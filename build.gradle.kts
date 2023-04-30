@@ -20,6 +20,7 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
+    implementation("org.springframework.data:spring-data-jpa:3.0.3")
 
     implementation("org.springframework.experimental:spring-modulith-core:0.5.1")
     implementation("org.springframework.experimental:spring-modulith-docs:0.5.1")

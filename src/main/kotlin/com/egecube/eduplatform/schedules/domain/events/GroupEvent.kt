@@ -13,7 +13,7 @@ open class GroupEvent {
     @GeneratedValue(strategy = GenerationType.AUTO)
     open var id: UUID? = null
 
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     open var name: String? = null
 
     //TODO(Replace with List<Group> from user-flow domain)

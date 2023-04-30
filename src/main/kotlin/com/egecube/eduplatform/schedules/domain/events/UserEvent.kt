@@ -14,7 +14,7 @@ open class UserEvent {
     open var id: UUID? = null
 
     //TODO(Check user id class here)
-    @Column(nullable = false, length = 100)
+    @Column(length = 100)
     open var assignedTo: Long? = null
 
     @Column(nullable = false, length = 100)
