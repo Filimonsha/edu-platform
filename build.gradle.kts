@@ -19,8 +19,14 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation("org.springframework.boot:spring-boot-starter")
-    implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
 
+//    Spring data jpa
+    implementation ("org.springframework.boot:spring-boot-starter-data-jpa:3.0.6")
+
+// Postgres
+    implementation("org.postgresql:postgresql:42.5.4")
+
+//    Modulith
     implementation("org.springframework.experimental:spring-modulith-core:0.5.1")
     implementation("org.springframework.experimental:spring-modulith-docs:0.5.1")
 
