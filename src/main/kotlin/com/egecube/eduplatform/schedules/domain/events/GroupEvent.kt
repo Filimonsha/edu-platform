@@ -13,10 +13,15 @@ open class GroupEvent {
     @GeneratedValue(strategy = GenerationType.AUTO)
     open var id: UUID? = null
 
+    @Column(nullable = false, length = 100)
+    open var name: String? = null
+
     //TODO(Replace with List<Group> from user-flow domain)
     @Column(nullable = false)
     open var groups: String? = null
 
     @Embedded
     open var eventDescription: EventDescription? = null
+
+    open var timeStamp: LocalDateTime? = null
 }

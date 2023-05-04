@@ -2,6 +2,7 @@ package com.egecube.eduplatform.schedules.domain.events
 
 import jakarta.annotation.Nonnull
 import jakarta.persistence.*
+import java.time.LocalDateTime
 import java.util.UUID
 
 @Entity
@@ -12,6 +13,11 @@ open class GlobalEvent {
     @GeneratedValue(strategy = GenerationType.AUTO)
     open var id: UUID? = null
 
+    @Column(nullable = false, length = 100)
+    open var name: String? = null
+
     @Embedded
     open var eventDescription: EventDescription? = null
+
+    open var timeStamp: LocalDateTime? = null
 }

@@ -16,15 +16,22 @@ repositories {
 }
 
 dependencies {
+    // Kotlin libs
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
+    // Spring Framework
     implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework:spring-webmvc:6.0.8")
+
+    // Spring Data
     implementation("jakarta.persistence:jakarta.persistence-api:3.1.0")
     implementation("org.springframework.data:spring-data-jpa:3.0.3")
 
+    // Modulith
     implementation("org.springframework.experimental:spring-modulith-core:0.5.1")
     implementation("org.springframework.experimental:spring-modulith-docs:0.5.1")
 
+    // Test libs
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
