@@ -1,7 +1,6 @@
 package com.egecube.eduplatform.schedules.repositories
 
 import com.egecube.eduplatform.schedules.domain.events.GlobalEvent
-import org.springframework.beans.factory.aot.AotServices.Loader
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import java.time.LocalDateTime

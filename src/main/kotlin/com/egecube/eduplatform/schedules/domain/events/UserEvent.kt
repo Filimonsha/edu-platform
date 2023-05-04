@@ -17,11 +17,6 @@ open class UserEvent {
     @Column(length = 100)
     open var assignedTo: Long? = null
 
-    @Column(nullable = false, length = 100)
-    open var name: String? = null
-
-    open var description: String? = null
-    open var eventType = EventType.NONE
-    open var timeStamp: LocalDateTime? = null
-    open var appendedLink: LocalDateTime? = null
+    @Embedded
+    open var eventDescription: EventDescription? = null
 }
