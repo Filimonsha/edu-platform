@@ -7,17 +7,17 @@ import java.util.UUID
 
 @Entity
 @Table(name = "global_events")
-open class GlobalEvent {
+open class GlobalEvent (
     @Id
     @Nonnull
     @GeneratedValue(strategy = GenerationType.AUTO)
-    open var id: UUID? = null
+    open var id: UUID? = null,
 
     @Column(nullable = false, length = 100)
-    open var name: String? = null
+    open var name: String? = null,
 
     @Embedded
-    open var eventDescription: EventDescription? = null
+    open var eventDescription: EventDescription? = null,
 
     open var timeStamp: LocalDateTime? = null
-}
+)

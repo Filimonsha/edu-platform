@@ -7,21 +7,21 @@ import java.util.*
 
 @Entity
 @Table(name = "user_events")
-open class UserEvent {
+open class UserEvent (
     @Id
     @Nonnull
     @GeneratedValue(strategy = GenerationType.AUTO)
-    open var id: UUID? = null
+    open var id: UUID? = null,
 
     @Column(nullable = false, length = 100)
-    open var name: String? = null
+    open var name: String? = null,
 
     //TODO(Check user id class here)
     @Column(length = 100)
-    open var assignedTo: Long? = null
+    open var assignedTo: Long? = null,
 
     @Embedded
-    open var eventDescription: EventDescription? = null
+    open var eventDescription: EventDescription? = null,
 
     open var timeStamp: LocalDateTime? = null
-}
+)
