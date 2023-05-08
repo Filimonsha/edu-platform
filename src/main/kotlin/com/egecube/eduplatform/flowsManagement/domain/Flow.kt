@@ -8,12 +8,12 @@ import jakarta.persistence.OneToMany
 
 
 @Entity
-open class Flow(
+class Flow(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    open var id: Long?,
-    open val name: String?,
-    open val description: String?,
+    var id: Long?,
+    val name: String?,
+    val description: String?,
 
     @OneToMany
     val groups: List<FlowGroup>,
