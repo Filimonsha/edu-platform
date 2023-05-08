@@ -46,8 +46,3 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
-
-
-//noArg {
-//    annotation("jakarta.persistence.Entity")
-//}

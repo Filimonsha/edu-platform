@@ -11,10 +11,10 @@ import jakarta.persistence.OneToMany
 open class Flow(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long,
-    val name: String,
-    val description: String,
+    open var id: Long?,
+    open val name: String?,
+    open val description: String?,
 
     @OneToMany
-    val groups: List<Group>,
+    val groups: List<FlowGroup>,
 )

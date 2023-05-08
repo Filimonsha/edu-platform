@@ -4,15 +4,14 @@ import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
-import jakarta.persistence.ManyToOne
 
 @Entity
-open class Group(
+open class FlowParticipant(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long,
-    var name: String,
-
-    @ManyToOne
-    var flow: Flow
+    open val id: Long?,
+    open val name: String?,
+    open val secondName: String?,
+    open val email: String?,
+    open val participantRole: ParticipantRole?,
 )

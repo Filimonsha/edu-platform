@@ -6,12 +6,9 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 
 @Entity
-class User(
+open class FlowGroup(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
-    val name: String,
-    val secondName: String,
-    val email: String,
-    val userRole: UserRole,
+    open var id: Long?,
+    open var name: String?,
 )

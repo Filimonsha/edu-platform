@@ -1,6 +1,6 @@
 package com.egecube.eduplatform.flowsManagement.domain
 
-enum class UserRole {
+enum class ParticipantRole {
     TEACHER,
     STUDENT,
     MENTOR
