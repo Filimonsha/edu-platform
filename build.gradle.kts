@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "3.0.6"
     id("io.spring.dependency-management") version "1.1.0"
+    id("org.jetbrains.kotlin.plugin.jpa") version "1.8.21"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
 }
@@ -19,6 +20,8 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     implementation("org.springframework.boot:spring-boot-starter")
+
+    implementation("org.springframework:spring-webmvc:6.0.8")
 
 //    Spring data jpa
     implementation ("org.springframework.boot:spring-boot-starter-data-jpa:3.0.6")
@@ -43,3 +46,8 @@ tasks.withType<KotlinCompile> {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+
+//noArg {
+//    annotation("jakarta.persistence.Entity")
+//}
