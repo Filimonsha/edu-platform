@@ -14,10 +14,16 @@ import org.springframework.web.bind.annotation.RestController
 class FlowsController(private val flowService: FlowService) {
 
 
+    @GetMapping("/")
+    fun getFlows() = ResponseEntity(flowService.getAll(), HttpStatus.OK)
+
     @GetMapping("/{id}")
     fun getFlow(@PathVariable(value = "id") flowId: Long): ResponseEntity<Flow> {
         val flow = flowService.get(flowId)
-        return if (flow.isEmpty) ResponseEntity(flow.get(),HttpStatus.OK) else ResponseEntity(HttpStatus.NOT_FOUND)
+        return if (flow.isPresent)
+            ResponseEntity(flow.get(), HttpStatus.OK)
+        else ResponseEntity(HttpStatus.NOT_FOUND)
     }
+
 
 }

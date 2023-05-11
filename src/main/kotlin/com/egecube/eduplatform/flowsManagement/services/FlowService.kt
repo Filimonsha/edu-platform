@@ -8,4 +8,6 @@ import java.util.*
 @Service
 class FlowService (private val flowRepository: FlowRepository){
     fun get(id: Long): Optional<Flow> = flowRepository.findById(id)
+
+    fun getAll() = flowRepository.findAll()
 }
