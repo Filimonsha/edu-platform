@@ -1,6 +1,6 @@
 package com.egecube.eduplatform.classesManagement.controllers
 
-import com.egecube.eduplatform.classesManagement.dto.FlowDto
+import com.egecube.eduplatform.classesManagement.dto.SubjectFlowDto
 import com.egecube.eduplatform.classesManagement.services.FlowService
 import org.modelmapper.ModelMapper
 import org.springframework.web.bind.annotation.GetMapping

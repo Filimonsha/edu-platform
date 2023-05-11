@@ -21,9 +21,9 @@ class SubjectController(private val subjectService: SubjectService, private val 
 
     @GetMapping("/{id}")
     fun getFlow(@PathVariable(value = "id") flowId: Long): ResponseEntity<SubjectDto> {
-        val clazz = subjectService.get(flowId).orElseThrow()
+        val subject = subjectService.get(flowId).orElseThrow()
 
-        return ResponseEntity(modelMapper.map(clazz, SubjectDto::class.java), HttpStatus.OK)
+        return ResponseEntity(modelMapper.map(subject, SubjectDto::class.java), HttpStatus.OK)
     }
 
 

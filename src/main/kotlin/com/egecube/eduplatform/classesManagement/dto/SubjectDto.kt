@@ -9,5 +9,5 @@ data class SubjectDto(
     var id: Long? = null,
     var name: String? = null,
     var description: String? = null,
-    var flows: MutableSet<FlowDto?>? = null
+    var flows: MutableSet<SubjectFlowDto?>? = null
 ) : Serializable

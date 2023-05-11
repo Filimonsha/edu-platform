@@ -1,2 +1,2 @@
-INSERT INTO public.flow (id, description, name)
-VALUES (DEFAULT, 'Some math subject', 'MATH');
+INSERT INTO public.flow (id, name, subject_id)
+VALUES (DEFAULT, 'Some', 1);

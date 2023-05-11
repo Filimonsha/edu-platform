@@ -16,4 +16,7 @@ class Flow(
 
     @Column(name = "subject_id")
     val subjectId: Long,
+
+    @ManyToMany
+    val participants: Set<FlowParticipant>?,
 )
