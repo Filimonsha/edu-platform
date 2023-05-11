@@ -1,10 +1,10 @@
-package com.egecube.eduplatform.flowsManagement.domain
+package com.egecube.eduplatform.classesManagement.domain
 
 import jakarta.persistence.*
 
 
 @Entity
-class Flow(
+class Subject(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,5 +12,7 @@ class Flow(
     val name: String?,
     val description: String?,
 
+    @OneToMany(mappedBy = "subject")
+    val flows:Set<Flow>
 
 )

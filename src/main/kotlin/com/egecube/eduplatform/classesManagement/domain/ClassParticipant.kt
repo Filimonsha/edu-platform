@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.flowsManagement.domain
+package com.egecube.eduplatform.classesManagement.domain
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -6,7 +6,7 @@ import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 
 @Entity
-class FlowParticipant(
+class ClassParticipant(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long?,

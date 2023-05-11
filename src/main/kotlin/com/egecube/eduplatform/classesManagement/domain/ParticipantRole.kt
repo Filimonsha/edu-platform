@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.flowsManagement.domain
+package com.egecube.eduplatform.classesManagement.domain
 
 enum class ParticipantRole {
     TEACHER,
