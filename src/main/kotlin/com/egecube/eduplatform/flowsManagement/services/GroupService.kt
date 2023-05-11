@@ -8,6 +8,7 @@ class GroupService(private val groupsRepository: GroupsRepository) {
 
     fun getById(id: Long) = groupsRepository.findById(id)
 
+    fun getByFlowIdAndId(flowId: Long, id: Long) = groupsRepository.getByFlowIdAndId(flowId, id)
     fun getAllByFlowId(flowId: Long) = groupsRepository.getAllByFlowId(flowId)
 
 }

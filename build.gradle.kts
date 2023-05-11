@@ -19,11 +19,11 @@ repositories {
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
-    implementation ("org.springframework.boot:spring-boot-starter-web:3.0.6")
+    implementation("org.springframework.boot:spring-boot-starter-web:3.0.6")
 
 
 //    Spring data jpa
-    implementation ("org.springframework.boot:spring-boot-starter-data-jpa:3.0.6")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.0.6")
 
 // Postgres
     implementation("org.postgresql:postgresql:42.5.4")
@@ -31,8 +31,13 @@ dependencies {
 //    Modulith
     implementation("org.springframework.experimental:spring-modulith-core:0.5.1")
     implementation("org.springframework.experimental:spring-modulith-docs:0.5.1")
+//    Utils
+    implementation("org.modelmapper:modelmapper:3.1.1")
+
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+
 }
 
 tasks.withType<KotlinCompile> {
