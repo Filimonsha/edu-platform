@@ -38,3 +38,5 @@ out/
 
 ### Modulith ###
 modulith-docs/
+
+src/main/resources/application.properties
