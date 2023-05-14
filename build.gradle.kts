@@ -21,22 +21,25 @@ dependencies {
 
     implementation("org.springframework.boot:spring-boot-starter-web:3.0.6")
 
-//  Spring data jpa
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.0.6")
-    implementation("org.postgresql:postgresql:42.5.4")
-
-//  Spring security
+    //  Spring security
     implementation("org.springframework.boot:spring-boot-starter-security:3.0.6")
 
-//  Modulith
+
+//    Spring data jpa
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.0.6")
+
+// Postgres
+    implementation("org.postgresql:postgresql:42.5.4")
+
+//    Modulith
     implementation("org.springframework.experimental:spring-modulith-core:0.5.1")
     implementation("org.springframework.experimental:spring-modulith-docs:0.5.1")
-
-//  Utils
+//    Utils
     implementation("org.modelmapper:modelmapper:3.1.1")
 
-//  Tests
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
 
 }
 

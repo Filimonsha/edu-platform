@@ -8,9 +8,11 @@ interface UserAccountRepository: CrudRepository<UserAccount, Long> {
 
     fun findByEmail(query: String): UserAccount?
 
-    fun findByAllNamesContaining(query: String): ArrayList<UserAccount>? {
-        return findAllByFirstNameContainingOrLastNameContainingOrderByFirstName(query, query)
-    }
+//    Provide into proxy interface?
+//
+//    fun findByAllNamesContaining(query: String): ArrayList<UserAccount>? {
+//        return findAllByFirstNameContainingOrLastNameContainingOrderByFirstName(query, query)
+//    }
 
     fun findAllByFirstNameContainingOrLastNameContainingOrderByFirstName(queryF: String, queryS: String): ArrayList<UserAccount>?
 }

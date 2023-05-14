@@ -10,21 +10,21 @@ import org.springframework.security.core.userdetails.UserDetails
 open class UserAccount(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long?,
-    var firstName: String?,
-    var lastName: String?,
-    var email: String?,
-    var password: String?,
-    var accountSuspended: Boolean = false,
+    open val id: Long?,
+    open var firstName: String?,
+    open var lastName: String?,
+    open var email: String?,
+    open var passWord: String?,
+    open var accountSuspended: Boolean = false,
     @Enumerated(EnumType.STRING)
-    var role: UserRole = UserRole.USER
+    open var role: UserRole = UserRole.USER
 ) : UserDetails {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return arrayListOf(SimpleGrantedAuthority(role.name))
     }
 
     override fun getPassword(): String =
-        if (password.isNullOrEmpty()) "null" else password!!
+        if (passWord.isNullOrEmpty()) "null" else passWord!!
 
     override fun getUsername(): String =
         if (email.isNullOrEmpty()) "null" else email!!
