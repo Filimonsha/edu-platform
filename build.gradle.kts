@@ -33,7 +33,7 @@ dependencies {
     implementation("org.springframework.experimental:spring-modulith-docs:0.5.1")
 //    Utils
     implementation("org.modelmapper:modelmapper:3.1.1")
-
+    implementation("org.modelmapper.extensions:modelmapper-jackson:3.1.1")
 
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 

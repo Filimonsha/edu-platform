@@ -13,6 +13,10 @@ class Subject(
     val description: String?,
 
     @OneToMany(mappedBy = "subject")
-    val flows:Set<Flow>
+    val flows: Set<Flow>?,
 
-)
+    @ManyToMany
+    val participants: Set<Participant>?,
+
+
+    )

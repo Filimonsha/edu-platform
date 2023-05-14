@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.classesManagement.controllers
+package com.egecube.eduplatform.classesManagement.dto
 
 import java.io.Serializable
 

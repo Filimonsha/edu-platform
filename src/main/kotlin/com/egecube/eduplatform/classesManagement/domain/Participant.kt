@@ -1,24 +1,29 @@
 package com.egecube.eduplatform.classesManagement.domain
 
+import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
-import jakarta.persistence.JoinColumn
 import jakarta.persistence.ManyToMany
-import jakarta.persistence.ManyToOne
 
 @Entity
-class FlowParticipant(
+class Participant(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long?,
+
+    @JsonProperty("name")
     val name: String?,
     val secondName: String?,
     val email: String?,
-    val participantRole: ParticipantRole?,
+
+    val participantRole: String?,
 
     @ManyToMany
-    val relatedSubjects: Set<Flow>?,
+    val relatedSubjects: Set<Subject>?,
+
+    @ManyToMany
+    val relatedFlows: Set<Flow>?
 
 )
