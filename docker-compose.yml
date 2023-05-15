@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  app:
+    image: edu-platform:0.0.1-SNAPSHOT
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    env_file: 
+      - ./environment/.env
+      - ./environment/.env.db
+
+  db:
+    container_name: postgres-db
+    image: postgres:15.2
+    env_file: ./environment/.env.db
+    ports:
+      - 5432:5432
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
