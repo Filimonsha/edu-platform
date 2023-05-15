@@ -1,8 +1,6 @@
 name: Gradle Package
 
-on:
-  release:
-    types: [created]
+on: [push]
 
 env:
   IMAGE_NAME: list-keep
