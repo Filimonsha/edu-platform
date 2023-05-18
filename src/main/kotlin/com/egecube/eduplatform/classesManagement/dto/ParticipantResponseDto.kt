@@ -1,6 +1,5 @@
-package com.egecube.eduplatform.classesManagement.controllers
+package com.egecube.eduplatform.classesManagement.dto
 
-import com.egecube.eduplatform.classesManagement.domain.ParticipantRole
 import java.io.Serializable
 
 /**
@@ -11,9 +10,9 @@ data class ParticipantResponseDto(
     var name: String? = null,
     var secondName: String? = null,
     var email: String? = null,
-    var participantRole: String? = null,
-    var relatedSubjects: MutableSet<ParticipantSubjectDto?>? = null,
-    var relatedFlows: MutableSet<ParticipantFlowDto?>? = null
+    var participantRole: String?,
+    var relatedSubjects: Set<ParticipantSubjectDto?> = setOf(),
+    var relatedFlows: Set<ParticipantFlowDto?> = setOf()
 ) : Serializable {
     /**
      * A DTO for the {@link com.egecube.eduplatform.classesManagement.domain.Subject} entity

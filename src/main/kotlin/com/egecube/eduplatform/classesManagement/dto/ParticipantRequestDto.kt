@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.classesManagement.controllers
+package com.egecube.eduplatform.classesManagement.dto
 
 import com.egecube.eduplatform.classesManagement.domain.ParticipantRole
 import com.fasterxml.jackson.annotation.JsonProperty
@@ -9,8 +9,8 @@ import java.io.Serializable
  */
 data class ParticipantRequestDto(
     @JsonProperty("name")
-    var name: String? = null,
-    var secondName: String? = null,
-    var email: String? = null,
-    var participantRole: String? = null
+    var name: String?,
+    var secondName: String?,
+    var email: String?,
+    var participantRole: String?
 ) : Serializable

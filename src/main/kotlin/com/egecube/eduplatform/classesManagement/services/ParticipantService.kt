@@ -1,12 +1,9 @@
 package com.egecube.eduplatform.classesManagement.services
 
-import com.egecube.eduplatform.classesManagement.controllers.ParticipantRequestDto
-import com.egecube.eduplatform.classesManagement.controllers.ParticipantResponseDto
+import com.egecube.eduplatform.classesManagement.dto.ParticipantRequestDto
+import com.egecube.eduplatform.classesManagement.dto.ParticipantResponseDto
 import com.egecube.eduplatform.classesManagement.domain.Participant
 import com.egecube.eduplatform.classesManagement.repositories.ParticipantRepository
-import com.fasterxml.jackson.databind.JsonNode
-import com.fasterxml.jackson.databind.ObjectMapper
-import net.minidev.json.JSONObject
 import org.modelmapper.ModelMapper
 import org.springframework.stereotype.Service
 

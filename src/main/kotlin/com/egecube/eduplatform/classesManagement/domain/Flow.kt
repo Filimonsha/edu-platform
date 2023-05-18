@@ -12,11 +12,11 @@ class Flow(
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id", insertable = false, updatable = false)
-    val subject: Subject?,
+    val subject: Subject,
 
     @Column(name = "subject_id")
     val subjectId: Long,
 
     @ManyToMany
-    val participants: Set<Participant>?,
+    val participants: Set<Participant> = setOf(),
 )

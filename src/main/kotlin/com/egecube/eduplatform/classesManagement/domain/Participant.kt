@@ -14,16 +14,16 @@ class Participant(
     val id: Long?,
 
     @JsonProperty("name")
-    val name: String?,
-    val secondName: String?,
-    val email: String?,
+    var name: String?,
+    var secondName: String?,
+    var email: String?,
 
     val participantRole: String?,
 
     @ManyToMany
-    val relatedSubjects: Set<Subject>?,
+    val relatedSubjects: Set<Subject> = setOf(),
 
     @ManyToMany
-    val relatedFlows: Set<Flow>?
+    val relatedFlows: Set<Flow> = setOf()
 
 )
