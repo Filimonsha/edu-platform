@@ -5,18 +5,20 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
+// todo(kotlin jpa not working!!!!!)
+
 @Entity
 @Table(name = "users_capacity")
 open class UserAccount(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long?,
-    var firstName: String,
-    var lastName: String,
-    var email: String,
-    var phone: String?,
-    var passWord: String,
-    var accountSuspended: Boolean = false,
+    open val id: Long,
+    open var firstName: String,
+    open var lastName: String,
+    open var email: String,
+    open var phone: String?,
+    open var passWord: String,
+    open var accountSuspended: Boolean = false,
     @Enumerated(EnumType.STRING)
     open var role: UserRole = UserRole.USER
 ) : UserDetails {

@@ -11,10 +11,10 @@ import kotlin.collections.HashMap
 
 @Service
 class JwtService {
-    @Value("\${application.security.token_timeout_h}")
+//    @Value("\${jwt_timeout_h}")
     private var tokenTimeoutH: Int = 1
 
-    @Value("\${application.security.refresh_token.expiration_h}")
+//    @Value("\${jwt_timeout_h}")
     private var tokenRefreshTimeoutH: Int = 12
 
     @Autowired
@@ -25,6 +25,12 @@ class JwtService {
         userDetails: UserDetails
     ): String = jwtUtils.buildToken(
         claims, userDetails, tokenTimeoutH
+    )
+
+    fun generateToken(
+        userDetails: UserDetails
+    ): String = jwtUtils.buildToken(
+        HashMap(), userDetails, tokenTimeoutH
     )
 
     fun generateRefreshToken(

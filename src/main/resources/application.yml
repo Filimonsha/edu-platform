@@ -1,6 +1,0 @@
-application:
-  security:
-    secret_key: sjhjgkzlsghzjrkhhgskjfdhjghberjkfbvshkbf
-    token_timeout_h: 12
-    refresh_token:
-      expiration_h: 24

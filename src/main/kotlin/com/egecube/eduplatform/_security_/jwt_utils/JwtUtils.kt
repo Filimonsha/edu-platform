@@ -12,8 +12,8 @@ import java.util.function.Function
 
 @Component
 class JwtUtils {
-    @Value("\${application.security.secret_key}")
-    private lateinit var secretKey: String
+//    @Value("\${jwt_signin_key}")
+    private var secretKey: String = "fkldsnfkjlsdnflksnhfdjkshfjdkshbfbkefsfbnnskefjksdbfjskbfjesfkhjsdf"
 
     private val signKey = Keys.hmacShaKeyFor(secretKey.toByteArray())
     private val signAlgorithm = SignatureAlgorithm.HS256
