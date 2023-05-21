@@ -43,7 +43,7 @@ class JwtService {
 
     // Defined methods
 
-    fun extractUsername(token: String): String = jwtUtils.extractClaim(
+    fun extractUsername(token: String): String? = jwtUtils.extractClaim(
         token, Claims::getSubject
     )
 

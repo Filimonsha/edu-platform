@@ -14,7 +14,7 @@ open class UserAccount(
     var firstName: String,
     var lastName: String,
     var email: String,
-    var phone: String,
+    var phone: String?,
     var passWord: String,
     var accountSuspended: Boolean = false,
     @Enumerated(EnumType.STRING)
@@ -25,9 +25,8 @@ open class UserAccount(
         return arrayListOf(SimpleGrantedAuthority(role.name))
     }
 
-    override fun getPassword(): String = passWord.ifEmpty { "null" }
-
-    override fun getUsername(): String = email.ifEmpty { "null" }
+    override fun getPassword(): String = passWord
+    override fun getUsername(): String = email
 
     override fun isAccountNonExpired() = !accountSuspended
     override fun isAccountNonLocked() = !accountSuspended
