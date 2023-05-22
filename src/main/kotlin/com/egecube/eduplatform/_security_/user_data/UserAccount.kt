@@ -23,6 +23,10 @@ open class UserAccount(
     open var role: UserRole = UserRole.USER
 ) : UserDetails {
 
+    companion object {
+        fun build(): UserAccount = UserAccount::class.java.getConstructor().newInstance()
+    }
+
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return arrayListOf(SimpleGrantedAuthority(role.name))
     }

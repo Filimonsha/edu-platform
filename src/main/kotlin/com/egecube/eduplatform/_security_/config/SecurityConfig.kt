@@ -35,9 +35,14 @@ class SecurityConfig {
     }
 
     @Bean
-    fun authenticationManage(
+    fun authenticationManager(
         config: AuthenticationConfiguration
     ): AuthenticationManager {
         return config.authenticationManager
+    }
+
+    @Bean
+    fun passwordEncoder(): PasswordEncoder {
+        return BCryptPasswordEncoder()
     }
 }

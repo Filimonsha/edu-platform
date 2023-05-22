@@ -24,6 +24,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-security:3.0.6")
 //  Spring data jpa
     implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.0.6")
+    implementation("org.springframework:spring-expression:6.0.9")
 //  Jwt
     implementation("io.jsonwebtoken:jjwt-api:0.11.5")
     implementation("io.jsonwebtoken:jjwt-impl:0.11.5")

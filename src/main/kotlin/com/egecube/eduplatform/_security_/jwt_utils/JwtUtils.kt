@@ -12,8 +12,10 @@ import java.util.function.Function
 
 @Component
 class JwtUtils {
-//    @Value("\${jwt_signin_key}")
-    private var secretKey: String = "fkldsnfkjlsdnflksnhfdjkshfjdkshbfbkefsfbnnskefjksdbfjskbfjesfkhjsdf"
+
+    // HOW THE FUCK DOES THIS WORK, NOT GETTING INJECTED!!!!
+    //    @Value("\${jwt_signin_key}")
+    private val secretKey: String = "fkldsnfkjlsdnflksnhfdjkshfjdkshbfbkefsfbnnskefjksdbfjskbfjesfkhjsdf"
 
     private val signKey = Keys.hmacShaKeyFor(secretKey.toByteArray())
     private val signAlgorithm = SignatureAlgorithm.HS256
@@ -25,10 +27,10 @@ class JwtUtils {
     ): String {
         val issuedAt: Long = System.currentTimeMillis()
         val expiredAt = issuedAt + expiredHours * 60 * 60 * 1000
-
+        println("building token for user " + userDetails.username)
         return Jwts.builder()
-            .setSubject(userDetails.username)
             .setClaims(claims)
+            .setSubject(userDetails.username)
             .setIssuedAt(Date(issuedAt))
             .setExpiration(Date(expiredAt))
             .signWith(signKey, signAlgorithm)
@@ -46,12 +48,4 @@ class JwtUtils {
         token: String, claimsResolver: Function<Claims, T>
     ): T = claimsResolver.apply(extractAllClaims(token))
 
-    fun generateRefreshToken(
-        userDetails: UserDetails,
-        refreshExpiredHours: Int
-    ): String = buildToken(
-        HashMap(),
-        userDetails,
-        refreshExpiredHours
-    )
 }

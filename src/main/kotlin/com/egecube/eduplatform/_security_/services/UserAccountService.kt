@@ -10,6 +10,7 @@ import com.egecube.eduplatform._security_.user_data.UserRole
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 // TODO("make full review and rewrite logic")
@@ -19,12 +20,12 @@ class UserAccountService {
 
     @Autowired
     private lateinit var userAccountRepository: UserAccountRepository
-
     @Autowired
     private lateinit var jwtService: JwtService
-
     @Autowired
     private lateinit var authenticationManager: AuthenticationManager
+    @Autowired
+    private lateinit var passwordEncoder: PasswordEncoder
 
     fun authenticateUser(request: LoginRequest): AuthResponse {
         authenticationManager.authenticate(
@@ -39,18 +40,18 @@ class UserAccountService {
         return AuthResponse(jwtToken)
     }
 
-//    fun registerUser(request: RegisterRequest): AuthResponse {
-//        val newUser = UserAccount::class.java.getConstructor().newInstance().also {
-//            it.firstName = request.firstName
-//            it.lastName = request.lastName
-//            it.email = request.userMail
-//            it.phone = request.userPhone
-//            it.passWord = request.password
-//            it.role = UserRole.USER
-//        }
-//
-//        userAccountRepository.save(newUser)
-//        val jwtToken = jwtService.generateToken(newUser)
-//        return AuthResponse(jwtToken)
-//    }
+    fun registerUser(request: RegisterRequest): AuthResponse {
+        val newUser = UserAccount.build().also {
+            it.firstName = request.firstName
+            it.lastName = request.lastName
+            it.email = request.userMail
+            it.phone = request.userPhone
+            it.passWord = passwordEncoder.encode(request.password)
+            it.role = UserRole.USER
+        }
+
+        userAccountRepository.save(newUser)
+        val jwtToken = jwtService.generateToken(newUser)
+        return AuthResponse(jwtToken)
+    }
 }

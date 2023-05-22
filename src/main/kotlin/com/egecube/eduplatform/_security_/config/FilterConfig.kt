@@ -30,7 +30,7 @@ class FilterConfig {
             .csrf()
             .disable()
             .authorizeHttpRequests()
-            .requestMatchers("")
+            .requestMatchers("/api/auth/*")
             .permitAll()
             .anyRequest()
             .authenticated()

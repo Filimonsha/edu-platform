@@ -2,7 +2,6 @@ package com.egecube.eduplatform._security_.auth_controllers
 
 import com.egecube.eduplatform._security_.dto.AuthResponse
 import com.egecube.eduplatform._security_.dto.LoginRequest
-import com.egecube.eduplatform._security_.dto.RegisterRequest
 import com.egecube.eduplatform._security_.services.UserAccountService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequestMapping("/api/auth/register")
+@RequestMapping("/api/auth/login")
 class LoginController {
 
     @Autowired

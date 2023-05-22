@@ -14,9 +14,6 @@ class JwtService {
 //    @Value("\${jwt_timeout_h}")
     private var tokenTimeoutH: Int = 1
 
-//    @Value("\${jwt_timeout_h}")
-    private var tokenRefreshTimeoutH: Int = 12
-
     @Autowired
     private lateinit var jwtUtils: JwtUtils
 
@@ -31,12 +28,6 @@ class JwtService {
         userDetails: UserDetails
     ): String = jwtUtils.buildToken(
         HashMap(), userDetails, tokenTimeoutH
-    )
-
-    fun generateRefreshToken(
-        userDetails: UserDetails
-    ): String = jwtUtils.generateRefreshToken(
-        userDetails, tokenRefreshTimeoutH
     )
 
     fun isTokenExpired(token: String): Boolean =
