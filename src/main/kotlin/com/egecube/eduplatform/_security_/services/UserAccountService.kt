@@ -1,12 +1,13 @@
 package com.egecube.eduplatform._security_.services
 
-import com.egecube.eduplatform._security_.dto.AuthResponse
-import com.egecube.eduplatform._security_.dto.LoginRequest
-import com.egecube.eduplatform._security_.dto.RegisterRequest
+import com.egecube.eduplatform._security_.dto.responses.AuthResponse
+import com.egecube.eduplatform._security_.dto.requests.LoginRequest
+import com.egecube.eduplatform._security_.dto.requests.RegisterRequest
 import com.egecube.eduplatform._security_.jwt_utils.JwtService
 import com.egecube.eduplatform._security_.user_data.UserAccount
 import com.egecube.eduplatform._security_.user_data.UserAccountRepository
 import com.egecube.eduplatform._security_.user_data.UserRole
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserAccountService {
+    private val logger = LoggerFactory.getLogger(this::class.java)
 
     @Autowired
     private lateinit var userAccountRepository: UserAccountRepository
@@ -27,20 +29,20 @@ class UserAccountService {
     @Autowired
     private lateinit var passwordEncoder: PasswordEncoder
 
-    fun authenticateUser(request: LoginRequest): AuthResponse {
+    fun authenticateUser(request: LoginRequest): AuthResponse? {
         authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(
                 request.userMail,
                 request.password
             )
         )
-        // TODO("check for null")
         val user = userAccountRepository.findByEmail(request.userMail)
-        val jwtToken = jwtService.generateToken(user!!)
+            ?: return null
+        val jwtToken = jwtService.generateToken(user)
         return AuthResponse(jwtToken)
     }
 
-    fun registerUser(request: RegisterRequest): AuthResponse {
+    fun registerUser(request: RegisterRequest): AuthResponse? {
         val newUser = UserAccount.build().also {
             it.firstName = request.firstName
             it.lastName = request.lastName
@@ -51,6 +53,7 @@ class UserAccountService {
         }
 
         userAccountRepository.save(newUser)
+        logger.info("Registered new user: ${newUser.email}")
         val jwtToken = jwtService.generateToken(newUser)
         return AuthResponse(jwtToken)
     }

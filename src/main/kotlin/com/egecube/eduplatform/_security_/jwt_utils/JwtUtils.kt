@@ -4,21 +4,32 @@ import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
-import org.springframework.beans.factory.annotation.Value
+import jakarta.annotation.PostConstruct
+import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
 import java.util.Date
 import java.util.function.Function
+import javax.crypto.SecretKey
 
 @Component
 class JwtUtils {
 
-    // HOW THE FUCK DOES THIS WORK, NOT GETTING INJECTED!!!!
-    //    @Value("\${jwt_signin_key}")
-    private val secretKey: String = "fkldsnfkjlsdnflksnhfdjkshfjdkshbfbkefsfbnnskefjksdbfjskbfjesfkhjsdf"
+    private val logger = LoggerFactory.getLogger(this::class.java)
 
-    private val signKey = Keys.hmacShaKeyFor(secretKey.toByteArray())
+    @Autowired
+    private lateinit var jwtConfig: JwtConfiguration
+    private lateinit var secretKey: String
+    private lateinit var signKey: SecretKey
+
     private val signAlgorithm = SignatureAlgorithm.HS256
+
+    @PostConstruct
+    private fun loadKeys() {
+        secretKey = jwtConfig.signingKey
+        signKey = Keys.hmacShaKeyFor(secretKey.toByteArray())
+    }
 
     fun buildToken(
         claims: Map<String, Any>,
@@ -27,7 +38,7 @@ class JwtUtils {
     ): String {
         val issuedAt: Long = System.currentTimeMillis()
         val expiredAt = issuedAt + expiredHours * 60 * 60 * 1000
-        println("building token for user " + userDetails.username)
+        logger.trace("Building token for user ${userDetails.username}")
         return Jwts.builder()
             .setClaims(claims)
             .setSubject(userDetails.username)

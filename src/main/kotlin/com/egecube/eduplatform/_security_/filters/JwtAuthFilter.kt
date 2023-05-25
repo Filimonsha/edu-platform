@@ -1,7 +1,7 @@
 package com.egecube.eduplatform._security_.filters
 
+import com.egecube.eduplatform._security_.http_utils.HeaderUtils
 import com.egecube.eduplatform._security_.jwt_utils.JwtService
-import com.egecube.eduplatform._security_.user_data.UserAccountRepository
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -16,8 +16,8 @@ import org.springframework.web.filter.OncePerRequestFilter
 @Component
 class JwtAuthFilter : OncePerRequestFilter() {
 
-    private val authHeaderSign = "Authorization"
-    private val jwtPreIndex = "Bearer "
+    @Autowired
+    private lateinit var headerUtils: HeaderUtils
 
     @Autowired
     private lateinit var jwtService: JwtService
@@ -31,13 +31,12 @@ class JwtAuthFilter : OncePerRequestFilter() {
         filterChain: FilterChain
     ) {
         // Check token exists
-        val authHeader: String? = request.getHeader(authHeaderSign)
-        if (authHeader.isNullOrEmpty() || !authHeader.startsWith(jwtPreIndex)) {
+        if (!headerUtils.jwtHeaderCorrect(request)) {
             filterChain.doFilter(request, response)
             return
         }
 
-        val jwt = authHeader.substring(jwtPreIndex.length)
+        val jwt = headerUtils.extractJwt(request)
         val userMail = jwtService.extractUsername(jwt)
         if (!userMail.isNullOrBlank() &&
             SecurityContextHolder.getContext().authentication == null
