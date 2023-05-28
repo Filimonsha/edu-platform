@@ -26,7 +26,7 @@ class JwtUtils {
     private val signAlgorithm = SignatureAlgorithm.HS256
 
     @PostConstruct
-    private fun loadKeys() {
+    private fun loadValues() {
         secretKey = jwtConfig.signingKey
         signKey = Keys.hmacShaKeyFor(secretKey.toByteArray())
     }
@@ -41,6 +41,7 @@ class JwtUtils {
         logger.trace("Building token for user ${userDetails.username}")
         return Jwts.builder()
             .setClaims(claims)
+            // Subject truly is id
             .setSubject(userDetails.username)
             .setIssuedAt(Date(issuedAt))
             .setExpiration(Date(expiredAt))

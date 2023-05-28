@@ -1,6 +1,6 @@
 package com.egecube.eduplatform._security_.filters
 
-import com.egecube.eduplatform._security_.http_utils.HeaderUtils
+import com.egecube.eduplatform._security_.access_rights_utils.AccessRightsService
 import com.egecube.eduplatform._security_.jwt_utils.JwtService
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
@@ -17,32 +17,28 @@ import org.springframework.web.filter.OncePerRequestFilter
 class JwtAuthFilter : OncePerRequestFilter() {
 
     @Autowired
-    private lateinit var headerUtils: HeaderUtils
-
-    @Autowired
-    private lateinit var jwtService: JwtService
+    private lateinit var accessRightsService: AccessRightsService
 
     @Autowired
     private lateinit var userDetailsService: UserDetailsService
+
+    @Autowired
+    private lateinit var jwtService: JwtService
 
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        // Check token exists
-        if (!headerUtils.jwtHeaderCorrect(request)) {
+        val jwt = accessRightsService.extractJwtIfPresentInRequest(request)
+        if (jwt.isNullOrEmpty()) {
             filterChain.doFilter(request, response)
             return
         }
-
-        val jwt = headerUtils.extractJwt(request)
-        val userMail = jwtService.extractUsername(jwt)
-        if (!userMail.isNullOrBlank() &&
-            SecurityContextHolder.getContext().authentication == null
-        ) {
+        val userId = jwtService.extractId(jwt)
+        if (SecurityContextHolder.getContext().authentication == null) {
             // Update auth context for filters
-            val userDetails = userDetailsService.loadUserByUsername(userMail)
+            val userDetails = userDetailsService.loadUserByUsername(userId)
             if (jwtService.isTokenValid(jwt, userDetails)) {
                 val auth = UsernamePasswordAuthenticationToken(
                     userDetails,

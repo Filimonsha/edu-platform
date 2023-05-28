@@ -12,6 +12,9 @@ class HeaderUtils {
         return request.getHeader(authHeaderSign)
     }
 
+    /**
+     * @return whether jwt token can be read from request header
+     */
     fun jwtHeaderCorrect(request: HttpServletRequest): Boolean {
         val authHeader = getAuthHeader(request)
         return authHeader?.startsWith(jwtPreIndex) ?: false

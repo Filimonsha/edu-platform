@@ -1,4 +1,4 @@
-package com.egecube.eduplatform._security_.dto.requests
+package com.egecube.eduplatform._security_.accounts.dto
 
 import org.springframework.lang.Nullable
 

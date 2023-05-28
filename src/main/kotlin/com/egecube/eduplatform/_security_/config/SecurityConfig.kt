@@ -1,6 +1,6 @@
 package com.egecube.eduplatform._security_.config
 
-import com.egecube.eduplatform._security_.user_data.UserAccountRepository
+import com.egecube.eduplatform._security_.accounts.UserAccountRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -20,9 +20,12 @@ class SecurityConfig {
     private lateinit var userAccountRepository: UserAccountRepository
 
     @Bean
+            /**
+             * Changes username UserDetails logic to UserId
+             */
     fun userDetailsService(): UserDetailsService {
-        return UserDetailsService { userMail: String ->
-           userAccountRepository.findByEmail(userMail)
+        return UserDetailsService { userId: String ->
+           userAccountRepository.findById(userId.toLong()).get()
         }
     }
 

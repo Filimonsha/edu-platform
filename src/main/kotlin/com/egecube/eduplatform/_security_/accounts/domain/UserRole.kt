@@ -1,4 +1,4 @@
-package com.egecube.eduplatform._security_.user_data
+package com.egecube.eduplatform._security_.accounts.domain
 
 enum class UserRole {
     USER, // Can only access open data under auth condition

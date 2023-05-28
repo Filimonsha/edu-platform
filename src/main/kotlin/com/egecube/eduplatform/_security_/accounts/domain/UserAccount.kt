@@ -1,4 +1,4 @@
-package com.egecube.eduplatform._security_.user_data
+package com.egecube.eduplatform._security_.accounts.domain
 
 import jakarta.persistence.*
 import org.springframework.security.core.GrantedAuthority
@@ -23,6 +23,7 @@ open class UserAccount(
     open var role: UserRole = UserRole.USER
 ) : UserDetails {
 
+    // Custom builder, cause Kotlin noArg plugin generates only Java empty constructor
     companion object {
         fun build(): UserAccount = UserAccount::class.java.getConstructor().newInstance()
     }
@@ -32,7 +33,7 @@ open class UserAccount(
     }
 
     override fun getPassword(): String = passWord
-    override fun getUsername(): String = email
+    override fun getUsername(): String = id.toString()
 
     override fun isAccountNonExpired() = !accountSuspended
     override fun isAccountNonLocked() = !accountSuspended
