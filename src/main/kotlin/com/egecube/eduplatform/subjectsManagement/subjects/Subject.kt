@@ -18,6 +18,6 @@ class Subject(
     val courses: Set<Course>,
 
     @ManyToMany
-    val participants: Set<Participant>,
+    val participants: MutableSet<Participant>,
 
     )

@@ -16,7 +16,7 @@ class Course(
     val subject: Subject,
 
     @ManyToMany
-    val participants: Set<Participant> = setOf(),
+    val participants: MutableSet<Participant>,
 
 
 )

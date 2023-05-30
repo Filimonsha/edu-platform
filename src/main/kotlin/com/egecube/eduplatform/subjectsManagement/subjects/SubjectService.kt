@@ -31,10 +31,14 @@ class SubjectService(
                 participantId
             ).orElseThrow()
             println(foundParticipant.name + " " + "NAME")
-            subject.participants.plus(foundParticipant)
+            val listWithNewParticipant =  subject.participants.plus(foundParticipant)
 
-            subject.participants.plusElement(foundParticipant)
-            println(subject.participants.toString() + " " + "NAME")
+            subject.participants.add(foundParticipant);
+            subjectRepository.save(subject)
+
+            foundParticipant.relatedSubjects.add(subject);
+            participantRepository.save(foundParticipant);
+
             courseService.addParticipantToCourse(foundParticipant, null)
 
         }

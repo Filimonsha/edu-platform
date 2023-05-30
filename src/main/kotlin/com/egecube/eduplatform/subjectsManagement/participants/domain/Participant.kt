@@ -23,10 +23,10 @@ class Participant(
 
     val participantRole: String,
 
-    @ManyToMany
-    val relatedSubjects: Set<Subject> = setOf(),
+    @ManyToMany(mappedBy = "participants")
+    val relatedSubjects: MutableSet<Subject> = mutableSetOf(),
 
     @ManyToMany
-    val relatedCourses: Set<Course> = setOf()
+    val relatedCourses: MutableSet<Course> = mutableSetOf(),
 
 )
