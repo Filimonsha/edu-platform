@@ -2,6 +2,7 @@ package com.egecube.eduplatform.subjectsManagement.subjects
 
 import com.egecube.eduplatform.subjectsManagement.courses.CourseRepository
 import com.egecube.eduplatform.subjectsManagement.courses.CourseService
+import com.egecube.eduplatform.subjectsManagement.events.AddedParticipantToSubject
 import com.egecube.eduplatform.subjectsManagement.participants.ParticipantRepository
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.stereotype.Service
@@ -31,7 +32,7 @@ class SubjectService(
                 participantId
             ).orElseThrow()
             println(foundParticipant.name + " " + "NAME")
-            val listWithNewParticipant =  subject.participants.plus(foundParticipant)
+            val listWithNewParticipant = subject.participants.plus(foundParticipant)
 
             subject.participants.add(foundParticipant);
             subjectRepository.save(subject)
@@ -41,7 +42,10 @@ class SubjectService(
 
             courseService.addParticipantToCourse(foundParticipant, null)
 
+            applicationEventPublisher.publishEvent(AddedParticipantToSubject(foundParticipant.id))
+
         }
+
 
         return subject
     }
