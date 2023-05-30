@@ -31,8 +31,7 @@ class SubjectService(
             val foundParticipant = participantRepository.findById(
                 participantId
             ).orElseThrow()
-            println(foundParticipant.name + " " + "NAME")
-            val listWithNewParticipant = subject.participants.plus(foundParticipant)
+
 
             subject.participants.add(foundParticipant);
             subjectRepository.save(subject)
