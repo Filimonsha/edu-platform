@@ -24,8 +24,8 @@ class SecurityConfig {
              * Changes username UserDetails logic to UserId
              */
     fun userDetailsService(): UserDetailsService {
-        return UserDetailsService { userId: String ->
-           userAccountRepository.findById(userId.toLong()).get()
+        return UserDetailsService { userMail: String ->
+           userAccountRepository.findByEmail(userMail)
         }
     }
 

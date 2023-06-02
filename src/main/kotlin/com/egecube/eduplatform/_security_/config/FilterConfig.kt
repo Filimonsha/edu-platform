@@ -31,7 +31,7 @@ class FilterConfig {
             .csrf()
             .disable()
             .authorizeHttpRequests()
-            .requestMatchers("${BaseRoute.BASE_ROUTE}/*")
+            .requestMatchers("${BaseRoute.BASE_ROUTE}/**")
             .permitAll()
             .anyRequest()
             .authenticated()

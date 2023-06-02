@@ -30,13 +30,13 @@ class AccessRightsService {
     fun isJwtForOwnerOrSuperuser(jwtContainer: HttpServletRequest, accessorId: Long): Boolean {
         val jwt = extractJwtIfPresentInRequest(jwtContainer)
         if (jwt.isNullOrEmpty()) return false
-        val userId = jwtService.extractId(jwt)
+        val userId = jwtService.extractUserMail(jwt)
         if (userId.isNullOrEmpty()) return false
         return try {
             // Actually loads by id, replaced logic
             val userDetails = userDetailsService.loadUserByUsername(userId)
             // If for user or non expired admin
-            jwtService.isTokenValid(jwt, userDetails) ||
+            jwtService.isTokenValid(jwt, userDetails.username) ||
                     !jwtService.isTokenExpired(jwt) &&
                     userDetails.authorities.first().authority == UserRole.ADMIN.toString()
         } catch (e: UsernameNotFoundException) {
@@ -49,12 +49,12 @@ class AccessRightsService {
     fun isJwtValidForUser(jwtContainer: HttpServletRequest, accessorId: Long): Boolean {
         val jwt = extractJwtIfPresentInRequest(jwtContainer)
         if (jwt.isNullOrEmpty()) return false
-        val userId = jwtService.extractId(jwt)
+        val userId = jwtService.extractUserMail(jwt)
         if (userId.isNullOrEmpty()) return false
         return try {
             // Actually loads by id, replaced logic
             val userDetails = userDetailsService.loadUserByUsername(userId)
-            jwtService.isTokenValid(jwt, userDetails)
+            jwtService.isTokenValid(jwt, userDetails.username)
         } catch (e: UsernameNotFoundException) {
             false
         }

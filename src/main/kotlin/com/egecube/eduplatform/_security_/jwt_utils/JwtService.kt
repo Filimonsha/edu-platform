@@ -3,7 +3,6 @@ package com.egecube.eduplatform._security_.jwt_utils
 import io.jsonwebtoken.Claims
 import jakarta.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Service
 import java.util.Date
 import kotlin.collections.HashMap
@@ -24,30 +23,31 @@ class JwtService {
         tokenTimeoutH = jwtConfig.timeoutH
     }
 
-    fun generateToken(
-        claims: HashMap<String, Any>,
-        userDetails: UserDetails
-    ): String = jwtUtils.buildToken(
-        claims, userDetails, tokenTimeoutH.toInt()
-    )
+//    fun generateToken(
+//        claims: HashMap<String, Any>,
+//        userMail: String
+//    ): String = jwtUtils.buildToken(
+//        claims, userMail, tokenTimeoutH.toInt()
+//    )
 
     fun generateToken(
-        userDetails: UserDetails
+        userMail: String
     ): String = jwtUtils.buildToken(
-        HashMap(), userDetails, tokenTimeoutH.toInt()
+        HashMap(), userMail, tokenTimeoutH.toInt()
     )
 
-    fun isTokenExpired(token: String): Boolean =
-        jwtUtils.extractClaim(token, Claims::getExpiration).before(Date())
+    fun isTokenExpired(token: String): Boolean {
+        return jwtUtils.extractClaim(token, Claims::getExpiration)?.before(Date()) ?: true
+    }
 
-    fun isTokenValid(token: String, userDetails: UserDetails): Boolean {
-        val username = extractId(token)
-        return username == userDetails.username && !isTokenExpired(token)
+    fun isTokenValid(token: String, userMail: String): Boolean {
+        val username = extractUserMail(token)
+        return username == userMail && !isTokenExpired(token)
     }
 
     // Defined methods
 
-    fun extractId(token: String): String? = jwtUtils.extractClaim(
+    fun extractUserMail(token: String): String? = jwtUtils.extractClaim(
         token, Claims::getSubject
     )
 

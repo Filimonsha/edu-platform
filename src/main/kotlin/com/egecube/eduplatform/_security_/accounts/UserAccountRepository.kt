@@ -10,7 +10,7 @@ interface UserAccountRepository: CrudRepository<UserAccount, Long> {
     // Still nothing but basic functions, probably everything could be overlapped
     // by inner accounts logic
 
-//    fun findByEmail(query: String): UserAccount?
+    fun findByEmail(query: String): UserAccount?
 
 //    fun findAllByFirstNameContainingOrLastNameContainingOrderByFirstName(queryF: String, queryS: String): ArrayList<UserAccount>?
 }

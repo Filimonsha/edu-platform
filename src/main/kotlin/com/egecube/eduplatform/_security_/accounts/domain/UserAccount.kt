@@ -33,7 +33,7 @@ open class UserAccount(
     }
 
     override fun getPassword(): String = passWord
-    override fun getUsername(): String = id.toString()
+    override fun getUsername(): String = email
 
     override fun isAccountNonExpired() = !accountSuspended
     override fun isAccountNonLocked() = !accountSuspended

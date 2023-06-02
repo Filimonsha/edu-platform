@@ -11,8 +11,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
-// TODO("make full review and rewrite logic")
-
 @Service
 class UserAccountService {
     private val logger = LoggerFactory.getLogger(this::class.java)
@@ -24,6 +22,9 @@ class UserAccountService {
     private lateinit var passwordEncoder: PasswordEncoder
 
     fun registerNewUser(request: RegisterRequest): Long? {
+        if (userAccountRepository.findByEmail(request.userMail) != null) {
+            return null
+        }
         val newUser = UserAccount.build().also {
             it.firstName = request.firstName
             it.lastName = request.lastName
@@ -80,7 +81,7 @@ class UserAccountService {
     fun changeSecureUserDataById(id: Long, changes: ChangeUserDataDto): Long? {
         return try {
             val changing = userAccountRepository.findById(id).get()
-            // Change base values
+            // Change secure values
             changing.role = changes.role
             // Save
             userAccountRepository.save(changing)

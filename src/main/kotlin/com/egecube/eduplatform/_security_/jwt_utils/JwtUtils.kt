@@ -1,13 +1,13 @@
 package com.egecube.eduplatform._security_.jwt_utils
 
 import io.jsonwebtoken.Claims
+import io.jsonwebtoken.JwtException
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
 import jakarta.annotation.PostConstruct
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
 import java.util.Date
 import java.util.function.Function
@@ -33,16 +33,15 @@ class JwtUtils {
 
     fun buildToken(
         claims: Map<String, Any>,
-        userDetails: UserDetails,
+        userMail: String,
         expiredHours: Int
     ): String {
         val issuedAt: Long = System.currentTimeMillis()
         val expiredAt = issuedAt + expiredHours * 60 * 60 * 1000
-        logger.trace("Building token for user ${userDetails.username}")
+        logger.trace("Building token for user $userMail")
         return Jwts.builder()
             .setClaims(claims)
-            // Subject truly is id
-            .setSubject(userDetails.username)
+            .setSubject(userMail)
             .setIssuedAt(Date(issuedAt))
             .setExpiration(Date(expiredAt))
             .signWith(signKey, signAlgorithm)
@@ -58,6 +57,12 @@ class JwtUtils {
 
     fun <T> extractClaim(
         token: String, claimsResolver: Function<Claims, T>
-    ): T = claimsResolver.apply(extractAllClaims(token))
+    ): T? {
+        return try {
+            claimsResolver.apply(extractAllClaims(token))
+        } catch (e: JwtException) {
+            null
+        }
+    }
 
 }
