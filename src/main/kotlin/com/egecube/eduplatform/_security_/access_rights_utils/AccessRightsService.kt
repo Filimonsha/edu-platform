@@ -1,11 +1,11 @@
 package com.egecube.eduplatform._security_.access_rights_utils
 
+import com.egecube.eduplatform._security_.accounts.UserAccountRepository
 import com.egecube.eduplatform._security_.accounts.domain.UserRole
 import com.egecube.eduplatform._security_.http_utils.HeaderUtils
 import com.egecube.eduplatform._security_.jwt_utils.JwtService
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 
@@ -19,7 +19,7 @@ class AccessRightsService {
     private lateinit var jwtService: JwtService
 
     @Autowired
-    private lateinit var userDetailsService: UserDetailsService
+    private lateinit var userAccountRepository: UserAccountRepository
 
     fun extractJwtIfPresentInRequest(req: HttpServletRequest): String? {
         if (!headerUtils.jwtHeaderCorrect(req)) return null
@@ -28,35 +28,32 @@ class AccessRightsService {
 
     // Check whether jwtToken is destined for accessor or jwt is for superuser
     fun isJwtForOwnerOrSuperuser(jwtContainer: HttpServletRequest, accessorId: Long): Boolean {
-        val jwt = extractJwtIfPresentInRequest(jwtContainer)
-        if (jwt.isNullOrEmpty()) return false
-        val userId = jwtService.extractUserMail(jwt)
-        if (userId.isNullOrEmpty()) return false
         return try {
-            // Actually loads by id, replaced logic
-            val userDetails = userDetailsService.loadUserByUsername(userId)
-            // If for user or non expired admin
-            jwtService.isTokenValid(jwt, userDetails.username) ||
+            val jwt = extractJwtIfPresentInRequest(jwtContainer)
+            val jwtUserName = jwtService.extractUserMail(jwt!!)
+            val userFromJwt = userAccountRepository.findByEmail(jwtUserName!!)
+            val userFromId = userAccountRepository.findById(accessorId).get()
+
+            jwtService.isTokenValid(jwt, userFromId.email) ||
                     !jwtService.isTokenExpired(jwt) &&
-                    userDetails.authorities.first().authority == UserRole.ADMIN.toString()
+                    userFromJwt!!.authorities.first().authority == UserRole.ADMIN.toString()
         } catch (e: UsernameNotFoundException) {
+            false
+        } catch (e: NullPointerException) {
             false
         }
     }
 
 
     // Check whether jwtToken valid just for user
-    fun isJwtValidForUser(jwtContainer: HttpServletRequest, accessorId: Long): Boolean {
+    fun isJwtValidForAccessor(jwtContainer: HttpServletRequest, accessorId: Long): Boolean {
         val jwt = extractJwtIfPresentInRequest(jwtContainer)
         if (jwt.isNullOrEmpty()) return false
-        val userId = jwtService.extractUserMail(jwt)
-        if (userId.isNullOrEmpty()) return false
         return try {
-            // Actually loads by id, replaced logic
-            val userDetails = userDetailsService.loadUserByUsername(userId)
-            jwtService.isTokenValid(jwt, userDetails.username)
-        } catch (e: UsernameNotFoundException) {
-            false
+            val userNameFromId = userAccountRepository.findById(accessorId).get().email
+            jwtService.isTokenValid(jwt, userNameFromId)
+        } catch (e: NoSuchElementException) {
+            return false
         }
     }
 }

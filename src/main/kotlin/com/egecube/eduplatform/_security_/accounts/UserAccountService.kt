@@ -73,7 +73,7 @@ class UserAccountService {
             userAccountRepository.save(changing)
             logger.info("Changed base account info for ${changing.email}")
             changing.id
-        } catch (e: UsernameNotFoundException) {
+        } catch (e: NoSuchElementException) {
             null
         }
     }
@@ -94,6 +94,7 @@ class UserAccountService {
 
     fun deleteAccountById(id: Long): Long {
         userAccountRepository.deleteById(id)
+        logger.info("Deleted account of user $id")
         return id
     }
 }

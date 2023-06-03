@@ -29,8 +29,13 @@ class UserAccountController {
     @GetMapping(UserAccountRoutes.ACCOUNT)
     fun getAccountInfoById(
         @PathVariable("id") userId: Long
-    ): UserAccountDto? {
-        return userService.getUserById(userId)
+    ): ResponseEntity<UserAccountDto> {
+        val userInfo = userService.getUserById(userId)
+        return if (userInfo != null) {
+            ResponseEntity.ok().body(userInfo)
+        } else {
+            ResponseEntity.notFound().build()
+        }
     }
 
     // Open endpoint
@@ -54,7 +59,7 @@ class UserAccountController {
         httpRequest: HttpServletRequest
     ): ResponseEntity<Long> {
         val fromUserOrAdmin = accessRightsService.isJwtForOwnerOrSuperuser(httpRequest, userId)
-        val fromUser = accessRightsService.isJwtValidForUser(httpRequest, userId)
+        val fromUser = accessRightsService.isJwtValidForAccessor(httpRequest, userId)
         return if (!fromUserOrAdmin) {
             ResponseEntity.badRequest().build()
         } else {
@@ -73,9 +78,11 @@ class UserAccountController {
         @PathVariable("id") userId: Long,
         httpRequest: HttpServletRequest
     ): ResponseEntity<Long> {
-        if (accessRightsService.isJwtForOwnerOrSuperuser(httpRequest, userId)) {
+        return if (accessRightsService.isJwtForOwnerOrSuperuser(httpRequest, userId)) {
             userService.deleteAccountById(userId)
+            ResponseEntity.ok().build()
+        } else {
+            ResponseEntity.badRequest().build()
         }
-        return ResponseEntity.ok().build()
     }
 }
