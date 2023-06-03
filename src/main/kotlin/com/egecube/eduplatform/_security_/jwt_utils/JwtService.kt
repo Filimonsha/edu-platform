@@ -2,33 +2,22 @@ package com.egecube.eduplatform._security_.jwt_utils
 
 import io.jsonwebtoken.Claims
 import jakarta.annotation.PostConstruct
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.Date
 import kotlin.collections.HashMap
 
 
 @Service
-class JwtService {
-
-    @Autowired
-    private lateinit var jwtConfig: JwtConfiguration
+class JwtService(
+    private val jwtConfig: JwtConfiguration,
+    private val jwtUtils: JwtUtils
+) {
     private lateinit var tokenTimeoutH: String
-
-    @Autowired
-    private lateinit var jwtUtils: JwtUtils
 
     @PostConstruct
     fun loadValues() {
         tokenTimeoutH = jwtConfig.timeoutH
     }
-
-//    fun generateToken(
-//        claims: HashMap<String, Any>,
-//        userMail: String
-//    ): String = jwtUtils.buildToken(
-//        claims, userMail, tokenTimeoutH.toInt()
-//    )
 
     fun generateToken(
         userMail: String

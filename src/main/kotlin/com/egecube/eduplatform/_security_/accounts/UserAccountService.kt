@@ -5,21 +5,19 @@ import com.egecube.eduplatform._security_.accounts.domain.UserAccount
 import com.egecube.eduplatform._security_.accounts.domain.UserRole
 import com.egecube.eduplatform._security_.accounts.dto.ChangeUserDataDto
 import com.egecube.eduplatform._security_.accounts.dto.UserAccountDto
+import com.egecube.eduplatform._security_.events.*
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.security.core.userdetails.UsernameNotFoundException
+import org.springframework.context.ApplicationEventPublisher
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 
 @Service
-class UserAccountService {
+class UserAccountService(
+    private val userAccountRepository: UserAccountRepository,
+    private val passwordEncoder: PasswordEncoder,
+    private val applicationEventPublisher: ApplicationEventPublisher
+) {
     private val logger = LoggerFactory.getLogger(this::class.java)
-
-    @Autowired
-    private lateinit var userAccountRepository: UserAccountRepository
-
-    @Autowired
-    private lateinit var passwordEncoder: PasswordEncoder
 
     fun registerNewUser(request: RegisterRequest): Long? {
         if (userAccountRepository.findByEmail(request.userMail) != null) {
@@ -36,6 +34,10 @@ class UserAccountService {
         return try {
             val registered = userAccountRepository.save(newUser)
             logger.info("Registered new user: ${registered.email}")
+            // Publish event
+            applicationEventPublisher.publishEvent(
+                UserAccountCreated(UserAccountDto(registered))
+            )
             registered.id
         } catch (_: IllegalArgumentException) {
             logger.warn("Unable to register new user ${newUser.email}")
@@ -45,17 +47,9 @@ class UserAccountService {
 
     fun getUserById(id: Long): UserAccountDto? {
         return try {
-            val user = userAccountRepository.findById(id).get()
-            UserAccountDto(
-                userId = user.id,
-                accountSuspended = user.accountSuspended,
-                firstName = user.firstName,
-                lastName = user.lastName,
-                userMail = user.email,
-                userPhone = user.phone,
-                userRole = user.role
-            )
-        } catch (e: UsernameNotFoundException) {
+            val userAccount = userAccountRepository.findById(id).get()
+            UserAccountDto(userAccount)
+        } catch (e: NoSuchElementException) {
             null
         }
 
@@ -70,7 +64,11 @@ class UserAccountService {
             changing.lastName = changes.lastName
             changing.phone = changes.userPhone
             // Save
-            userAccountRepository.save(changing)
+            val changed = userAccountRepository.save(changing)
+            // Publish event
+            applicationEventPublisher.publishEvent(
+                UserAccountModified(UserAccountDto(changed))
+            )
             logger.info("Changed base account info for ${changing.email}")
             changing.id
         } catch (e: NoSuchElementException) {
@@ -84,16 +82,21 @@ class UserAccountService {
             // Change secure values
             changing.role = changes.role
             // Save
-            userAccountRepository.save(changing)
+            val changed = userAccountRepository.save(changing)
+            // Publish event
+            applicationEventPublisher.publishEvent(
+                UserRightsUpdated(changed.role)
+            )
             logger.warn("Changed secure account info of ${changing.email} to ${changing.role}")
             changing.id
-        } catch (e: UsernameNotFoundException) {
+        } catch (e: NoSuchElementException) {
             null
         }
     }
 
     fun deleteAccountById(id: Long): Long {
         userAccountRepository.deleteById(id)
+        applicationEventPublisher.publishEvent(UserAccountDeleted(id))
         logger.info("Deleted account of user $id")
         return id
     }

@@ -2,7 +2,6 @@ package com.egecube.eduplatform._security_.config
 
 import com.egecube.eduplatform._security_.filters.JwtAuthFilter
 import com.egecube.eduplatform._security_.routes.BaseRoute
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.annotation.Order
@@ -15,12 +14,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-class FilterConfig {
-
-    @Autowired
-    private lateinit var jwtAuthFilter: JwtAuthFilter
-    @Autowired
-    private lateinit var authProvider: AuthenticationProvider
+class FilterConfig(
+    private val jwtAuthFilter: JwtAuthFilter,
+    private val authProvider: AuthenticationProvider
+) {
 
     @Order(1)
     @Bean

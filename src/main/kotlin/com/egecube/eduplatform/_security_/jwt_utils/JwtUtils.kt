@@ -7,23 +7,20 @@ import io.jsonwebtoken.SignatureAlgorithm
 import io.jsonwebtoken.security.Keys
 import jakarta.annotation.PostConstruct
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
 import java.util.Date
 import java.util.function.Function
 import javax.crypto.SecretKey
 
 @Component
-class JwtUtils {
-
+class JwtUtils(
+    private val jwtConfig: JwtConfiguration
+) {
     private val logger = LoggerFactory.getLogger(this::class.java)
+    private val signAlgorithm = SignatureAlgorithm.HS256
 
-    @Autowired
-    private lateinit var jwtConfig: JwtConfiguration
     private lateinit var secretKey: String
     private lateinit var signKey: SecretKey
-
-    private val signAlgorithm = SignatureAlgorithm.HS256
 
     @PostConstruct
     private fun loadValues() {

@@ -5,21 +5,15 @@ import com.egecube.eduplatform._security_.accounts.domain.UserRole
 import com.egecube.eduplatform._security_.http_utils.HeaderUtils
 import com.egecube.eduplatform._security_.jwt_utils.JwtService
 import jakarta.servlet.http.HttpServletRequest
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.userdetails.UsernameNotFoundException
 import org.springframework.stereotype.Service
 
 @Service
-class AccessRightsService {
-
-    @Autowired
-    private lateinit var headerUtils: HeaderUtils
-
-    @Autowired
-    private lateinit var jwtService: JwtService
-
-    @Autowired
-    private lateinit var userAccountRepository: UserAccountRepository
+class AccessRightsService(
+    private val headerUtils: HeaderUtils,
+    private val jwtService: JwtService,
+    private val userAccountRepository: UserAccountRepository
+) {
 
     fun extractJwtIfPresentInRequest(req: HttpServletRequest): String? {
         if (!headerUtils.jwtHeaderCorrect(req)) return null
