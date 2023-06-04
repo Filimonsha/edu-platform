@@ -33,6 +33,8 @@ dependencies {
 //  Modulith
     implementation("org.springframework.experimental:spring-modulith-core:0.5.1")
     implementation("org.springframework.experimental:spring-modulith-docs:0.5.1")
+    implementation("org.springframework.experimental:spring-modulith-test:0.6.0")
+
 //  Utils
     implementation("org.modelmapper:modelmapper:3.1.1")
 //  Tests

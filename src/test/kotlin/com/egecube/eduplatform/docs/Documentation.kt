@@ -1,5 +1,6 @@
-package com.egecube.eduplatform
+package com.egecube.eduplatform.docs
 
+import com.egecube.eduplatform.EduPlatformApplication
 import org.junit.jupiter.api.Test
 import org.springframework.modulith.core.ApplicationModules
 import org.springframework.modulith.docs.Documenter
