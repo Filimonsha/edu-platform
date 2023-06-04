@@ -6,6 +6,7 @@ plugins {
     id("org.jetbrains.kotlin.plugin.jpa") version "1.8.21"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
+    kotlin("plugin.jpa") version "1.7.22"
 }
 
 group = "com.egecube"
@@ -37,6 +38,8 @@ dependencies {
 
 //  Utils
     implementation("org.modelmapper:modelmapper:3.1.1")
+    implementation("org.modelmapper.extensions:modelmapper-jackson:3.1.1")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4")
 //  Tests
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
