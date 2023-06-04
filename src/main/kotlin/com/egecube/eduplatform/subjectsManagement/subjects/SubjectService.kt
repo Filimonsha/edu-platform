@@ -1,6 +1,5 @@
 package com.egecube.eduplatform.subjectsManagement.subjects
 
-import com.egecube.eduplatform.subjectsManagement.courses.CourseRepository
 import com.egecube.eduplatform.subjectsManagement.courses.CourseService
 import com.egecube.eduplatform.subjectsManagement.events.AddedParticipantToSubject
 import com.egecube.eduplatform.subjectsManagement.participants.ParticipantRepository
@@ -12,7 +11,6 @@ import java.util.*
 class SubjectService(
     private val subjectRepository: SubjectRepository,
     private val participantRepository: ParticipantRepository,
-    private val courseRepository: CourseRepository,
     private val applicationEventPublisher: ApplicationEventPublisher,
     private val courseService: CourseService
 ) {
@@ -39,7 +37,7 @@ class SubjectService(
             foundParticipant.relatedSubjects.add(subject);
             participantRepository.save(foundParticipant);
 
-            courseService.addParticipantToCourse(foundParticipant, null)
+            courseService.addParticipantToCourse(foundParticipant, subjectId, null)
 
             applicationEventPublisher.publishEvent(AddedParticipantToSubject(foundParticipant.id))
 

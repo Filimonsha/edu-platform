@@ -1,7 +1,6 @@
 package com.egecube.eduplatform.subjectsManagement.participants
 
 import com.egecube.eduplatform.subjectsManagement.participants.domain.Participant
-import org.modelmapper.ModelMapper
 import org.springframework.stereotype.Service
 
 @Service

@@ -4,10 +4,10 @@ import com.egecube.eduplatform.schedules.domain.events.GlobalEvent
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 @Repository
-interface GlobalEventsRepository: CrudRepository<GlobalEvent, Long> {
+interface GlobalEventsRepository : CrudRepository<GlobalEvent, Long> {
     fun findAllByNameContaining(query: String): List<GlobalEvent>
 
     fun findAllByTimeStampBetween(start: LocalDateTime, stop: LocalDateTime)

@@ -1,7 +1,7 @@
 package com.egecube.eduplatform.subjectsManagement.participants.dto
 
-import java.io.Serializable
 import com.egecube.eduplatform.subjectsManagement.participants.domain.Participant
+import java.io.Serializable
 
 /**
  * A DTO for the [Participant] entity

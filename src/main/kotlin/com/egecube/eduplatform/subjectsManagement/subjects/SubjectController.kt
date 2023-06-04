@@ -1,7 +1,7 @@
 package com.egecube.eduplatform.subjectsManagement.subjects
 
-import com.egecube.eduplatform.subjectsManagement.subjects.dto.SubjectResponseDto
 import com.egecube.eduplatform.subjectsManagement.subjects.consts.SubjectsRoutes
+import com.egecube.eduplatform.subjectsManagement.subjects.dto.SubjectResponseDto
 import com.egecube.eduplatform.subjectsManagement.subjects.utils.mapSubjectToResponse
 import org.modelmapper.ModelMapper
 import org.springframework.web.bind.annotation.*
@@ -18,7 +18,7 @@ class SubjectController(
         subjectService.getAll().map { subject -> mapSubjectToResponse(subject) }
 
     @GetMapping(SubjectsRoutes.SUBJECT)
-    fun getSubjectById(@PathVariable(value = "id") subjectId: Long): SubjectResponseDto {
+    fun getSubjectById(@PathVariable(value = "subjectId") subjectId: Long): SubjectResponseDto {
         return mapSubjectToResponse(subjectService.getById(subjectId).orElseThrow())
     }
 
@@ -28,8 +28,11 @@ class SubjectController(
     }
 
     @PostMapping(SubjectsRoutes.SUBJECT_PARTICIPANTS)
-    fun addParticipantToSubject(@PathVariable id: Long, @RequestBody participantsIds: Set<Long>): SubjectResponseDto {
-        return mapSubjectToResponse(subjectService.addParticipantsToSubject(id, participantsIds))
+    fun addParticipantToSubject(
+        @PathVariable subjectId: Long,
+        @RequestBody participantsIds: Set<Long>
+    ): SubjectResponseDto {
+        return mapSubjectToResponse(subjectService.addParticipantsToSubject(subjectId, participantsIds))
     }
 
 }

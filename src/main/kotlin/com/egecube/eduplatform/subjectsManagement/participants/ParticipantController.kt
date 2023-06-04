@@ -1,8 +1,8 @@
 package com.egecube.eduplatform.subjectsManagement.participants
 
+import com.egecube.eduplatform.subjectsManagement.participants.consts.ParticipantsRoutes
 import com.egecube.eduplatform.subjectsManagement.participants.dto.ParticipantRequestDto
 import com.egecube.eduplatform.subjectsManagement.participants.dto.ParticipantResponseDto
-import com.egecube.eduplatform.subjectsManagement.participants.consts.ParticipantsRoutes
 import com.egecube.eduplatform.subjectsManagement.participants.utils.mapParticipantToResponse
 import com.egecube.eduplatform.subjectsManagement.participants.utils.mapRequestToParticipant
 import io.swagger.v3.oas.annotations.tags.Tag

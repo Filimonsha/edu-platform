@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity
 @Table(name = "user_events")
-open class UserEvent (
+open class UserEvent(
     @Id
     @Nonnull
     @GeneratedValue(strategy = GenerationType.AUTO)

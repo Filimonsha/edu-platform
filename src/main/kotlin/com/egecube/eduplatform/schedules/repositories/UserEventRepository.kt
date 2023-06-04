@@ -4,10 +4,10 @@ import com.egecube.eduplatform.schedules.domain.events.UserEvent
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 @Repository
-interface UserEventRepository: CrudRepository<UserEvent, Long> {
+interface UserEventRepository : CrudRepository<UserEvent, Long> {
     fun findAllByNameContaining(query: String): List<UserEvent>
 
     //TODO(Check user id class)
