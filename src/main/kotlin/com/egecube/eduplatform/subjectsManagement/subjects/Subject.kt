@@ -11,16 +11,16 @@ open class Subject(
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long?,
+    open val id: Long?,
 
     @JsonProperty("name")
-    val name: String,
-    val description: String,
+    open val name: String,
+    open val description: String,
 
     @OneToMany(mappedBy = "subject")
-    val courses: MutableSet<Course> = mutableSetOf(),
+    open val courses: MutableSet<Course> = mutableSetOf(),
 
     @ManyToMany
-    val participants: MutableSet<Participant> = mutableSetOf(),
+    open val participants: MutableSet<Participant> = mutableSetOf(),
 
     )
