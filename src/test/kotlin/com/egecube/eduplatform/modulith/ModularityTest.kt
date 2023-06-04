@@ -1,9 +1,10 @@
-package com.egecube.eduplatform
+package com.egecube.eduplatform.modulith
 
+import com.egecube.eduplatform.EduPlatformApplication
 import org.junit.jupiter.api.Test
 import org.springframework.modulith.core.ApplicationModules
 
-internal class ModularityTest {
+class ModularityTest {
     private var modules = ApplicationModules.of(EduPlatformApplication::class.java)
 
     @Test
