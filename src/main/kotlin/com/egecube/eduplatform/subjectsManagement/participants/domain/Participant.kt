@@ -9,19 +9,19 @@ import jakarta.persistence.*
 open class Participant(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long?,
+    open val id: Long?,
 
     @JsonProperty("name")
-    var name: String,
-    var secondName: String,
-    var email: String,
+    open var name: String,
+    open var secondName: String,
+    open var email: String,
 
-    val participantRole: String,
+    open val participantRole: String,
 
     @ManyToMany(mappedBy = "participants")
-    val relatedSubjects: MutableSet<Subject> = mutableSetOf(),
+    open val relatedSubjects: MutableSet<Subject> = mutableSetOf(),
 
     @ManyToMany
-    val relatedCourses: MutableSet<Course> = mutableSetOf(),
+    open val relatedCourses: MutableSet<Course> = mutableSetOf(),
 
     )

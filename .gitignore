@@ -41,6 +41,3 @@ src/main/resources/application.properties
 
 ### Modulith ###
 modulith-docs/
-
-src/main/resources/application.properties
-src/main/resources/jwt.properties
