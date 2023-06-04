@@ -36,5 +36,8 @@ out/
 ### VS Code ###
 .vscode/
 
+## Application ###
+src/main/resources/application.properties
+
 ### Modulith ###
 modulith-docs/
