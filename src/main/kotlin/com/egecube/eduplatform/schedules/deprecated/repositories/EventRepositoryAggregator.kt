@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.schedules.repositories
+package com.egecube.eduplatform.schedules.deprecated.repositories
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

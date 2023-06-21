@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.schedules.domain.events
+package com.egecube.eduplatform.schedules.deprecated.events
 
 import jakarta.persistence.Embeddable
 import java.time.LocalDateTime

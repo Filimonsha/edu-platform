@@ -1,6 +1,6 @@
-package com.egecube.eduplatform.schedules.repositories
+package com.egecube.eduplatform.schedules.deprecated.repositories
 
-import com.egecube.eduplatform.schedules.domain.events.UserEvent
+import com.egecube.eduplatform.schedules.deprecated.events.UserEvent
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 import java.time.LocalDateTime

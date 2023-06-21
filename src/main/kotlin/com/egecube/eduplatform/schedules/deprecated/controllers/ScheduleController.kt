@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.schedules.controllers
+package com.egecube.eduplatform.schedules.deprecated.controllers
 
 import org.springframework.stereotype.Service
 

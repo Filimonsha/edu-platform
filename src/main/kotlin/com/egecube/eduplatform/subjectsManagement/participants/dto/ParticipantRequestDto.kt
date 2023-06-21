@@ -1,6 +1,6 @@
 package com.egecube.eduplatform.subjectsManagement.participants.dto
 
-import com.egecube.eduplatform.subjectsManagement.Course
+import com.egecube.eduplatform.subjectsManagement.courses.Course
 import java.io.Serializable
 
 /**
