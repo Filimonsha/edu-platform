@@ -1,6 +1,6 @@
 package com.egecube.eduplatform.subjectsManagement.courses.utils
 
-import com.egecube.eduplatform.subjectsManagement.courses.Course
+import com.egecube.eduplatform.subjectsManagement.Course
 import com.egecube.eduplatform.subjectsManagement.courses.dto.CourseResponseDto
 
 

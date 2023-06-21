@@ -1,5 +1,6 @@
 package com.egecube.eduplatform.subjectsManagement.courses
 
+import com.egecube.eduplatform.subjectsManagement.Course
 import com.egecube.eduplatform.subjectsManagement.participants.ParticipantRepository
 import com.egecube.eduplatform.subjectsManagement.participants.domain.Participant
 import com.egecube.eduplatform.subjectsManagement.subjects.SubjectRepository

@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.subjectsManagement.courses
+package com.egecube.eduplatform.subjectsManagement
 
 import com.egecube.eduplatform.subjectsManagement.participants.domain.Participant
 import com.egecube.eduplatform.subjectsManagement.subjects.Subject

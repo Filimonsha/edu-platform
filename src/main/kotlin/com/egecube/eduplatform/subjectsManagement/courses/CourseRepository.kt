@@ -1,5 +1,6 @@
 package com.egecube.eduplatform.subjectsManagement.courses
 
+import com.egecube.eduplatform.subjectsManagement.Course
 import org.springframework.data.jpa.repository.JpaRepository
 import java.util.*
 

@@ -1,6 +1,6 @@
 package com.egecube.eduplatform.subjectsManagement.participants.domain
 
-import com.egecube.eduplatform.subjectsManagement.courses.Course
+import com.egecube.eduplatform.subjectsManagement.Course
 import com.egecube.eduplatform.subjectsManagement.subjects.Subject
 import com.fasterxml.jackson.annotation.JsonProperty
 import jakarta.persistence.*
