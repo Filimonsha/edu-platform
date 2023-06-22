@@ -5,6 +5,7 @@ import com.egecube.eduplatform.subjectsManagement.courses.dto.CourseRequestDto
 import com.egecube.eduplatform.subjectsManagement.courses.dto.CourseResponseDto
 import com.egecube.eduplatform.subjectsManagement.courses.utils.mapCourseToResponse
 import org.modelmapper.ModelMapper
+import org.springframework.security.access.annotation.Secured
 import org.springframework.web.bind.annotation.*
 
 
@@ -17,6 +18,7 @@ class CoursesController(private val courseService: CourseService, private val mo
             .map { course -> mapCourseToResponse(course) }
     }
 
+    @Secured("ADMIN")
     @PostMapping(CoursesRoutes.COURSES)
     fun createCourse(@PathVariable subjectId: Long, @RequestBody requestBody: CourseRequestDto): CourseResponseDto {
 

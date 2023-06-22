@@ -2,10 +2,12 @@ package com.egecube.eduplatform._security_.filters
 
 //import com.egecube.eduplatform._security_.access_rights_utils.AccessRightsService
 //import com.egecube.eduplatform._security_.jwt_utils.JwtService
+import com.egecube.eduplatform._security_.accounts.domain.UserRole
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource
 import org.springframework.stereotype.Component
@@ -33,7 +35,7 @@ class JwtAuthFilter(
 //                        userMail,
                         "def_user",
                         null,
-                        null
+                        arrayListOf(SimpleGrantedAuthority(UserRole.ADMIN.name))
                     )
                     auth.details = WebAuthenticationDetailsSource().buildDetails(request)
                     SecurityContextHolder.getContext().authentication = auth

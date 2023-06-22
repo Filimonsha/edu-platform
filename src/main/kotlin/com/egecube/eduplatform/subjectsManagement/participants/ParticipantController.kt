@@ -7,6 +7,7 @@ import com.egecube.eduplatform.subjectsManagement.participants.utils.mapParticip
 import com.egecube.eduplatform.subjectsManagement.participants.utils.mapRequestToParticipant
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.modelmapper.ModelMapper
+import org.springframework.security.access.annotation.Secured
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -26,6 +27,7 @@ class ParticipantController(
             .map { participant -> mapParticipantToResponse(participant) }
     }
 
+    @Secured("ADMIN")
     @PostMapping(ParticipantsRoutes.PARTICIPANTS)
     fun createParticipant(@RequestBody participantRequestDto: ParticipantRequestDto): ParticipantResponseDto {
 
