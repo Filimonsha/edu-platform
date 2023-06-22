@@ -13,24 +13,24 @@ open class Event (
     @GeneratedValue(strategy = GenerationType.TABLE)
     open val id: Long? = null,
     @NonNull
-    open var eventName: String? = null,
+    open var name: String? = null,
     open var description: String? = null,
     @NonNull
     open var startsAt: ZonedDateTime? = null,
     @NonNull
     open var endsAt: ZonedDateTime? = null,
     @ElementCollection(fetch = FetchType.LAZY)
-    open var assignedPersonIds: List<Long> = emptyList(),
+    open var assignedUserIds: List<Long> = emptyList(),
 ) {
 
     inline fun <reified T> initCommonWithDto(data: EventDto): T? {
         if (!T::class.isSubclassOf(Event::class)) return null
         val inst = T::class.java.getConstructor().newInstance() as Event
-        inst.eventName = data.eventName
+        inst.name = data.eventName
         inst.description = data.description
         inst.startsAt = data.startsAt
         inst.endsAt = data.endsAt
-        inst.assignedPersonIds = data.assignedPersonIds
+        inst.assignedUserIds = data.assignedPersonIds
         return inst as T
     }
 }
