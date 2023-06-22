@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.streams
+package com.egecube.eduplatform.streams.rest
 
 import com.egecube.eduplatform.streams.domain.Stream
 import org.springframework.data.repository.CrudRepository

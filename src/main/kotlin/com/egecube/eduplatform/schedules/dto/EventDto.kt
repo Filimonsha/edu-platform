@@ -1,11 +1,11 @@
-package com.egecube.eduplatform.schedules
+package com.egecube.eduplatform.schedules.dto
 
 import java.time.ZonedDateTime
 
-data class CommonEventDto(
+data class EventDto(
     val eventName: String,
     val description: String?,
     val startsAt: ZonedDateTime,
     val endsAt: ZonedDateTime,
-    val assignedPersonIds: ArrayList<Long>,
+    val assignedPersonIds: List<Long>,
 )

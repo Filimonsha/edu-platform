@@ -1,7 +1,5 @@
 package com.egecube.eduplatform.streams.rest
 
-import com.egecube.eduplatform.schedules.CommonEvent
-import com.egecube.eduplatform.streams.StreamsRepository
 import com.egecube.eduplatform.streams.domain.Stream
 import com.egecube.eduplatform.streams.dto.StreamDto
 import org.slf4j.LoggerFactory
@@ -13,20 +11,9 @@ class StreamsService(
 ) {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
-//    fun getEventDescriptionFromStreamId(streamId: Long): CommonEvent? {
-//        return try {
-//            val eventId = streamsRepository.findById(streamId).get().webinarId
-//            eventsRepository.findById(eventId).get()
-//        } catch (e: NoSuchElementException) {
-//            null
-//        }
-//    }
-
-    fun getTranslationsForUser(): ArrayList<Stream> {
+    fun getTranslationsForUser(): List<Stream> {
         return streamsRepository.findAll() as ArrayList<Stream>
     }
-
-    fun getTranslationsForGroupList() {}
 
     fun getTranslationById(eventId: Long): Stream? {
         return try {
