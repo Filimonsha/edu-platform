@@ -5,8 +5,6 @@ import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 
-// todo(kotlin jpa not working!!!!!)
-
 @Entity
 @Table(name = "users_capacity")
 open class UserAccount(
