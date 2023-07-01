@@ -4,6 +4,7 @@ import com.egecube.eduplatform.lectures.domain.Lecture
 import com.egecube.eduplatform.lectures.dto.LectureDto
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import java.security.Principal
 
 @Service
 class LecturesService(
@@ -11,7 +12,9 @@ class LecturesService(
 ) {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
-    fun getTranslationsForUser(): List<Lecture> {
+    fun getTranslationsForUser(
+        principal: Principal
+    ): List<Lecture> {
         return lecturesRepository.findAll() as ArrayList<Lecture>
     }
 

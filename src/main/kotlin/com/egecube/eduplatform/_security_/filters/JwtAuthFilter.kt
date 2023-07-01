@@ -33,8 +33,8 @@ class JwtAuthFilter(
 //                if (jwtService.isTokenValid(jwt, userMail!!)) {
                     val auth = UsernamePasswordAuthenticationToken(
 //                        userMail,
-                        "def_user",
-                        null,
+                        "def_user", // username
+                        1, // get id from db if not authenticated
                         arrayListOf(SimpleGrantedAuthority(UserRole.ADMIN.name))
                     )
                     auth.details = WebAuthenticationDetailsSource().buildDetails(request)

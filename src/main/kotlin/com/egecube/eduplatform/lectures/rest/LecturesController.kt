@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
+import java.security.Principal
 
 @RestController
 class LecturesController(
@@ -17,8 +18,10 @@ class LecturesController(
 ) {
 
     @GetMapping(LecturesRoutes.LECTURES_ROUTE)
-    fun getAvailableLectures(): ResponseEntity<List<Lecture>> {
-        val streams = lecturesService.getTranslationsForUser()
+    fun getAvailableLectures(
+        principal: Principal
+    ): ResponseEntity<List<Lecture>> {
+        val streams = lecturesService.getTranslationsForUser(principal)
         return if (streams.isNotEmpty()) {
             ResponseEntity.ok().body(streams)
         } else {
@@ -31,7 +34,6 @@ class LecturesController(
     fun addNewStream(
         @RequestBody lectureDto: LectureDto
     ): ResponseEntity<Long> {
-        println(lectureDto.common.assignedPersonIds)
         val newStreamId = lecturesService.createTranslation(lectureDto)
         return if (newStreamId != null) {
             ResponseEntity.ok().body(newStreamId)
