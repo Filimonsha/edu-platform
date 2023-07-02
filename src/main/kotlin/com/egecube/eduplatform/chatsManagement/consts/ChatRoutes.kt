@@ -5,4 +5,5 @@ object ChatRoutes {
     const val CHAT_ROUTE = "$CHATS_ROUTE/{chatId}"
 
     const val CHAT_WS = "/chat-ws"
+    const val CHAT_ENDPOINT = "/chat-queue"
 }

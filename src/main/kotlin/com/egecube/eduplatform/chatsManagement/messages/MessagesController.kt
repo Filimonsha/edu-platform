@@ -36,7 +36,7 @@ class MessagesController(
         @RequestParam page: Int = 0
     ): ResponseEntity<Page<ChatMessage>> {
         return ResponseEntity.ok().body(
-            messagesService.getMessagesForChat2(chatId, page)
+            messagesService.getMessagesForChat(chatId, page)
         )
     }
 }
