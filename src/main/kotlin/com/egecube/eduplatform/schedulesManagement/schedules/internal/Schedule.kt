@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.schedulesManagement.schedules
+package com.egecube.eduplatform.schedulesManagement.schedules.internal
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue

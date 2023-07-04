@@ -28,12 +28,11 @@ class ListenersController(
             }
     }
 
-    @GetMapping(ListenersRoutes.LISTENER_LECTURES)
+//    @GetMapping(ListenersRoutes.LISTENER_LECTURES)
+    @GetMapping("api/lectures-management/listeners/{listenerId}/lectures")
     fun getAllListenerLectures(@PathVariable("listenerId") listenerId: Long): List<LectureResponseDto> {
-
         return listenersService
             .getAllListenerLectures(listenerId)
-            .map { lecture: Lecture -> modelMapper.map(lecture, LectureResponseDto::class.java) }
     }
 
     @PostMapping(ListenersRoutes.LISTENER_LECTURES)
