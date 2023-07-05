@@ -11,5 +11,6 @@ data class LectureRequestDto(
     val description: String,
     val startsAt: ZonedDateTime,
     val endsAt: ZonedDateTime,
-    val listeners: Set<Long>
+    val listeners: Set<Long>,
+    val flowSrc: String? = null,
 ) : Serializable

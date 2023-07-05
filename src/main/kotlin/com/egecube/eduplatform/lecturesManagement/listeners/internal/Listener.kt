@@ -16,5 +16,5 @@ open class Listener(
     open val email: String,
 
     @ManyToMany(mappedBy = "listeners")
-    open val availableLectures: MutableSet<Lecture> = mutableSetOf()
-)
+    open val availableLectures: MutableSet<Lecture> = mutableSetOf(),
+    )

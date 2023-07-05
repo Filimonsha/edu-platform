@@ -6,7 +6,7 @@ import com.egecube.eduplatform.lecturesManagement.lectures.internal.const.Lectur
 import org.springframework.web.bind.annotation.*
 
 @RestController
-class LecturesController(
+class LectureController(
     private val lecturesService: LecturesService
 ) {
     @GetMapping(LecturesRoutes.LECTURES)
@@ -27,6 +27,7 @@ class LecturesController(
         )
 
         val createdLecture = lecturesService.createLecture(newLecture, lectureRequestDto.listeners)
+
         return LectureResponseDto(
             createdLecture.name,
             createdLecture.description,
@@ -36,8 +37,35 @@ class LecturesController(
     }
 
     @GetMapping(LecturesRoutes.LECTURE)
-    fun getLecture(@PathVariable(value = "lectureId") lectureId: Long) {
-//    TODO
+    fun getLecture(@PathVariable(value = "lectureId") lectureId: Long): LectureResponseDto {
+        val foundLecture = lecturesService.getById(lectureId)
+        return LectureResponseDto(
+            foundLecture.name,
+            foundLecture.description,
+            foundLecture.startsAt,
+            foundLecture.endsAt
+        )
     }
 
+    @PutMapping(LecturesRoutes.LECTURE)
+    fun modifyLecture(
+        @PathVariable(value = "lectureId") lectureId: Long,
+        @RequestBody lecture: LectureRequestDto
+    ): LectureResponseDto {
+        val (name, description, startsAt, endsAt) = lecture
+        val replacedLecture = lecturesService.replaceLecture(
+            lectureId,
+            Lecture(
+                null,
+                name,
+                description, startsAt, endsAt
+            )
+        )
+        return LectureResponseDto(
+            replacedLecture.name,
+            replacedLecture.description,
+            replacedLecture.startsAt,
+            replacedLecture.endsAt
+        )
+    }
 }

@@ -2,21 +2,20 @@ package com.egecube.eduplatform.lecturesManagement.listeners
 
 import com.egecube.eduplatform.lecturesManagement.lectures.LectureResponseDto
 import com.egecube.eduplatform.lecturesManagement.lectures.internal.Lecture
-import com.egecube.eduplatform.lecturesManagement.lectures.internal.LecturesRepository
+import com.egecube.eduplatform.lecturesManagement.lectures.internal.LectureRepository
 import com.egecube.eduplatform.lecturesManagement.listeners.internal.Listener
 import com.egecube.eduplatform.lecturesManagement.listeners.internal.ListenersRepository
 import com.egecube.eduplatform.subjectsManagement.events.ParticipantRegistered
 import org.modelmapper.ModelMapper
 import org.springframework.scheduling.annotation.Async
 import org.springframework.stereotype.Service
-import org.springframework.transaction.annotation.Transactional
 import org.springframework.transaction.event.TransactionPhase
 import org.springframework.transaction.event.TransactionalEventListener
 
 @Service
 class ListenersService(
     private val listenersRepository: ListenersRepository,
-    private val lecturesRepository: LecturesRepository,
+    private val lectureRepository: LectureRepository,
     private val modelMapper: ModelMapper,
 ) {
 
@@ -28,14 +27,21 @@ class ListenersService(
     fun getAllListenerLectures(listenerId: Long): List<LectureResponseDto> {
         val foundListener = listenersRepository.findById(listenerId).orElseThrow()
         return foundListener.availableLectures
-            .map { lecture: Lecture -> modelMapper.map(lecture, LectureResponseDto::class.java) }
+            .map { lecture: Lecture ->
+                LectureResponseDto(
+                    lecture.name,
+                    lecture.description,
+                    lecture.startsAt,
+                    lecture.endsAt
+                )
+            }
     }
 
     fun addToListenerAvailableLecture(listenerId: Long, lecturesIds: Set<Long>) {
         val foundListener = listenersRepository.findById(listenerId).orElseThrow()
 
         lecturesIds.forEach { lectureId ->
-            val foundLecture = lecturesRepository.findById(
+            val foundLecture = lectureRepository.findById(
                 lectureId
             ).orElseThrow()
 
@@ -44,7 +50,7 @@ class ListenersService(
             listenersRepository.save(foundListener)
 
             foundLecture.listeners.add(foundListener)
-            lecturesRepository.save(foundLecture)
+            lectureRepository.save(foundLecture)
 
         }
     }

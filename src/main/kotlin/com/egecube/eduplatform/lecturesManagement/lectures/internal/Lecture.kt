@@ -9,16 +9,17 @@ import jakarta.persistence.ManyToMany
 import java.time.ZonedDateTime
 
 @Entity
-data class Lecture(
+open class Lecture(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long?,
-    val name: String,
-    val description:String,
-    val startsAt: ZonedDateTime,
-    val endsAt: ZonedDateTime,
+    open val id: Long?,
+    open var name: String,
+    open var description: String,
+    open var startsAt: ZonedDateTime,
+    open var endsAt: ZonedDateTime,
 
     @ManyToMany
-    val listeners: MutableSet<Listener> = mutableSetOf()
+    open val listeners: MutableSet<Listener> = mutableSetOf(),
 
+    open var flowSrc: String? = null,
 )

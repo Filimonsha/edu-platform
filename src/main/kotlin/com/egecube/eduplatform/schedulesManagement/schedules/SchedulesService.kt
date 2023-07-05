@@ -7,6 +7,7 @@ import com.egecube.eduplatform.schedulesManagement.schedules.internal.ScheduleRe
 import com.egecube.eduplatform.schedulesManagement.schedules.internal.dto.ScheduleResponseDto
 import com.egecube.eduplatform.subjectsManagement.events.ParticipantRegistered
 import org.springframework.stereotype.Service
+import org.springframework.transaction.event.TransactionPhase
 import org.springframework.transaction.event.TransactionalEventListener
 
 @Service
@@ -30,7 +31,7 @@ class SchedulesService(
     fun getAll() = scheduleRepository.findAll()
 
 
-    @TransactionalEventListener
+    @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
     fun registerSchedule(participantRegistered: ParticipantRegistered): Schedule {
         return scheduleRepository.save(Schedule(participantRegistered.participantId))
     }
