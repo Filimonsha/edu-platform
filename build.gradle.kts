@@ -19,6 +19,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 //  Spring web
     implementation("org.springframework.boot:spring-boot-starter-web:3.0.6")
+    implementation("org.springframework.boot:spring-boot-starter-websocket:3.1.1")
 //  Spring security
     implementation("org.springframework.boot:spring-boot-starter-security:3.0.6")
 //  Spring data jpa
@@ -30,6 +31,8 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
 //  Postgres
     implementation("org.postgresql:postgresql:42.5.4")
+//  Mongo
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb:3.1.1")
 //  Modulith
     implementation("org.springframework.experimental:spring-modulith-core:0.5.1")
     implementation("org.springframework.experimental:spring-modulith-docs:0.5.1")
