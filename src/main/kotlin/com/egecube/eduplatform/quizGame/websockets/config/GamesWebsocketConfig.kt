@@ -1,6 +1,6 @@
-package com.egecube.eduplatform.quiz_game.websockets.config
+package com.egecube.eduplatform.quizGame.websockets.config
 
-import com.egecube.eduplatform.quiz_game.consts.QuizGameWsRoutes
+import com.egecube.eduplatform.quizGame.consts.QuizGameWsRoutes
 import org.springframework.context.annotation.Configuration
 import org.springframework.messaging.simp.config.MessageBrokerRegistry
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker

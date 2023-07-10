@@ -1,6 +1,6 @@
 package com.egecube.eduplatform.achievmentsManagement.game_achievements
 
-import com.egecube.eduplatform.achievmentsManagement.GameType
+import com.egecube.eduplatform.achievmentsManagement.types.GameType
 import com.egecube.eduplatform.achievmentsManagement.game_achievements.domain.GameAchievements
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
@@ -27,6 +27,7 @@ class GameStatsCounterService(
             GameType.QUIZ_GAME -> ach.quizGameLost += 1
             else -> {}
         }
+        GameType.valueOf("QUIZ_GAME")
     }
 
     private fun getOrCreateAchievementList(userId: Long): GameAchievements {

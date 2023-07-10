@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.quiz_game.websockets
+package com.egecube.eduplatform.quizGame.websockets
 
 import org.springframework.stereotype.Service
 

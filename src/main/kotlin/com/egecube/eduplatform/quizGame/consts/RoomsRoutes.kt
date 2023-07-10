@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.quiz_game.consts
+package com.egecube.eduplatform.quizGame.consts
 
 object RoomsRoutes {
     const val ROOMS_ROUTE = "/api/games/quiz/rooms"

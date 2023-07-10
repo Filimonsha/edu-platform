@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.quiz_game.rooms.domain
+package com.egecube.eduplatform.quizGame.rooms.domain
 
 data class PlayerInRoom(
     val userId: Long,

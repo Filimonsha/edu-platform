@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.quiz_game.active_games.domain
+package com.egecube.eduplatform.quizGame.active_games.domain
 
 import org.springframework.data.mongodb.core.mapping.Document
 

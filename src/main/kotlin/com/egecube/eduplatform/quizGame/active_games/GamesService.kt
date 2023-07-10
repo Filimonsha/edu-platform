@@ -1,6 +1,6 @@
-package com.egecube.eduplatform.quiz_game.active_games
+package com.egecube.eduplatform.quizGame.active_games
 
-import com.egecube.eduplatform.quiz_game.rooms.domain.PlayerInRoom
+import com.egecube.eduplatform.quizGame.rooms.domain.PlayerInRoom
 import org.springframework.stereotype.Service
 
 @Service
