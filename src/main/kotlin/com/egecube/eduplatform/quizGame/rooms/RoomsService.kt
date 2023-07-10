@@ -12,29 +12,41 @@ class RoomsService(
 ) {
     private val roomSize = 2
 
-    private var roomSequence: Long = 10
+    private var roomSequence: Int = 10
     private val playersAwaiting = ArrayDeque<PlayerInRoom>()
 
-    fun standIntoQueue(userId: Long): Long {
-        // If no one is waiting create a room id
+    fun standIntoQueue(userId: Long): Int {
         return if (playersAwaiting.isEmpty()) {
             roomSequence += 1
-            playersAwaiting.addLast(PlayerInRoom(userId, roomSequence))
+            addToQueueAndNotify(userId, roomSequence)
             roomSequence
         } else {
             val lastRoom = playersAwaiting.last().roomId
-            playersAwaiting.addLast(PlayerInRoom(userId, lastRoom))
+            addToQueueAndNotify(userId, lastRoom)
             if (playersAwaiting.size == roomSize) {
                 gamesService.startGame(playersAwaiting)
+                playersAwaiting.clear()
             }
             lastRoom
         }
     }
 
-    fun getOutOfQueue(userId: Long) {
-        playersAwaiting.filter {
-            it.userId != userId
+    fun getOutOfQueue(userId: Long): Int {
+        var room = 0
+        val player = playersAwaiting.find { it.userId == userId }
+        if (player != null) {
+            room = player.roomId
+            playersAwaiting.remove(player)
+            playerNotifications.notifyOfUsersInRoom(room)
         }
+        return room
+    }
+
+    fun countInQueue(roomId: Int) = playersAwaiting.filter { it.roomId == roomId }.size
+
+    private fun addToQueueAndNotify(userId: Long, roomId: Int) {
+        playersAwaiting.addLast(PlayerInRoom(userId, roomId))
+        playerNotifications.notifyOfUsersInRoom(roomId)
     }
 
 }

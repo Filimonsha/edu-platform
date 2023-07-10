@@ -1,5 +1,6 @@
 package com.egecube.eduplatform.quizGame.rooms.dto
 
 data class PlaceInQueueRequest(
-    val userId: String
+    val user: String,
+    val fiels: String
 )

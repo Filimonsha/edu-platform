@@ -4,15 +4,11 @@ import org.springframework.stereotype.Service
 
 @Service
 class PlayerNotifications {
-    fun notifyOfUsersInRoom(userID: Long) {
+    fun notifyOfUsersInRoom(roomId: Int) {
 
     }
 
-    fun notifyOfGameStart(userID: Long) {
-
-    }
-
-    fun notifyPlayerDisconnected(userID: Long) {
+    fun notifyOfGameStart(roomId: Int) {
 
     }
 }
