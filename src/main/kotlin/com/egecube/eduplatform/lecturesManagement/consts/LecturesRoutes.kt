@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.lectures.consts
+package com.egecube.eduplatform.lecturesManagement.consts
 
 object LecturesRoutes {
     const val LECTURES_ROUTE = "/api/lectures-management"

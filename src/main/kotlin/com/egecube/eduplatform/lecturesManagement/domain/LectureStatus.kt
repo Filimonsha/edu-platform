@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.lectures.domain
+package com.egecube.eduplatform.lecturesManagement.domain
 
 enum class LectureStatus {
     PLANNED,
