@@ -1,6 +1,7 @@
-package com.egecube.eduplatform.homework.task
+package com.egecube.eduplatform.homeworksManagement.task
 
-import com.egecube.eduplatform.homework.attachment.Attachment
+import com.egecube.eduplatform.homeworksManagement.attachment.Attachment
+import com.egecube.eduplatform.homeworksManagement.internal.domain.TaskType
 
 data class Task(
     val taskId: Long,

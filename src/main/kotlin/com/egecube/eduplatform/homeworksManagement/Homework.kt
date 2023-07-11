@@ -1,7 +1,7 @@
-package com.egecube.eduplatform.homework
+package com.egecube.eduplatform.homeworksManagement
 
-import com.egecube.eduplatform.homework.evaluation.Criteria
-import com.egecube.eduplatform.homework.task.Task
+import com.egecube.eduplatform.homeworksManagement.evaluation.Criteria
+import com.egecube.eduplatform.homeworksManagement.task.Task
 import java.time.LocalDateTime
 
 data class Homework(

@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.homework.attachment
+package com.egecube.eduplatform.homeworksManagement.attachment
 
 data class Attachment(
     val data: String,

@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.homework.evaluation
+package com.egecube.eduplatform.homeworksManagement.evaluation
 
 data class Criteria(
     val weightage: Map<String, Double>,

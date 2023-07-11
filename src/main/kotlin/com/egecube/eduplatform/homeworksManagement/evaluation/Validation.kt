@@ -1,6 +1,6 @@
-package com.egecube.eduplatform.homework.evaluation
+package com.egecube.eduplatform.homeworksManagement.evaluation
 
-import com.egecube.eduplatform.homework.submission.Submission
+import com.egecube.eduplatform.homeworksManagement.submission.Submission
 import java.time.LocalDateTime
 
 data class Validation(

@@ -30,6 +30,8 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
 //  Postgres
     implementation("org.postgresql:postgresql:42.5.4")
+//    MongoDB with spring
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb:3.1.1")
 //  Modulith
     implementation("org.springframework.experimental:spring-modulith-core:0.5.1")
     implementation("org.springframework.experimental:spring-modulith-docs:0.5.1")
