@@ -1,7 +1,6 @@
 package com.egecube.eduplatform.quizGame.rooms
 
 import com.egecube.eduplatform.quizGame.consts.RoomsRoutes
-import com.egecube.eduplatform.quizGame.rooms.dto.PlaceInQueueRequest
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -11,16 +10,16 @@ class RoomsController(
 
     @PostMapping(RoomsRoutes.ROOMS_ROUTE)
     fun getIntoQueue(
-        @RequestBody newWait: PlaceInQueueRequest
+        @RequestBody newWait: Long
     ): Int {
-        return roomsService.standIntoQueue(newWait.user.toLong())
+        return roomsService.standIntoQueue(newWait)
     }
 
     @DeleteMapping(RoomsRoutes.ROOMS_ROUTE)
     fun getOutOfRoom(
-        @RequestBody oldWait: PlaceInQueueRequest
+        @RequestBody oldWait: Long
     ): Int {
-        return roomsService.getOutOfQueue(oldWait.user.toLong())
+        return roomsService.getOutOfQueue(oldWait)
     }
 
     @GetMapping(RoomsRoutes.ROOM_ROUTE)

@@ -1,13 +1,13 @@
 package com.egecube.eduplatform.quizGame.rooms
 
-import com.egecube.eduplatform.quizGame.active_games.GamesService
+import com.egecube.eduplatform.quizGame.active_games.GameService
 import com.egecube.eduplatform.quizGame.rooms.domain.PlayerInRoom
 import com.egecube.eduplatform.quizGame.websockets.PlayerNotifications
 import org.springframework.stereotype.Service
 
 @Service
 class RoomsService(
-    private val gamesService: GamesService,
+    private val gameService: GameService,
     private val playerNotifications: PlayerNotifications
 ) {
     private val roomSize = 2
@@ -24,7 +24,7 @@ class RoomsService(
             val lastRoom = playersAwaiting.last().roomId
             addToQueueAndNotify(userId, lastRoom)
             if (playersAwaiting.size == roomSize) {
-                gamesService.startGame(playersAwaiting)
+                gameService.startGame(playersAwaiting)
                 playersAwaiting.clear()
             }
             lastRoom
