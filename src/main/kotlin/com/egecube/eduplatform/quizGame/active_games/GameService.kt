@@ -43,11 +43,34 @@ class GameService(
         return gameRepository.findById(gameId).get()
     }
 
-    fun checkAndAddAnswerToGame(gameId: ObjectId, answer: GameAnswer) {
+    fun checkAndAddAnswerToGame(gameId: ObjectId, answer: GameAnswer): Game {
+        val gameStat = gameRepository.findById(gameId).orElseThrow()
+        var answerIsCorrect = false
 
-        // get orig answer from game
-        // check if answer correct
-        // add to game history
-        // notify players
+        val taskInfo = gameStat.tasksSet.find { it.id == answer.simpleTaskId }
+        val neededField = Pair(answer.simpleTaskId, false)
+
+        val row = gameStat.gameField.indexOfFirst { it.contains(neededField) }
+        val col = gameStat.gameField[row].indexOf(neededField)
+
+        @Suppress("KotlinConstantConditions")
+        if (col == -1 || row == -1) throw NoSuchElementException("No task")
+
+        if (taskInfo != null && taskInfo.rightAnswer == answer.answer) {
+            answerIsCorrect = true
+        }
+        gameStat.postedAnswers.add(
+            Pair(
+                GameAnswer(
+                    answer.userId,
+                    answer.simpleTaskId,
+                    answer.answer
+                ),
+                answerIsCorrect
+            )
+        )
+        gameStat.gameField[row][col] = Pair(answer.simpleTaskId, answerIsCorrect)
+
+        return gameRepository.save(gameStat)
     }
 }
