@@ -57,6 +57,12 @@ tasks.withType<KotlinCompile> {
     }
 }
 
+sourceSets {
+    named("main") {
+        java.srcDir("src/main/kotlin")
+    }
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }
