@@ -38,16 +38,6 @@ class GameService(
         )
         val savedGame = gameRepository.save(newGame)
         return savedGame._id
-//        return "jfdkshfjkds"
-        // create new game
-        // get tasks from service
-        // add players
-        // init empty answers
-        // init chat from other module
-        // get game id
-
-        // finish, transactions returns game id
-        // else on rest
     }
 
     fun getGameState(gameId: ObjectId): Game {
