@@ -6,8 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document
 
 @Document
 class Game(
-    val gameId: Long,
     val appendedChatId: Long,
-    val answersCollection: ArrayList<Task>,
-    val postedAnswers: ArrayList<HashMap<GameAnswer, Boolean>>
+    val answersCollection: List<Task>,
+    val gameField: ArrayList<ArrayList<Pair<Long?, Boolean?>>>,
+    val postedAnswers: ArrayList<Pair<GameAnswer, Boolean>>
 )
