@@ -43,6 +43,13 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4")
 //  Tests
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+//  Static html, to remove under development
+    implementation("org.webjars:webjars-locator-core")
+    implementation("org.webjars:sockjs-client:1.0.2")
+    implementation("org.webjars:stomp-websocket:2.3.3")
+    implementation("org.webjars:bootstrap:3.3.7")
+    implementation("org.webjars:jquery:3.1.1-1")
 }
 
 tasks.withType<KotlinCompile> {
