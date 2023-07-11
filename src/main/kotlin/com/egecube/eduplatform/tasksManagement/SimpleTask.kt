@@ -1,8 +1,8 @@
 package com.egecube.eduplatform.tasksManagement
 
-data class Task(
+data class SimpleTask(
     val id: Long = 13,
     val desc: String = "Simple question",
     val answers: ArrayList<String> = arrayListOf("Right", "Wrong"),
-    val right: Int = 0
+    val rightAnswer: Int = 0
 )

@@ -1,6 +1,7 @@
 package com.egecube.eduplatform.quizGame.rooms
 
 import com.egecube.eduplatform.quizGame.active_games.GameService
+import com.egecube.eduplatform.quizGame.consts.QuizGameData
 import com.egecube.eduplatform.quizGame.rooms.domain.PlayerInRoom
 import com.egecube.eduplatform.quizGame.websockets.PlayerNotifications
 import org.springframework.stereotype.Service
@@ -10,7 +11,7 @@ class RoomsService(
     private val gameService: GameService,
     private val playerNotifications: PlayerNotifications
 ) {
-    private val roomSize = 2
+    private val roomSize = QuizGameData.ROOM_SIZE
 
     private var roomSequence: Int = 10
     private val playersAwaiting = ArrayDeque<PlayerInRoom>()
