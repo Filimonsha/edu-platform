@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.quizGame
+package com.egecube.eduplatform.tasksManagement
 
 data class Task(
     val id: Long = 13,

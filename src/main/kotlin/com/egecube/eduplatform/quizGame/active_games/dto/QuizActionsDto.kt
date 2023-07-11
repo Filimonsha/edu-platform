@@ -19,5 +19,9 @@ sealed class QuizActionsDto(
         val answer: Long
     ): QuizActionsDto(QuizActions.SUBMIT_ANSWER)
 
-    class WriteMessage
+    class WriteMessage(
+        val content: String
+    ): QuizActionsDto(QuizActions.WRITE_MESSAGE)
+
+    class GiveUp(): QuizActionsDto(QuizActions.GIVE_UP)
 }

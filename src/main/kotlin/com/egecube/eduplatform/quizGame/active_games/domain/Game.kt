@@ -1,6 +1,6 @@
 package com.egecube.eduplatform.quizGame.active_games.domain
 
-import com.egecube.eduplatform.quizGame.Task
+import com.egecube.eduplatform.tasksManagement.Task
 import com.egecube.eduplatform.quizGame.active_games.dto.GameAnswer
 import org.springframework.data.mongodb.core.mapping.Document
 

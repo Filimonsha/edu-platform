@@ -1,6 +1,7 @@
 package com.egecube.eduplatform.quizGame.active_games
 
-import com.egecube.eduplatform.quizGame.Task
+import com.egecube.eduplatform.quizGame.active_games.domain.Game
+import com.egecube.eduplatform.tasksManagement.Task
 import com.egecube.eduplatform.quizGame.active_games.dto.GameAnswer
 import com.egecube.eduplatform.quizGame.rooms.domain.PlayerInRoom
 import org.springframework.stereotype.Service
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service
 class GameService {
 
     fun startGame(players: List<PlayerInRoom>) {
+//        val newGame = Game()
         // create new game
         // get tasks from service
         // add players
