@@ -17,7 +17,7 @@ class MessagesController(
     private val messagesService: MessagesService
 ) {
 
-    @PostMapping(ChatRoutes.CHAT_ROUTE)
+    @PostMapping(ChatRoutes.MESSAGES_ROUTE)
     fun postMessageToChat(
         @RequestBody message: NewMessageDto,
         @PathVariable chatId: Long

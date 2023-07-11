@@ -3,7 +3,6 @@ package com.egecube.eduplatform.quizGame.active_games
 import com.egecube.eduplatform.chatsManagement.chats.ChatsService
 import com.egecube.eduplatform.chatsManagement.chats.internal.dto.NewChatDto
 import com.egecube.eduplatform.quizGame.active_games.domain.Game
-import com.egecube.eduplatform.tasksManagement.SimpleTask
 import com.egecube.eduplatform.quizGame.active_games.dto.GameAnswer
 import com.egecube.eduplatform.quizGame.active_games.utils.FieldUtils
 import com.egecube.eduplatform.quizGame.consts.QuizGameData
@@ -44,7 +43,8 @@ class GameService(
         return gameRepository.findById(gameId).get()
     }
 
-    fun checkAndAddAnswerToGame(gameId: Int, answer: GameAnswer) {
+    fun checkAndAddAnswerToGame(gameId: ObjectId, answer: GameAnswer) {
+
         // get orig answer from game
         // check if answer correct
         // add to game history
