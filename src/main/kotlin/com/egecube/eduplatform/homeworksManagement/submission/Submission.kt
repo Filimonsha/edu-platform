@@ -1,9 +1,9 @@
 package com.egecube.eduplatform.homeworksManagement.submission
 
-import com.egecube.eduplatform.homeworksManagement.attachment.Attachment
 import com.egecube.eduplatform.homeworksManagement.Homework
-import com.egecube.eduplatform.homeworksManagement.task.TaskAnswer
+import com.egecube.eduplatform.homeworksManagement.attachment.Attachment
 import com.egecube.eduplatform.homeworksManagement.internal.domain.TaskType
+import com.egecube.eduplatform.homeworksManagement.task.TaskAnswer
 import java.time.LocalDateTime
 
 data class Submission(

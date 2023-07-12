@@ -1,11 +1,14 @@
 package com.egecube.eduplatform._security_.accounts
 
-import com.egecube.eduplatform._security_.accounts.dto.RegisterRequest
 import com.egecube.eduplatform._security_.accounts.domain.UserAccount
 import com.egecube.eduplatform._security_.accounts.domain.UserRole
 import com.egecube.eduplatform._security_.accounts.dto.ChangeUserDataDto
+import com.egecube.eduplatform._security_.accounts.dto.RegisterRequest
 import com.egecube.eduplatform._security_.accounts.dto.UserAccountDto
-import com.egecube.eduplatform._security_.events.*
+import com.egecube.eduplatform._security_.events.UserAccountCreated
+import com.egecube.eduplatform._security_.events.UserAccountDeleted
+import com.egecube.eduplatform._security_.events.UserAccountModified
+import com.egecube.eduplatform._security_.events.UserRightsUpdated
 import org.slf4j.LoggerFactory
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.security.crypto.password.PasswordEncoder

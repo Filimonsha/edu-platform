@@ -1,10 +1,8 @@
 package com.egecube.eduplatform.homeworksManagement.dto
 
-import java.io.Serializable
-import java.time.LocalDateTime
 import com.egecube.eduplatform.homeworksManagement.Homework
 import com.egecube.eduplatform.homeworksManagement.internal.domain.Task
-import java.time.ZonedDateTime
+import java.io.Serializable
 
 /**
  * A DTO for the [Homework] entity

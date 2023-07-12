@@ -2,7 +2,6 @@ package com.egecube.eduplatform.homeworksManagement.internal.domain
 
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
-import org.springframework.data.mongodb.core.mapping.Field
 
 //@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 sealed class TaskAnswerType {
@@ -26,9 +25,8 @@ sealed class TaskAnswerType {
 //            override val taskId: String,
 //            @Field
 //            override val taskType: TaskType = TaskType.TEXT_INPUT,
-            val answer: String ,
-            val answer1: String,
-        ) : TaskRightAnswer()
+            val answer: String = ""
+            ) : TaskRightAnswer()
 
         class SelectAnswer(
 //            override val taskId: String,
