@@ -29,8 +29,6 @@ class FilterConfig(
         http
             .csrf()
             .disable()
-            .cors()
-            .and()
             .authorizeHttpRequests()
             .requestMatchers("${BaseRoute.BASE_ROUTE}/**")
             .permitAll()
@@ -43,7 +41,6 @@ class FilterConfig(
             .authenticationProvider(authProvider)
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter::class.java)
             .addFilterAfter(allowCorsFilter, jwtAuthFilter::class.java)
-
         return http.build()
     }
 
