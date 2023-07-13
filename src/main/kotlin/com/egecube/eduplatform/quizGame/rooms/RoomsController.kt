@@ -15,11 +15,12 @@ class RoomsController(
         return roomsService.standIntoQueue(newWait)
     }
 
-    @DeleteMapping(GamesRoutes.ROOMS_ROUTE)
+    @DeleteMapping(GamesRoutes.ROOM_ROUTE)
     fun getOutOfRoom(
-        @RequestBody oldWait: Long
+        @PathVariable roomId: Int,
+        @RequestBody userId: Long
     ): Int {
-        return roomsService.getOutOfQueue(oldWait)
+        return roomsService.getOutOfQueue(roomId, userId)
     }
 
     @GetMapping(GamesRoutes.ROOM_ROUTE)

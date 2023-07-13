@@ -12,9 +12,10 @@ data class Game(
     @Id
     @JsonIgnore
     val _id: ObjectId = ObjectId(),
-    val appendedChatId: Long = 0,
+    val appendedChatId: Long,
+    val participants: List<Long>,
     @JsonIgnore
-    val tasksSet: List<SimpleTask> = emptyList(),
-    val gameField: ArrayList<ArrayList<Pair<Long?, Boolean?>>> = ArrayList(),
-    val postedAnswers: ArrayList<Pair<GameAnswer, Boolean>> = ArrayList(),
+    val tasksSet: List<SimpleTask>,
+    val gameField: ArrayList<ArrayList<Pair<Long?, Boolean?>>>,
+    val postedAnswers: ArrayList<Pair<GameAnswer, Boolean>>,
 )

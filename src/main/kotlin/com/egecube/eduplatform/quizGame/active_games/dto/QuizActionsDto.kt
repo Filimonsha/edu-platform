@@ -16,7 +16,7 @@ sealed class QuizActionsDto(
     ): QuizActionsDto(QuizActions.PICK_FOR_ANSWER)
 
     class SubmitAnswer(
-        val answer: Long
+        val answer: GameAnswer
     ): QuizActionsDto(QuizActions.SUBMIT_ANSWER)
 
     class WriteMessage(

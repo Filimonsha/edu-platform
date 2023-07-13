@@ -4,5 +4,5 @@ data class SimpleTask(
     val id: Long = 13,
     val desc: String = "Simple question",
     val answers: ArrayList<String> = arrayListOf("Right", "Wrong"),
-    val rightAnswer: Int = 0
+    val rightAnswer: String = "0"
 )

@@ -19,11 +19,12 @@ class GameService(
 ) {
     private val fieldUtils = FieldUtils()
 
-    fun startGame(players: List<PlayerInRoom>): ObjectId {
+    fun startGame(players: List<PlayerInRoom>): Game {
+        val playersList = players.map { it.userId }
         val newChat = chatsService.createNewChat(
             NewChatDto(
                 "Chat for game ${players.first().roomId}",
-                players.map { it.userId }
+                playersList
             )
         )
         val tasksSet = tasksService.getNumberOfSimpleTasks(QuizGameData.Q_ELEMENTS)
@@ -33,10 +34,10 @@ class GameService(
             appendedChatId = newChat!!,
             tasksSet = tasksSet,
             gameField = taskFields,
-            postedAnswers = ArrayList()
+            postedAnswers = ArrayList(),
+            participants = playersList
         )
-        val savedGame = gameRepository.save(newGame)
-        return savedGame._id
+        return gameRepository.save(newGame)
     }
 
     fun getGameState(gameId: ObjectId): Game {

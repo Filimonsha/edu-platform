@@ -32,15 +32,13 @@ class RoomsService(
         }
     }
 
-    fun getOutOfQueue(userId: Long): Int {
-        var room = 0
-        val player = playersAwaiting.find { it.userId == userId }
+    fun getOutOfQueue(roomId: Int, userId: Long): Int {
+        val player = playersAwaiting.find { it.userId == userId && it.roomId == roomId }
         if (player != null) {
-            room = player.roomId
             playersAwaiting.remove(player)
-            playerNotifications.notifyOfUsersInRoom(room)
+            playerNotifications.notifyOfUsersInRoom(roomId)
         }
-        return room
+        return roomId
     }
 
     fun countInQueue(roomId: Int) = playersAwaiting.filter { it.roomId == roomId }.size
