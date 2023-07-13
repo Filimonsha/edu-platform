@@ -19,23 +19,14 @@ class HomeworkController(
 ) {
     @GetMapping(HomeworksRoute.HOMEWORKS)
     fun getAllHomeworks(): List<HomeWork> {
-        return listOf(
-            HomeWork(
-                " title",
-                "description",
-//                deadline,
-//                setOf()
-                setOf(Task("a", "", 1, TaskAnswerType.TaskRightAnswer.TextAnswer("dfddd")))
-            )
-        )
-//        return homeworkService.getAllHomeworks()
+        return homeworkService.getAllHomeworks()
     }
 
     @PostMapping(HomeworksRoute.HOMEWORKS)
     fun createHomework(
         @RequestBody homeworkRequestDto: HomeworkRequestDto
     ): HomeWork {
-        val (title, description, tasks) = homeworkRequestDto
+        val (title, description, deadline,tasks) = homeworkRequestDto
         println(tasks.first().correctAnswer::class)
         println(TaskAnswerType.TaskRightAnswer.TextAnswer::class)
         println(tasks.first().correctAnswer is TaskAnswerType.TaskRightAnswer.TextAnswer)
@@ -43,7 +34,7 @@ class HomeworkController(
             HomeWork(
                 title,
                 description,
-//                deadline,
+                deadline,
                 tasks
 //            setOf(Task("a","",1,TaskAnswerType.TaskRightAnswer.TextAnswer(TaskType.TEXT_INPUT,"")))
             )
