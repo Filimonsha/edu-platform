@@ -1,5 +1,6 @@
 package com.egecube.eduplatform._security_.config
 
+import com.egecube.eduplatform._security_.filters.AllowCorsFilter
 import com.egecube.eduplatform._security_.filters.JwtAuthFilter
 import com.egecube.eduplatform._security_.routes.BaseRoute
 import org.springframework.context.annotation.Bean
@@ -16,7 +17,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 class FilterConfig(
     private val jwtAuthFilter: JwtAuthFilter,
-    private val authProvider: AuthenticationProvider
+    private val authProvider: AuthenticationProvider,
+    private val allowCorsFilter: AllowCorsFilter
 ) {
 
     @Order(1)
@@ -27,6 +29,8 @@ class FilterConfig(
         http
             .csrf()
             .disable()
+            .cors()
+            .and()
             .authorizeHttpRequests()
             .requestMatchers("${BaseRoute.BASE_ROUTE}/**")
             .permitAll()
@@ -38,6 +42,7 @@ class FilterConfig(
             .and()
             .authenticationProvider(authProvider)
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter::class.java)
+            .addFilterAfter(allowCorsFilter, jwtAuthFilter::class.java)
 
         return http.build()
     }
