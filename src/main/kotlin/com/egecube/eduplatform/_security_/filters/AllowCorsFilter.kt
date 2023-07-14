@@ -15,7 +15,8 @@ class AllowCorsFilter: OncePerRequestFilter() {
         filterChain: FilterChain
     ) {
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"))
-
+        response.setHeader("Access-Control-Allow-Headers", "*")
+        response.setHeader("Access-Control-Allow-Methods", "*")
         filterChain.doFilter(request, response)
     }
 }
