@@ -24,7 +24,7 @@ class FileController(
     }
 
     @PostMapping("/api/files/")
-    fun loadFile(@RequestParam file: MultipartFile): ObjectId {
-        return attachmentFileService.loadFile(file)
+    fun loadFile(@RequestParam file: MultipartFile): String {
+        return attachmentFileService.loadFile(file).toString()
     }
 }
