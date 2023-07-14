@@ -1,7 +1,7 @@
 package com.egecube.eduplatform.homeworksManagement.attachments
 
-import com.egecube.eduplatform.homeworksManagement.attachments.internal.AttachmentRepository
 import com.egecube.eduplatform.homeworksManagement.attachments.internal.Attachment
+import com.egecube.eduplatform.homeworksManagement.attachments.internal.AttachmentRepository
 import org.bson.BsonBinarySubType
 import org.bson.types.Binary
 import org.springframework.stereotype.Service

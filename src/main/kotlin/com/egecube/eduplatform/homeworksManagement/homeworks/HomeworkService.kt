@@ -1,11 +1,11 @@
 package com.egecube.eduplatform.homeworksManagement.homeworks
 
-import com.egecube.eduplatform.homeworksManagement.tasks.dto.TaskRequestDTO
 import com.egecube.eduplatform.homeworksManagement.homeworks.internal.HomeworkAnswerRepository
 import com.egecube.eduplatform.homeworksManagement.homeworks.internal.HomeworkRepository
-import com.egecube.eduplatform.homeworksManagement.tasks.internal.TaskRepository
-import com.egecube.eduplatform.homeworksManagement.homeworks.internal.domain.HomeWork
+import com.egecube.eduplatform.homeworksManagement.homeworks.internal.domain.Homework
 import com.egecube.eduplatform.homeworksManagement.homeworks.internal.domain.HomeworkAnswer
+import com.egecube.eduplatform.homeworksManagement.tasks.dto.TaskRequestDTO
+import com.egecube.eduplatform.homeworksManagement.tasks.internal.TaskRepository
 import com.egecube.eduplatform.homeworksManagement.tasks.internal.domain.Task
 import com.egecube.eduplatform.homeworksManagement.tasks.internal.domain.TaskAnswer
 import org.springframework.stereotype.Service
@@ -16,20 +16,20 @@ class HomeworkService(
     private val homeworkAnswerRepository: HomeworkAnswerRepository,
     private val taskRepository: TaskRepository
 ) {
-    fun getAllHomeworks(): List<HomeWork> {
+    fun getAllHomeworks(): List<Homework> {
         return homeworkRepository.findAll()
     }
 
-    fun createHomework(homework: HomeWork): HomeWork {
+    fun createHomework(homework: Homework): Homework {
 //        homework.tasks.forEach { task: Task -> taskRepository.save(task) }
         return homeworkRepository.save(homework)
     }
 
-    fun getHomework(homeworkId: String): HomeWork {
+    fun getHomework(homeworkId: String): Homework {
         return homeworkRepository.findById(homeworkId).orElseThrow()
     }
 
-    fun addTasksToHomework(homeworkId: String, dtoTasks: List<TaskRequestDTO>) {
+    fun addTasksToHomework(homeworkId: String, dtoTasks: List<TaskRequestDTO>): Homework {
         val foundHomework = homeworkRepository.findById(homeworkId).orElseThrow()
         print(foundHomework._id.toString() + "AAAAAAAAAaaaaaa")
 //            TODO Как проверять уникальность приритета ?
@@ -49,7 +49,7 @@ class HomeworkService(
 
 
 //        return
-        homeworkRepository.save(foundHomework)
+        return homeworkRepository.save(foundHomework)
     }
 
     fun getHomeworkTasks(homeworkId: String): List<Task> {
