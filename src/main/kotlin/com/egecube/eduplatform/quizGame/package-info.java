@@ -1,7 +1,8 @@
 @ApplicationModule(
         allowedDependencies = {
                 "chatsManagement::ChatsService",
-                "tasksManagement::TasksService"
+                "tasksManagement::TasksService",
+                "common::WsConfig"
         }
 )
 package com.egecube.eduplatform.quizGame;
