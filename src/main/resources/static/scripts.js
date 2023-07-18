@@ -63,7 +63,7 @@ function showMessage(message) {
 function sendMessage(id) {
     // console.log("sending message");
     // stompClient.send("/ws/message", {}, JSON.stringify({'messageContent': $("#message").val()}));
-    fetch(rest_addr + chats_addr + `/${id}`, {
+    fetch(rest_addr + chats_addr + `/${id}/messages`, {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

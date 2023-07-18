@@ -1,6 +1,6 @@
-package com.egecube.eduplatform.chatsManagement.chats
+package com.egecube.eduplatform.chatsManagement.chats.internal
 
-import com.egecube.eduplatform.chatsManagement.chats.domain.Chat
+import com.egecube.eduplatform.chatsManagement.chats.internal.domain.Chat
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
 
