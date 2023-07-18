@@ -2,6 +2,7 @@ package com.egecube.eduplatform.quizGame.active_games
 
 import com.egecube.eduplatform.quizGame.active_games.domain.Game
 import com.egecube.eduplatform.quizGame.active_games.dto.GameAnswer
+import com.egecube.eduplatform.quizGame.active_games.dto.StartRequest
 import com.egecube.eduplatform.quizGame.consts.GamesRoutes
 import org.bson.types.ObjectId
 import org.springframework.web.bind.annotation.GetMapping
@@ -20,6 +21,16 @@ class QuizGameController(
         @PathVariable gameId: String
     ): Game {
         return gameService.getGameState(ObjectId(gameId))
+    }
+
+    @PostMapping(GamesRoutes.GAME_ROUTE)
+    fun startGame(
+        @PathVariable gameId: String,
+        @RequestBody startRequest: StartRequest
+    ): Game {
+        return gameService.tryStartGame(
+            ObjectId(gameId), startRequest.userId, startRequest.roomId
+        )
     }
 
     @PostMapping(GamesRoutes.GAME_ANSWERS)

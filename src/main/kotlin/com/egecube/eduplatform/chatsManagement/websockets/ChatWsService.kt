@@ -11,7 +11,6 @@ class ChatWsService(
 ) {
 
     fun notifyChatUsers(message: ChatMessage) {
-        println("notifying to ${ChatWs.CHAT_ENDPOINT}/${message.chat.id}")
         simpMessaging.convertAndSend("${ChatWs.CHAT_ENDPOINT}/${message.chat.id}", message)
     }
 }
