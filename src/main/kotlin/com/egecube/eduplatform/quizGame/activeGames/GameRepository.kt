@@ -1,6 +1,6 @@
-package com.egecube.eduplatform.quizGame.active_games
+package com.egecube.eduplatform.quizGame.activeGames
 
-import com.egecube.eduplatform.quizGame.active_games.domain.Game
+import com.egecube.eduplatform.quizGame.activeGames.domain.Game
 import org.bson.types.ObjectId
 import org.springframework.data.mongodb.repository.MongoRepository
 

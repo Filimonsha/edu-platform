@@ -1,7 +1,9 @@
-package com.egecube.eduplatform.tasksManagement
+package com.egecube.eduplatform.tasksManagement.domain
+
+import org.bson.types.ObjectId
 
 data class SimpleTask(
-    val id: Long = 13,
+    val id: ObjectId = ObjectId(),
     val desc: String = "Simple question",
     val answers: ArrayList<String> = arrayListOf("Right", "Wrong"),
     val rightAnswer: String = "0"

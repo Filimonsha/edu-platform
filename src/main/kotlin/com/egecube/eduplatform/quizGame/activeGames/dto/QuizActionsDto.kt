@@ -1,14 +1,10 @@
-package com.egecube.eduplatform.quizGame.active_games.dto
+package com.egecube.eduplatform.quizGame.activeGames.dto
 
-import com.egecube.eduplatform.quizGame.active_games.actions.QuizActions
+import com.egecube.eduplatform.quizGame.activeGames.actions.QuizActions
 
 sealed class QuizActionsDto(
     val actionType: QuizActions
 ) {
-
-    class ClickReady(
-        val status: Boolean
-    ): QuizActionsDto(QuizActions.CLICK_READY)
 
     class PickForAnswer(
         val row: Int,
@@ -18,10 +14,6 @@ sealed class QuizActionsDto(
     class SubmitAnswer(
         val answer: GameAnswer
     ): QuizActionsDto(QuizActions.SUBMIT_ANSWER)
-
-    class WriteMessage(
-        val content: String
-    ): QuizActionsDto(QuizActions.WRITE_MESSAGE)
 
     class GiveUp(): QuizActionsDto(QuizActions.GIVE_UP)
 }

@@ -1,20 +1,21 @@
-package com.egecube.eduplatform.quizGame.active_games
+package com.egecube.eduplatform.quizGame.activeGames
 
 import com.egecube.eduplatform.chatsManagement.chats.ChatsService
 import com.egecube.eduplatform.chatsManagement.chats.internal.dto.NewChatDto
-import com.egecube.eduplatform.quizGame.active_games.domain.Game
-import com.egecube.eduplatform.quizGame.active_games.dto.GameAnswer
-import com.egecube.eduplatform.quizGame.active_games.utils.FieldUtils
+import com.egecube.eduplatform.quizGame.activeGames.domain.Game
+import com.egecube.eduplatform.quizGame.activeGames.dto.GameAnswer
+import com.egecube.eduplatform.quizGame.activeGames.dto.QuizActionsDto
+import com.egecube.eduplatform.quizGame.activeGames.utils.FieldUtils
 import com.egecube.eduplatform.quizGame.consts.QuizGameData
 import com.egecube.eduplatform.quizGame.websockets.PlayerNotifications
-import com.egecube.eduplatform.tasksManagement.TasksService
+import com.egecube.eduplatform.tasksManagement.TaskService
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
 
 @Service
 class GameService(
     private val chatsService: ChatsService,
-    private val tasksService: TasksService,
+    private val taskService: TaskService,
     private val gameRepository: GameRepository,
     private val notifications: PlayerNotifications
 ) {
@@ -24,8 +25,8 @@ class GameService(
         val newChat = chatsService.createNewChat(
             NewChatDto("Chat for game $roomId")
         )
-        val tasksSet = tasksService.getNumberOfSimpleTasks(QuizGameData.Q_ELEMENTS)
-        val taskFields = fieldUtils.makeEmptyFieldWithElements(QuizGameData.Q_ELEMENTS, tasksSet.map { it.id })
+        val tasksSet = taskService.getNumberOfSimpleTasks(QuizGameData.Q_ELEMENTS)
+        val taskFields = fieldUtils.makeEmptyFieldWithElements(QuizGameData.Q_ELEMENTS, tasksSet.map { it.id.toHexString() })
 
         val newGame = Game(
             appendedChatId = newChat!!,
@@ -38,14 +39,12 @@ class GameService(
         return gameRepository.save(newGame)
     }
 
-    fun addParticipants(gameId: ObjectId, participant: Long): Game {
-        val game = gameRepository.findById(gameId).orElseThrow()
+    fun addParticipants(game: Game, participant: Long): Game {
         game.participants.add(participant)
         return gameRepository.save(game)
     }
 
-    fun removeParticipant(gameId: ObjectId, userId: Long): Game {
-        val game = gameRepository.findById(gameId).orElseThrow()
+    fun removeParticipant(game: Game, userId: Long): Game {
         game.participants.remove(userId)
         return gameRepository.save(game)
     }
@@ -55,8 +54,8 @@ class GameService(
         game.startApproved.add(userId)
         if (game.startApproved.size == game.participants.size) {
             game.started = true
-            notifications.notifyOfGameState(game)
         }
+        notifications.notifyOfGameState(game)
         return gameRepository.save(game)
     }
 
@@ -64,11 +63,16 @@ class GameService(
         return gameRepository.findById(gameId).get()
     }
 
+    fun parseActionAndPerform(action: QuizActionsDto, gameId: ObjectId): Game {
+        val answerSubmit = action as QuizActionsDto.SubmitAnswer
+        return checkAndAddAnswerToGame(gameId, action.answer)
+    }
+
     fun checkAndAddAnswerToGame(gameId: ObjectId, answer: GameAnswer): Game {
         val gameStat = gameRepository.findById(gameId).orElseThrow()
         var answerIsCorrect = false
 
-        val taskInfo = gameStat.tasksSet.find { it.id == answer.simpleTaskId }
+        val taskInfo = gameStat.tasksSet.find { it.id.toHexString() == answer.simpleTaskId }
         val neededField = Pair(answer.simpleTaskId, false)
 
         val row = gameStat.gameField.indexOfFirst { it.contains(neededField) }

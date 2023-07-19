@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.achievmentsManagement.game_achievements
+package com.egecube.eduplatform.achievmentsManagement.gameAchievements
 
 import com.egecube.eduplatform.quizGame.events.GameFinished
 import org.springframework.modulith.ApplicationModuleListener

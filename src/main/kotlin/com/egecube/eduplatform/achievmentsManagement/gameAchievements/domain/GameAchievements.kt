@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.achievmentsManagement.game_achievements.domain
+package com.egecube.eduplatform.achievmentsManagement.gameAchievements.domain
 
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue

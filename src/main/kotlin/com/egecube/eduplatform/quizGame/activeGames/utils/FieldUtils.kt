@@ -1,10 +1,10 @@
-package com.egecube.eduplatform.quizGame.active_games.utils
+package com.egecube.eduplatform.quizGame.activeGames.utils
 
 import kotlin.math.floor
 import kotlin.math.sqrt
 
 class FieldUtils {
-    fun makeEmptyFieldWithElements(count: Int, tasks: List<Long>): ArrayList<ArrayList<Pair<Long?, Boolean?>>> {
+    fun makeEmptyFieldWithElements(count: Int, tasks: List<String>): ArrayList<ArrayList<Pair<String?, Boolean?>>> {
         // get square matrix and count values to append on sides
         val dimension: Int = floor(sqrt(count.toDouble())).toInt()
         var removing: Int = count - dimension*dimension
@@ -21,10 +21,10 @@ class FieldUtils {
 //        println("dimension $dimension")
 //        println("removing $removing")
         // fill the lists
-        val field: ArrayList<ArrayList<Pair<Long?, Boolean?>>> = ArrayList(dimension)
+        val field: ArrayList<ArrayList<Pair<String?, Boolean?>>> = ArrayList(dimension)
         var taskCount = 0
         for (rowN in 0 until dimension) {
-            val row: ArrayList<Pair<Long?, Boolean?>> = ArrayList()
+            val row: ArrayList<Pair<String?, Boolean?>> = ArrayList()
             for (colN in 0 until dimension) {
 //                println("adding row $rowN $colN el $taskCount")
                 row.add(Pair(tasks[taskCount], false))

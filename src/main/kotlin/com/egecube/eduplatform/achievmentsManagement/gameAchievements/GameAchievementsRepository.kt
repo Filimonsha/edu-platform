@@ -1,6 +1,6 @@
-package com.egecube.eduplatform.achievmentsManagement.game_achievements
+package com.egecube.eduplatform.achievmentsManagement.gameAchievements
 
-import com.egecube.eduplatform.achievmentsManagement.game_achievements.domain.GameAchievements
+import com.egecube.eduplatform.achievmentsManagement.gameAchievements.domain.GameAchievements
 import org.springframework.data.repository.CrudRepository
 import java.util.Optional
 

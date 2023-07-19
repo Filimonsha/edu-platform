@@ -1,7 +1,7 @@
 package com.egecube.eduplatform.quizGame.rooms
 
-import com.egecube.eduplatform.quizGame.active_games.GameService
-import com.egecube.eduplatform.quizGame.active_games.domain.Game
+import com.egecube.eduplatform.quizGame.activeGames.GameService
+import com.egecube.eduplatform.quizGame.activeGames.domain.Game
 import com.egecube.eduplatform.quizGame.consts.QuizGameData
 import com.egecube.eduplatform.quizGame.rooms.domain.PlayerInRoom
 import com.egecube.eduplatform.quizGame.websockets.PlayerNotifications
@@ -27,10 +27,9 @@ class RoomsService(
             roomSequence += 1
             gameSequence = gameService.initializeAndSaveGame(roomSequence)
         }
-        gameService.addParticipants(gameSequence!!._id, userId)
+        gameService.addParticipants(gameSequence!!, userId)
         addToQueueAndNotify(userId, roomSequence)
         return gameSequence!!
-
     }
 
     fun getOutOfQueue(roomId: Int, userId: Long): Game {
@@ -38,13 +37,13 @@ class RoomsService(
             it.userId == userId && it.roomId == roomId
         }
         playersAwaiting.remove(player)
-        gameService.removeParticipant(gameSequence!!._id, userId)
+        gameService.removeParticipant(gameSequence!!, userId)
         playerNotifications.notifyOfUsersInRoom(gameSequence!!)
         return gameSequence!!
     }
 
     private fun addToQueueAndNotify(userId: Long, roomId: Int) {
-        gameService.addParticipants(gameSequence!!._id, userId)
+        gameService.addParticipants(gameSequence!!, userId)
         playersAwaiting.addLast(PlayerInRoom(userId, roomId))
         playerNotifications.notifyOfUsersInRoom(gameSequence!!)
         playerNotifications.notifyOfGameState(gameSequence!!)

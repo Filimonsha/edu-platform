@@ -1,7 +1,6 @@
 package com.egecube.eduplatform._security_.config
 
 import com.egecube.eduplatform._security_.filters.JwtAuthFilter
-import com.egecube.eduplatform._security_.routes.BaseRoute
 import com.tngtech.archunit.thirdparty.com.google.common.collect.ImmutableList
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -35,7 +34,7 @@ class FilterConfig(
             .csrf()
             .disable()
             .authorizeHttpRequests()
-            .requestMatchers("${BaseRoute.BASE_ROUTE}/**")
+            .requestMatchers("/**")
             .permitAll()
             .anyRequest()
             .authenticated()

@@ -27,26 +27,26 @@ class JwtAuthFilter(
         filterChain: FilterChain
     ) {
         // NO SECURITY FOR DEV MAIN BRANCH
-        try {
-            val jwt = accessRightsService.extractJwtIfPresentInRequest(request)
-            val userMail = jwtService.extractUserMail(jwt!!)
+//        try {
+//            val jwt = accessRightsService.extractJwtIfPresentInRequest(request)
+//            val userMail = jwtService.extractUserMail(jwt!!)
             if (SecurityContextHolder.getContext().authentication == null) {
                 // Update auth context for filters
-                if (jwtService.isTokenValid(jwt, userMail!!)) {
+//                if (jwtService.isTokenValid(jwt, userMail!!)) {
                     val auth = UsernamePasswordAuthenticationToken(
-                        userMail,
-//                        "def_user", // username
+//                        userMail,
+                        "def_user", // username
                         1, // get id from db if not authenticated
                         arrayListOf(SimpleGrantedAuthority(UserRole.ADMIN.name))
                     )
                     auth.details = WebAuthenticationDetailsSource().buildDetails(request)
                     SecurityContextHolder.getContext().authentication = auth
-                }
+//                }
             }
             filterChain.doFilter(request, response)
-        } catch (e: NullPointerException) {
-            filterChain.doFilter(request, response)
-            return
-        }
+//        } catch (e: NullPointerException) {
+//            filterChain.doFilter(request, response)
+//            return
+//        }
     }
 }
