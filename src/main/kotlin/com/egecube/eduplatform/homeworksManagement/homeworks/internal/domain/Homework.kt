@@ -18,7 +18,6 @@ class Homework(
     val description: String,
     val deadline: ZonedDateTime,
 
-//    @DBRef
     val tasks: MutableSet<Task> = mutableSetOf(),
 
     val solvers: MutableList<Long> = mutableListOf(),
