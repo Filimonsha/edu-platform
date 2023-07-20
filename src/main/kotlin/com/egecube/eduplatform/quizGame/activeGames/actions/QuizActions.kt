@@ -1,7 +1,8 @@
 package com.egecube.eduplatform.quizGame.activeGames.actions
 
-enum class QuizActions {
-    PICK_FOR_ANSWER,
-    SUBMIT_ANSWER,
-    GIVE_UP
+object QuizActions {
+    const val PICK_FOR_ANSWER = "PICK_FOR_ANSWER"
+    const val UNPICK_FOR_ANSWER = "UNPICK_FOR_ANSWER"
+    const val SUBMIT_ANSWER = "SUBMIT_ANSWER"
+    const val GIVE_UP = "GIVE_UP"
 }

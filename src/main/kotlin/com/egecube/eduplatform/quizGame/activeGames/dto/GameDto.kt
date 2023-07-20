@@ -9,10 +9,12 @@ data class GameDto(
     val appendedChatId: Long,
     val participants: List<Long>,
     val taskSet: List<SimpleTaskDto>,
-    val gameField: ArrayList<ArrayList<Pair<String?, Boolean?>>>,
-    val postedAnswers: ArrayList<Pair<GameAnswer, Boolean>>,
+    val gameField: List<List<Pair<String?, Boolean?>>>,
+    val postedAnswers: List<Pair<GameAnswer, Boolean>>,
+    val pickedForAnswer: HashSet<String>,
     val startApproved: HashSet<Long>,
-    var started: Boolean
+    val started: Boolean,
+    val winner: Long
 ) {
     constructor(obj: Game) : this(
         id = obj._id.toHexString(),
@@ -22,7 +24,9 @@ data class GameDto(
         taskSet = obj.tasksSet.map { SimpleTaskDto(it) },
         gameField = obj.gameField,
         postedAnswers = obj.postedAnswers,
+        pickedForAnswer = obj.pickedForAnswer,
         startApproved = obj.startApproved,
-        started = obj.started
+        started = obj.started,
+        winner = obj.winner
     )
 }

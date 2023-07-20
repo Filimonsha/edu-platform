@@ -6,5 +6,5 @@ data class SimpleTask(
     val id: ObjectId = ObjectId(),
     val desc: String = "Simple question",
     val answers: ArrayList<String> = arrayListOf("Right", "Wrong"),
-    val rightAnswer: String = "0"
+    val rightAnswer: String = "Right"
 )

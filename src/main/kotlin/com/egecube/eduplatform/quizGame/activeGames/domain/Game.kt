@@ -16,6 +16,8 @@ data class Game(
     val tasksSet: List<SimpleTask>,
     val gameField: ArrayList<ArrayList<Pair<String?, Boolean?>>>,
     val postedAnswers: ArrayList<Pair<GameAnswer, Boolean>>,
+    val pickedForAnswer: HashSet<String>,
     val startApproved: HashSet<Long> = HashSet(),
-    var started: Boolean = false
+    var started: Boolean = false,
+    var winner: Long = -1
 )

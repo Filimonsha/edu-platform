@@ -2,10 +2,11 @@ package com.egecube.eduplatform.quizGame.activeGames
 
 import com.egecube.eduplatform.chatsManagement.chats.ChatsService
 import com.egecube.eduplatform.chatsManagement.chats.internal.dto.NewChatDto
+import com.egecube.eduplatform.quizGame.activeGames.actions.QuizActions
 import com.egecube.eduplatform.quizGame.activeGames.domain.Game
-import com.egecube.eduplatform.quizGame.activeGames.dto.GameAnswer
 import com.egecube.eduplatform.quizGame.activeGames.dto.QuizActionsDto
 import com.egecube.eduplatform.quizGame.activeGames.utils.FieldUtils
+import com.egecube.eduplatform.quizGame.activeGames.utils.GameActionsService
 import com.egecube.eduplatform.quizGame.consts.QuizGameData
 import com.egecube.eduplatform.quizGame.websockets.PlayerNotifications
 import com.egecube.eduplatform.tasksManagement.TaskService
@@ -17,9 +18,10 @@ class GameService(
     private val chatsService: ChatsService,
     private val taskService: TaskService,
     private val gameRepository: GameRepository,
-    private val notifications: PlayerNotifications
+    private val notifications: PlayerNotifications,
+    private val actionsService: GameActionsService,
+    private val fieldUtils: FieldUtils
 ) {
-    private val fieldUtils = FieldUtils()
 
     fun initializeAndSaveGame(roomId: Int): Game {
         val newChat = chatsService.createNewChat(
@@ -33,20 +35,11 @@ class GameService(
             tasksSet = tasksSet,
             gameField = taskFields,
             postedAnswers = ArrayList(),
+            pickedForAnswer = hashSetOf(),
             participants = hashSetOf(),
             roomId = roomId
         )
         return gameRepository.save(newGame)
-    }
-
-    fun addParticipants(game: Game, participant: Long): Game {
-        game.participants.add(participant)
-        return gameRepository.save(game)
-    }
-
-    fun removeParticipant(game: Game, userId: Long): Game {
-        game.participants.remove(userId)
-        return gameRepository.save(game)
     }
 
     fun tryStartGame(gameId: ObjectId, userId: Long): Game {
@@ -59,43 +52,34 @@ class GameService(
         return gameRepository.save(game)
     }
 
+    fun addParticipants(game: Game, participant: Long): Game {
+        game.participants.add(participant)
+        return gameRepository.save(game)
+    }
+
+    fun removeParticipant(game: Game, userId: Long): Game {
+        game.participants.remove(userId)
+        return gameRepository.save(game)
+    }
+
     fun getGameState(gameId: ObjectId): Game {
         return gameRepository.findById(gameId).get()
     }
 
     fun parseActionAndPerform(action: QuizActionsDto, gameId: ObjectId): Game {
-        val answerSubmit = action as QuizActionsDto.SubmitAnswer
-        return checkAndAddAnswerToGame(gameId, action.answer)
-    }
-
-    fun checkAndAddAnswerToGame(gameId: ObjectId, answer: GameAnswer): Game {
-        val gameStat = gameRepository.findById(gameId).orElseThrow()
-        var answerIsCorrect = false
-
-        val taskInfo = gameStat.tasksSet.find { it.id.toHexString() == answer.simpleTaskId }
-        val neededField = Pair(answer.simpleTaskId, false)
-
-        val row = gameStat.gameField.indexOfFirst { it.contains(neededField) }
-        val col = gameStat.gameField[row].indexOf(neededField)
-
-        @Suppress("KotlinConstantConditions")
-        if (col == -1 || row == -1) throw NoSuchElementException("No task")
-
-        if (taskInfo != null && taskInfo.rightAnswer == answer.answer) {
-            answerIsCorrect = true
+        val result = when (action.actionType) {
+            QuizActions.SUBMIT_ANSWER ->
+                actionsService.checkAndAddAnswerToGame(gameId, (action as QuizActionsDto.SubmitAnswer).answer!!)
+            QuizActions.PICK_FOR_ANSWER ->
+                actionsService.pickForAnswer(gameId, (action as QuizActionsDto.PickForAnswer).questionId!!)
+            QuizActions.UNPICK_FOR_ANSWER ->
+                actionsService.unpickForAnswer(gameId, (action as QuizActionsDto.UnPickForAnswer).questionId!!)
+            QuizActions.GIVE_UP ->
+                actionsService.giveUpInGame(gameId, (action as QuizActionsDto.GiveUp).userId!!)
+            else -> null
         }
-        gameStat.postedAnswers.add(
-            Pair(
-                GameAnswer(
-                    answer.userId,
-                    answer.simpleTaskId,
-                    answer.answer
-                ),
-                answerIsCorrect
-            )
-        )
-        gameStat.gameField[row][col] = Pair(answer.simpleTaskId, answerIsCorrect)
-
-        return gameRepository.save(gameStat)
+        return result!!
     }
+
+
 }
