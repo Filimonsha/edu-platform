@@ -12,6 +12,8 @@ class Homework(
     @Id
     @JsonIgnore
     var _id: String? = ObjectId().toString(),
+    val creatorId: String,
+    val subjectId: Long,
     val title: String,
     val description: String,
     val deadline: ZonedDateTime,
@@ -19,5 +21,7 @@ class Homework(
 //    @DBRef
     val tasks: MutableSet<Task> = mutableSetOf(),
 
-    val answers: MutableSet<HomeworkAnswer> = mutableSetOf()
+    val solvers: MutableList<Long> = mutableListOf(),
+
+    val answers: MutableSet<String> = mutableSetOf()
 )

@@ -15,8 +15,8 @@ class SubjectService(
     private val courseService: CourseService
 ) {
 
-    fun getById(id: Long): Optional<Subject> {
-        return subjectRepository.findById(id)
+    fun getById(id: Long): Subject {
+        return subjectRepository.findById(id).orElseThrow()
     }
 
     fun getAll() = subjectRepository.findAll()

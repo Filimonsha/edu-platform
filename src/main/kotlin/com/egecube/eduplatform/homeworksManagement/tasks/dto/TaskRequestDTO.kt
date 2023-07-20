@@ -8,7 +8,6 @@ import java.io.Serializable
 /**
  * A DTO for the [Task] entity
  */
-
 @Schema(name = "Прикрепление задачи к ДЗ")
 data class TaskRequestDTO(
     @Schema(description = "По умолчанию необходимо брать из индекса задания")

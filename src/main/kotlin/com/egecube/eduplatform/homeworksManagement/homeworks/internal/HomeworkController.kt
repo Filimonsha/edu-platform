@@ -9,7 +9,6 @@ import com.egecube.eduplatform.homeworksManagement.homeworks.internal.domain.Hom
 import com.egecube.eduplatform.homeworksManagement.homeworks.internal.routes.HomeworksRoute
 import com.egecube.eduplatform.homeworksManagement.tasks.dto.TaskRequestDTO
 import com.egecube.eduplatform.homeworksManagement.tasks.dto.TaskResponseDTO
-import com.egecube.eduplatform.homeworksManagement.tasks.internal.domain.TaskAnswer
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import org.bson.types.Binary
@@ -29,32 +28,29 @@ class HomeworkController(
 ) {
 
     @GetMapping(HomeworksRoute.HOMEWORKS)
-    @Operation(summary = "Получение всех ДЗ")
-    fun getAllHomeworks(): List<Homework> {
-        return homeworkService.getAllHomeworks()
+    @Operation(summary = "Получение всех ДЗ по создателю")
+    fun getAllHomeworks(@RequestParam creatorId: String): List<Homework> {
+        return homeworkService.getAllHomeworksByCreatorId(creatorId)
     }
 
     @PostMapping(HomeworksRoute.HOMEWORKS)
-    @Operation(summary = "Создание ДЗ")
+    @Operation(summary = "Создание ДЗ для групп")
     fun createHomework(
         @RequestBody homeworkRequestDto: HomeworkRequestDto
     ): HomeworkResponseDTO {
-        val (title, description, deadline) = homeworkRequestDto
 
         val createdHomework = homeworkService.createHomework(
-            Homework(
-                null,
-                title,
-                description,
-                deadline
-            )
+            homeworkRequestDto,
         )
         return HomeworkResponseDTO(
             createdHomework._id.toString(),
             createdHomework.title,
+            createdHomework.subjectId,
+            createdHomework.creatorId,
             createdHomework.description,
             createdHomework.deadline,
             createdHomework.tasks,
+            createdHomework.solvers,
             createdHomework.answers
         )
     }
@@ -67,9 +63,12 @@ class HomeworkController(
         return HomeworkResponseDTO(
             foundHomework._id.toString(),
             foundHomework.title,
+            foundHomework.subjectId,
+            foundHomework.creatorId,
             foundHomework.description,
             foundHomework.deadline,
             foundHomework.tasks,
+            foundHomework.solvers,
             foundHomework.answers
         )
     }
@@ -92,18 +91,11 @@ class HomeworkController(
         return homeworkService.addTasksToHomework(homeworkId, tasks)
     }
 
-    @PostMapping(HomeworksRoute.HOMEWORK_ANSWERS)
-    @Operation(summary = "Создание ответов к заданиям ДЗ")
-    fun createAnswerOnHomework(
-        @PathVariable homeworkId: String,
-        @RequestBody tasksAnswer: List<TaskAnswer>
-    ) {
-        homeworkService.createAnswerOnHomework(
-            HomeworkAnswer(
-                homeworkId,
-                tasksAnswer
-            )
-        )
+
+    @GetMapping(HomeworksRoute.HOMEWORK_ANSWERS)
+    @Operation(summary = "Получение всех ответов на ДЗ")
+    fun readAllHomeworkAnswers(@PathVariable homeworkId: String): List<HomeworkAnswer> {
+        return homeworkService.getAllHomeworkAnswers(homeworkId)
     }
 
     @PostMapping("/api/test")
