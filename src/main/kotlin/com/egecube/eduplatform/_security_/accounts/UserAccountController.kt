@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -20,6 +21,18 @@ class UserAccountController(
     private val userService: UserAccountService,
     private val accessRightsService: AccessRightsService
 ) {
+    // Open endpoint
+    @GetMapping(UserAccountRoutes.ACCOUNTS)
+    fun getAccountInfoByName(
+        @RequestParam("name") name: String
+    ): ResponseEntity<UserAccountDto> {
+        val userInfo = userService.getUserByName(name)
+        return if (userInfo != null) {
+            ResponseEntity.ok().body(userInfo)
+        } else {
+            ResponseEntity.notFound().build()
+        }
+    }
 
     // Open endpoint
     @GetMapping(UserAccountRoutes.ACCOUNT)

@@ -52,7 +52,17 @@ class UserAccountService(
         } catch (e: NoSuchElementException) {
             null
         }
+    }
 
+    fun getUserByName(name: String): UserAccountDto? {
+        return try {
+            val userAccount = userAccountRepository.findByEmail(name)
+            UserAccountDto(userAccount!!)
+        } catch (e: NoSuchElementException) {
+            null
+        } catch (e: NullPointerException) {
+            null
+        }
     }
 
     fun changeBaseUserDataById(id: Long, changes: ChangeUserDataDto): Long? {
