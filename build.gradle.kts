@@ -31,6 +31,8 @@ dependencies {
     implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
 //  Postgres
     implementation("org.postgresql:postgresql:42.5.4")
+//  Mongo
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb:3.1.1")
 //  Modulith
     implementation("org.springframework.experimental:spring-modulith-core:0.5.1")
     implementation("org.springframework.experimental:spring-modulith-docs:0.5.1")
@@ -46,8 +48,8 @@ dependencies {
     implementation("org.webjars:webjars-locator-core")
     implementation("org.webjars:sockjs-client:1.0.2")
     implementation("org.webjars:stomp-websocket:2.3.3")
-    implementation("org.webjars:bootstrap:3.3.7")
-    implementation("org.webjars:jquery:3.1.1-1")
+    implementation("org.webjars:bootstrap:3.4.0")
+    implementation("org.webjars:jquery:3.5.0")
 }
 
 tasks.withType<KotlinCompile> {

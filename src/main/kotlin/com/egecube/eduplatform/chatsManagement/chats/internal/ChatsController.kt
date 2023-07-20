@@ -1,8 +1,9 @@
-package com.egecube.eduplatform.chatsManagement.chats
+package com.egecube.eduplatform.chatsManagement.chats.internal
 
+import com.egecube.eduplatform.chatsManagement.chats.ChatsService
 import com.egecube.eduplatform.chatsManagement.consts.ChatRoutes
-import com.egecube.eduplatform.chatsManagement.chats.domain.Chat
-import com.egecube.eduplatform.chatsManagement.chats.dto.NewChatDto
+import com.egecube.eduplatform.chatsManagement.chats.internal.domain.Chat
+import com.egecube.eduplatform.chatsManagement.chats.internal.dto.NewChatDto
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping

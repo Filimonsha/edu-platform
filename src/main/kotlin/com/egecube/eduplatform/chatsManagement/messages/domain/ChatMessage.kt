@@ -1,6 +1,6 @@
 package com.egecube.eduplatform.chatsManagement.messages.domain
 
-import com.egecube.eduplatform.chatsManagement.chats.domain.Chat
+import com.egecube.eduplatform.chatsManagement.chats.internal.domain.Chat
 import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.Column
 import jakarta.persistence.Entity

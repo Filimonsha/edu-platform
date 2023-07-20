@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.chatsManagement.chats.domain
+package com.egecube.eduplatform.chatsManagement.chats.internal.domain
 
 import com.egecube.eduplatform.chatsManagement.messages.domain.ChatMessage
 import com.fasterxml.jackson.annotation.JsonIgnore

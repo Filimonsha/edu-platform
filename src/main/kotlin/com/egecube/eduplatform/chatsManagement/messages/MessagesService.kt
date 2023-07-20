@@ -1,6 +1,6 @@
 package com.egecube.eduplatform.chatsManagement.messages
 
-import com.egecube.eduplatform.chatsManagement.chats.ChatsRepository
+import com.egecube.eduplatform.chatsManagement.chats.internal.ChatsRepository
 import com.egecube.eduplatform.chatsManagement.messages.dto.NewMessageDto
 import com.egecube.eduplatform.chatsManagement.messages.domain.ChatMessage
 import com.egecube.eduplatform.chatsManagement.websockets.ChatWsService
