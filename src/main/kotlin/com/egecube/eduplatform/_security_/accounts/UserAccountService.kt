@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class UserAccountService(
@@ -19,6 +20,7 @@ class UserAccountService(
 ) {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
+    @Transactional
     fun registerNewUser(request: RegisterRequest): Long? {
         if (userAccountRepository.findByEmail(request.userMail) != null) {
             return null
@@ -65,6 +67,7 @@ class UserAccountService(
         }
     }
 
+    @Transactional
     fun changeBaseUserDataById(id: Long, changes: ChangeUserDataDto): Long? {
         return try {
             val changing = userAccountRepository.findById(id).get()
@@ -86,6 +89,7 @@ class UserAccountService(
         }
     }
 
+    @Transactional
     fun changeSecureUserDataById(id: Long, changes: ChangeUserDataDto): Long? {
         return try {
             val changing = userAccountRepository.findById(id).get()
@@ -104,6 +108,7 @@ class UserAccountService(
         }
     }
 
+    @Transactional
     fun deleteAccountById(id: Long): Long {
         userAccountRepository.deleteById(id)
         applicationEventPublisher.publishEvent(UserAccountDeleted(id))
