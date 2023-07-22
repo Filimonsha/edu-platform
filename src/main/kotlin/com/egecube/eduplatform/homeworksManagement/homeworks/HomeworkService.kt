@@ -6,8 +6,8 @@ import com.egecube.eduplatform.homeworksManagement.homeworks.internal.domain.Hom
 import com.egecube.eduplatform.homeworksManagement.homeworks.internal.domain.HomeworkAnswer
 import com.egecube.eduplatform.homeworksManagement.tasks.dto.TaskRequestDTO
 import com.egecube.eduplatform.homeworksManagement.tasks.internal.TaskRepository
-import com.egecube.eduplatform.homeworksManagement.tasks.internal.domain.Task
-import com.egecube.eduplatform.homeworksManagement.tasks.internal.domain.TaskAnswer
+import com.egecube.eduplatform.homeworksManagement.tasks.domain.Task
+import com.egecube.eduplatform.homeworksManagement.tasks.domain.TaskAnswer
 import org.springframework.stereotype.Service
 
 @Service

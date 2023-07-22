@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.chatsManagement.chats.internal.dto
+package com.egecube.eduplatform.chatsManagement.chats
 
 data class NewChatDto(
     val name: String,

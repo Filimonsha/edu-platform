@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.tasksManagement.consts
+package com.egecube.eduplatform.tasksManagement.tasks.consts
 
 object TaskRoutes {
     const val TASKS_ROUTE = "/api/tasks"

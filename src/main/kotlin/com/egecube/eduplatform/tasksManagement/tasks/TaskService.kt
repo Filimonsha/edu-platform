@@ -1,6 +1,5 @@
-package com.egecube.eduplatform.tasksManagement
+package com.egecube.eduplatform.tasksManagement.tasks
 
-import com.egecube.eduplatform.tasksManagement.domain.SimpleTask
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
 

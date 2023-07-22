@@ -1,8 +1,8 @@
-package com.egecube.eduplatform.tasksManagement.internal
+package com.egecube.eduplatform.tasksManagement.tasks.internal
 
-import com.egecube.eduplatform.tasksManagement.domain.SimpleTask
-import com.egecube.eduplatform.tasksManagement.TaskService
-import com.egecube.eduplatform.tasksManagement.consts.TaskRoutes
+import com.egecube.eduplatform.tasksManagement.tasks.SimpleTask
+import com.egecube.eduplatform.tasksManagement.tasks.TaskService
+import com.egecube.eduplatform.tasksManagement.tasks.consts.TaskRoutes
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam

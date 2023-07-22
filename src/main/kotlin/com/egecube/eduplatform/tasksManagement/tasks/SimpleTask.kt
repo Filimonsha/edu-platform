@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.tasksManagement.domain
+package com.egecube.eduplatform.tasksManagement.tasks
 
 import org.bson.types.ObjectId
 

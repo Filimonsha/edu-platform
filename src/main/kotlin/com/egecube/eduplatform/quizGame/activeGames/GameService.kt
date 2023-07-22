@@ -1,7 +1,7 @@
 package com.egecube.eduplatform.quizGame.activeGames
 
 import com.egecube.eduplatform.chatsManagement.chats.ChatsService
-import com.egecube.eduplatform.chatsManagement.chats.internal.dto.NewChatDto
+import com.egecube.eduplatform.chatsManagement.chats.NewChatDto
 import com.egecube.eduplatform.quizGame.activeGames.actions.QuizActions
 import com.egecube.eduplatform.quizGame.activeGames.domain.Game
 import com.egecube.eduplatform.quizGame.activeGames.dto.QuizActionsDto
@@ -9,7 +9,7 @@ import com.egecube.eduplatform.quizGame.activeGames.utils.FieldUtils
 import com.egecube.eduplatform.quizGame.activeGames.utils.GameActionsService
 import com.egecube.eduplatform.quizGame.consts.QuizGameData
 import com.egecube.eduplatform.quizGame.websockets.PlayerNotifications
-import com.egecube.eduplatform.tasksManagement.TaskService
+import com.egecube.eduplatform.tasksManagement.tasks.TaskService
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
 

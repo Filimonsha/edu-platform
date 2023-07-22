@@ -2,7 +2,7 @@ package com.egecube.eduplatform.homeworksManagement.homeworks.dto
 
 import com.egecube.eduplatform.homeworksManagement.homeworks.internal.domain.Homework
 import com.egecube.eduplatform.homeworksManagement.homeworks.internal.domain.HomeworkAnswer
-import com.egecube.eduplatform.homeworksManagement.tasks.internal.domain.Task
+import com.egecube.eduplatform.homeworksManagement.tasks.domain.Task
 import java.io.Serializable
 import java.time.ZonedDateTime
 

@@ -1,6 +1,4 @@
-package com.egecube.eduplatform.tasksManagement.dto
-
-import com.egecube.eduplatform.tasksManagement.domain.SimpleTask
+package com.egecube.eduplatform.tasksManagement.tasks
 
 data class SimpleTaskDto(
     val id: String,

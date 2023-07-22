@@ -1,6 +1,6 @@
 package com.egecube.eduplatform.quizGame.activeGames.domain
 
-import com.egecube.eduplatform.tasksManagement.domain.SimpleTask
+import com.egecube.eduplatform.tasksManagement.tasks.SimpleTask
 import com.egecube.eduplatform.quizGame.activeGames.dto.GameAnswer
 import jakarta.persistence.Id
 import org.bson.types.ObjectId

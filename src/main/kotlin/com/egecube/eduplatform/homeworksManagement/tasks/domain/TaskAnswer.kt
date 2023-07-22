@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.homeworksManagement.tasks.internal.domain
+package com.egecube.eduplatform.homeworksManagement.tasks.domain
 
 class TaskAnswer(
 

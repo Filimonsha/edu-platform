@@ -1,6 +1,6 @@
-package com.egecube.eduplatform.tasksManagement.internal
+package com.egecube.eduplatform.tasksManagement.tasks.internal
 
-import com.egecube.eduplatform.tasksManagement.domain.SimpleTask
+import com.egecube.eduplatform.tasksManagement.tasks.SimpleTask
 import org.springframework.data.mongodb.repository.MongoRepository
 
 interface TaskRepository: MongoRepository<SimpleTask, Long>
