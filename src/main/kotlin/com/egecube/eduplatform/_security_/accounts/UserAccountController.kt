@@ -5,6 +5,9 @@ import com.egecube.eduplatform._security_.accounts.consts.UserAccountRoutes
 import com.egecube.eduplatform._security_.accounts.dto.ChangeUserDataDto
 import com.egecube.eduplatform._security_.accounts.dto.RegisterRequest
 import com.egecube.eduplatform._security_.accounts.dto.UserAccountDto
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.responses.ApiResponse
+import io.swagger.v3.oas.annotations.responses.ApiResponses
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
@@ -22,6 +25,7 @@ class UserAccountController(
     private val accessRightsService: AccessRightsService
 ) {
     // Open endpoint
+    @Operation(summary = "Get account info, searching in the repo by unique name (mail)")
     @GetMapping(UserAccountRoutes.ACCOUNTS)
     fun getAccountInfoByName(
         @RequestParam("name") name: String
@@ -35,6 +39,7 @@ class UserAccountController(
     }
 
     // Open endpoint
+    @Operation(summary = "Get account info by id")
     @GetMapping(UserAccountRoutes.ACCOUNT)
     fun getAccountInfoById(
         @PathVariable("id") userId: Long
@@ -48,10 +53,15 @@ class UserAccountController(
     }
 
     // Open endpoint
+    @Operation(summary = "Request for creating new user account, back validation")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "400", description = "Bad request, user already exists"),
+        ApiResponse(responseCode = "200", description = "Account created, user returned")
+    ])
     @PostMapping(UserAccountRoutes.ACCOUNTS)
     fun createAccount(
         @RequestBody newUser: RegisterRequest
-    ): ResponseEntity<Long> {
+    ): ResponseEntity<UserAccountDto> {
         val registered = userService.registerNewUser(newUser)
         return if (registered != null) {
             ResponseEntity.ok().body(registered)
@@ -62,20 +72,24 @@ class UserAccountController(
 
     // Owner or superuser
     @PatchMapping(UserAccountRoutes.ACCOUNT)
+    @Operation(summary = "Change user data and rights if changer has higher level")
+    @ApiResponses(value = [
+        ApiResponse(responseCode = "200", description = "Changed rights in correlation of own, changed info")
+    ])
     fun changeAccountData(
         @PathVariable("id") userId: Long,
         @RequestBody newData: ChangeUserDataDto,
         httpRequest: HttpServletRequest
-    ): ResponseEntity<Long> {
+    ): ResponseEntity<UserAccountDto> {
         val fromUserOrAdmin = accessRightsService.isJwtForOwnerOrSuperuser(httpRequest, userId)
         val fromUser = accessRightsService.isJwtValidForAccessor(httpRequest, userId)
         return if (!fromUserOrAdmin) {
             ResponseEntity.badRequest().build()
         } else {
-            val updated = userService.changeBaseUserDataById(userId, newData)
+            var updated = userService.changeBaseUserDataById(userId, newData)
             if (!fromUser) {
                 // Not from user leaves from admin
-                userService.changeSecureUserDataById(userId, newData)
+                updated = userService.changeSecureUserDataById(userId, newData)
             }
             ResponseEntity.ok().body(updated)
         }
@@ -83,9 +97,10 @@ class UserAccountController(
 
     // Owner or superuser
     @DeleteMapping(UserAccountRoutes.ACCOUNT)
+    @Operation(summary = "Delete account by id, if owner of account or superuser")
     fun deleteAccountById(
         @PathVariable("id") userId: Long,
-        httpRequest: HttpServletRequest
+        httpRequest: HttpServletRequest,
     ): ResponseEntity<Long> {
         return if (accessRightsService.isJwtForOwnerOrSuperuser(httpRequest, userId)) {
             userService.deleteAccountById(userId)

@@ -21,7 +21,7 @@ class UserAccountService(
     private val logger = LoggerFactory.getLogger(this::class.java)
 
     @Transactional
-    fun registerNewUser(request: RegisterRequest): Long? {
+    fun registerNewUser(request: RegisterRequest): UserAccountDto? {
         if (userAccountRepository.findByEmail(request.userMail) != null) {
             return null
         }
@@ -40,7 +40,7 @@ class UserAccountService(
             applicationEventPublisher.publishEvent(
                 UserAccountCreated(UserAccountDto(registered))
             )
-            registered.id
+            UserAccountDto(registered)
         } catch (_: IllegalArgumentException) {
             logger.warn("Unable to register new user ${newUser.email}")
             null
@@ -68,7 +68,7 @@ class UserAccountService(
     }
 
     @Transactional
-    fun changeBaseUserDataById(id: Long, changes: ChangeUserDataDto): Long? {
+    fun changeBaseUserDataById(id: Long, changes: ChangeUserDataDto): UserAccountDto? {
         return try {
             val changing = userAccountRepository.findById(id).get()
             // Change base values
@@ -83,14 +83,14 @@ class UserAccountService(
                 UserAccountModified(UserAccountDto(changed))
             )
             logger.info("Changed base account info for ${changing.email}")
-            changing.id
+            UserAccountDto(changed)
         } catch (e: NoSuchElementException) {
             null
         }
     }
 
     @Transactional
-    fun changeSecureUserDataById(id: Long, changes: ChangeUserDataDto): Long? {
+    fun changeSecureUserDataById(id: Long, changes: ChangeUserDataDto): UserAccountDto? {
         return try {
             val changing = userAccountRepository.findById(id).get()
             // Change secure values
@@ -102,7 +102,7 @@ class UserAccountService(
                 UserRightsUpdated(changed.role)
             )
             logger.warn("Changed secure account info of ${changing.email} to ${changing.role}")
-            changing.id
+            UserAccountDto(changed)
         } catch (e: NoSuchElementException) {
             null
         }
