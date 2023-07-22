@@ -26,7 +26,7 @@ jobs:
       - name: Get version
         id: version
         run: |
-          echo "version=`git rev-parse --short HEAD`" >> "$GITHUB_OUTPUT"
+          echo "version=${GITHUB_SHA::8}" >> "$GITHUB_OUTPUT"
   build:
     needs: init
     runs-on: ubuntu-latest
