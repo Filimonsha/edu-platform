@@ -1,8 +1,7 @@
-package com.egecube.eduplatform.quizGame.active_games.domain
+package com.egecube.eduplatform.quizGame.activeGames.domain
 
-import com.egecube.eduplatform.tasksManagement.SimpleTask
-import com.egecube.eduplatform.quizGame.active_games.dto.GameAnswer
-import com.fasterxml.jackson.annotation.JsonIgnore
+import com.egecube.eduplatform.tasksManagement.domain.SimpleTask
+import com.egecube.eduplatform.quizGame.activeGames.dto.GameAnswer
 import jakarta.persistence.Id
 import org.bson.types.ObjectId
 import org.springframework.data.mongodb.core.mapping.Document
@@ -14,10 +13,11 @@ data class Game(
     val roomId: Int,
     val appendedChatId: Long,
     val participants: HashSet<Long>,
-    @JsonIgnore
     val tasksSet: List<SimpleTask>,
-    val gameField: ArrayList<ArrayList<Pair<Long?, Boolean?>>>,
+    val gameField: ArrayList<ArrayList<Pair<String?, Boolean?>>>,
     val postedAnswers: ArrayList<Pair<GameAnswer, Boolean>>,
+    val pickedForAnswer: HashSet<String>,
     val startApproved: HashSet<Long> = HashSet(),
-    var started: Boolean = false
+    var started: Boolean = false,
+    var winner: Long = -1
 )
