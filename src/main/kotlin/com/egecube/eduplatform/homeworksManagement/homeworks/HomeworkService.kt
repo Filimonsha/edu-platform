@@ -42,7 +42,6 @@ class HomeworkService(
 
 
         homework.solvers.addAll(solversIds)
-        println(homework.solvers.size)
 
         val savedHomework = homeworkRepository.save(homework)
         solversIds.forEach { solverId ->
@@ -59,7 +58,6 @@ class HomeworkService(
 
     fun addTasksToHomework(homeworkId: String, dtoTasks: List<TaskRequestDTO>): Homework {
         val foundHomework = homeworkRepository.findById(homeworkId).orElseThrow()
-        print(foundHomework._id.toString() + "AAAAAAAAAaaaaaa")
 //            TODO Как проверять уникальность приритета ?
         val distinctTasks = dtoTasks.map {
             Task(

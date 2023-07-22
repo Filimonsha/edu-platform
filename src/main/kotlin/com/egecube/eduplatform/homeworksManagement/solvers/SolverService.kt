@@ -36,7 +36,6 @@ class SolverService(
 
     fun getAllSolverHomeworksBySubject(solverId: Long, subjectId: Long): List<Homework> {
         return homeworkRepository.findAllBySubjectIdAndSolversContains(subjectId, mutableListOf(subjectId))
-            .also { println(it.size) }
     }
 
     fun addAnswerOnHomework(solverId: Long, homeworkId: String, tasksAnswer: List<TaskAnswer>): HomeworkAnswer {

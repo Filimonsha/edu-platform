@@ -106,7 +106,7 @@ class HomeworkController(
         @RequestParam("file") file: MultipartFile
     ): Binary {
 
-        return attachmentService.loadAttachment(title, file).data
+        return attachmentService.saveAttachment(title, file).data
     }
 
     @GetMapping("/api/test1")

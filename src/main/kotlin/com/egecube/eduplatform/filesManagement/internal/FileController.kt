@@ -1,7 +1,6 @@
 package com.egecube.eduplatform.filesManagement.internal
 
 import com.egecube.eduplatform.filesManagement.AttachmentFileService
-import org.bson.types.ObjectId
 import org.springframework.core.io.ByteArrayResource
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseEntity
@@ -25,6 +24,6 @@ class FileController(
 
     @PostMapping("/api/files/")
     fun loadFile(@RequestParam file: MultipartFile): String {
-        return attachmentFileService.loadFile(file).toString()
+        return attachmentFileService.saveFile(file).toString()
     }
 }
