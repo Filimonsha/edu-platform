@@ -1,11 +1,10 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("org.springframework.boot") version "3.0.6"
     id("io.spring.dependency-management") version "1.1.0"
+    id("org.jetbrains.kotlin.plugin.jpa") version "1.8.21"
     kotlin("jvm") version "1.7.22"
     kotlin("plugin.spring") version "1.7.22"
-    kotlin("plugin.jpa") version "1.7.22"
 }
 
 group = "com.egecube"
@@ -18,26 +17,51 @@ repositories {
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-
-    implementation("org.springframework.boot:spring-boot-starter")
-
-//    Spring data jpa
-    implementation ("org.springframework.boot:spring-boot-starter-data-jpa:3.0.6")
-
-// Postgres
+//  Spring web
+    implementation("org.springframework.boot:spring-boot-starter-web:3.0.6")
+    implementation("org.springframework.boot:spring-boot-starter-websocket:3.1.1")
+//  Spring security
+    implementation("org.springframework.boot:spring-boot-starter-security:3.0.6")
+//  Spring data jpa
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa:3.0.6")
+    implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
+//  Jwt
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-impl:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-jackson:0.11.5")
+//  Postgres
     implementation("org.postgresql:postgresql:42.5.4")
-
-//    Modulith
+//  Mongo
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb:3.1.1")
+//  Modulith
     implementation("org.springframework.experimental:spring-modulith-core:0.5.1")
     implementation("org.springframework.experimental:spring-modulith-docs:0.5.1")
-
+    implementation("org.springframework.experimental:spring-modulith-test:0.6.0")
+//  Utils
+    implementation("org.modelmapper:modelmapper:3.1.1")
+    implementation("org.modelmapper.extensions:modelmapper-jackson:3.1.1")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4")
+//  Tests
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+//  Static html, to remove under development
+    implementation("org.webjars:webjars-locator-core")
+    implementation("org.webjars:sockjs-client:1.0.2")
+    implementation("org.webjars:stomp-websocket:2.3.3")
+    implementation("org.webjars:bootstrap:3.4.0")
+    implementation("org.webjars:jquery:3.5.0")
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "17"
+    }
+}
+
+sourceSets {
+    named("main") {
+        java.srcDir("src/main/kotlin")
     }
 }
 

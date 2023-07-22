@@ -36,5 +36,10 @@ out/
 ### VS Code ###
 .vscode/
 
+## Application ###
+src/main/resources/application.properties
+/gradle/
+.jpb/
+
 ### Modulith ###
 modulith-docs/
