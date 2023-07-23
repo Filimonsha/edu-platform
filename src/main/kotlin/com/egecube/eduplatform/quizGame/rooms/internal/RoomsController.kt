@@ -1,7 +1,8 @@
-package com.egecube.eduplatform.quizGame.rooms
+package com.egecube.eduplatform.quizGame.rooms.internal
 
-import com.egecube.eduplatform.quizGame.activeGames.dto.GameDto
+import com.egecube.eduplatform.quizGame.activeGames.internal.dto.GameDto
 import com.egecube.eduplatform.quizGame.consts.GamesRoutes
+import com.egecube.eduplatform.quizGame.rooms.RoomsService
 import org.springframework.web.bind.annotation.*
 
 @RestController

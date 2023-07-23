@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.quizGame.activeGames.actions
+package com.egecube.eduplatform.quizGame.activeGames.internal.actions
 
 object QuizActions {
     const val PICK_FOR_ANSWER = "PICK_FOR_ANSWER"

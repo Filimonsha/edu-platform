@@ -1,6 +1,6 @@
-package com.egecube.eduplatform.quizGame.activeGames.dto
+package com.egecube.eduplatform.quizGame.activeGames.internal.dto
 
-import com.egecube.eduplatform.quizGame.activeGames.domain.Game
+import com.egecube.eduplatform.quizGame.activeGames.internal.domain.Game
 import com.egecube.eduplatform.tasksManagement.dto.SimpleTaskDto
 
 data class GameDto(
