@@ -1,0 +1,76 @@
+name: Build backend and push to ghcr
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - release
+
+env:
+  IMAGE_NAME: edu-platform
+  DEFAULT_JDK: "17"
+  DEFAULT_GRADLE_VERSION: "7.6.1"
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  init:
+    name: Initialize build
+    if: github.repository_owner == 'Moleus' || github.repository_owner ==  'Filimonsha'
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - name: Get version
+        id: version
+        run: |
+          echo "version=${GITHUB_SHA::8}" >> "$GITHUB_OUTPUT"
+  build:
+    needs: init
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v3.5.3
+
+    - name: Set up JDK ${{ env.DEFAULT_JDK }}
+      uses: actions/setup-java@v3
+      with:
+        java-version: ${{ env.DEFAULT_JDK }}
+        distribution: 'temurin'
+        server-id: github
+        settings-path: ${{ github.workspace }}
+
+    - name: Build with Gradle
+      uses: gradle/gradle-build-action@v2
+      with:
+        gradle-version: ${{ env.DEFAULT_GRADLE_VERSION }}
+        arguments: bootBuildImage --no-daemon --imageName=${{ env.IMAGE_NAME }}
+
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: ${{ needs.init.outputs.version }}
+        files: ./build/libs/*.jar
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
+    - name: Login to Github Container Registry
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: downcase REPO
+      run: |
+        echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+
+    - name: Tag & publish to GitHub Container Registry
+      run: |
+        IMAGE_ID=ghcr.io/${{ env.REPO }}/${IMAGE_NAME}
+        VERSION=${{ needs.init.outputs.version }}
+        docker tag ${IMAGE_NAME} ${IMAGE_ID}:${VERSION}
+        docker tag ${IMAGE_NAME} ${IMAGE_ID}:latest
+        docker push ${IMAGE_ID}:${VERSION}
