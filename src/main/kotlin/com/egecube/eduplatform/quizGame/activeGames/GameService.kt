@@ -28,7 +28,7 @@ class GameService(
             NewChatDto("Chat for game $roomId")
         )
         val tasksSet = taskService.getNumberOfSimpleTasks(QuizGameData.Q_ELEMENTS)
-        val taskFields = fieldUtils.makeEmptyFieldWithElements(QuizGameData.Q_ELEMENTS, tasksSet.map { it.id.toHexString() })
+        val taskFields = fieldUtils.makeEmptyFieldWithElements(QuizGameData.Q_ELEMENTS, tasksSet.map { it._id.toHexString() })
 
         val newGame = Game(
             appendedChatId = newChat!!,

@@ -4,6 +4,4 @@ import com.egecube.eduplatform.tasksManagement.tasks.SimpleTask
 import org.bson.types.ObjectId
 import org.springframework.data.mongodb.repository.MongoRepository
 
-interface SimpleTaskRepository: MongoRepository<SimpleTask, ObjectId> {
-    fun findByIdAndSubjectIdEquals(id: ObjectId, subjectId: Int)
-}
+interface SimpleTaskRepository: MongoRepository<SimpleTask, ObjectId>

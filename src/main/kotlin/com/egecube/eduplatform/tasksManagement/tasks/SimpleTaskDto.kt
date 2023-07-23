@@ -7,7 +7,7 @@ data class SimpleTaskDto(
     val answers: List<String>,
 ) {
     constructor(obj: SimpleTask) : this(
-        id = obj.id.toHexString(),
+        id = obj._id.toHexString(),
         subjectId = obj.subjectId,
         desc = obj.desc,
         answers = obj.answers

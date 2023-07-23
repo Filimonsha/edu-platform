@@ -7,6 +7,7 @@ import com.egecube.eduplatform.tasksManagement.tasks.dto.NewTaskDto
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
@@ -26,7 +27,7 @@ class TaskController(
     fun getNumberOfTasks(
         @RequestParam count: Int = 10
     ): List<SimpleTaskDto> {
-        return taskService.getNumberOfSimpleTasks(count)
+        return taskService.getNumberOfSimpleTasks(count).map { SimpleTaskDto(it) }
     }
 
     @GetMapping(TaskRoutes.SUBJECT_TASKS)
@@ -35,11 +36,12 @@ class TaskController(
         @RequestParam count: Int = 10
     ): List<SimpleTaskDto> {
         return taskService.getNumberOfSubjectTasks(count, subjectId.toInt())
+            .map { SimpleTaskDto(it) }
     }
 
     @PostMapping(TaskRoutes.TASKS_ROUTE)
     fun addSimpleTaskForSubject(
-        @RequestParam newTask: NewTaskDto
+        @RequestBody newTask: NewTaskDto
     ): SimpleTaskDto {
         return taskService.addTaskBySubject(newTask)
     }
