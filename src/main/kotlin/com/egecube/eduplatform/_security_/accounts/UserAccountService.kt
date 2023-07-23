@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.context.ApplicationEventPublisher
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class UserAccountService(
@@ -22,7 +23,8 @@ class UserAccountService(
 ) {
     private val logger = LoggerFactory.getLogger(this::class.java)
 
-    fun registerNewUser(request: RegisterRequest): Long? {
+    @Transactional
+    fun registerNewUser(request: RegisterRequest): UserAccountDto? {
         if (userAccountRepository.findByEmail(request.userMail) != null) {
             return null
         }
@@ -41,7 +43,7 @@ class UserAccountService(
             applicationEventPublisher.publishEvent(
                 UserAccountCreated(UserAccountDto(registered))
             )
-            registered.id
+            UserAccountDto(registered)
         } catch (_: IllegalArgumentException) {
             logger.warn("Unable to register new user ${newUser.email}")
             null
@@ -55,10 +57,21 @@ class UserAccountService(
         } catch (e: NoSuchElementException) {
             null
         }
-
     }
 
-    fun changeBaseUserDataById(id: Long, changes: ChangeUserDataDto): Long? {
+    fun getUserByName(name: String): UserAccountDto? {
+        return try {
+            val userAccount = userAccountRepository.findByEmail(name)
+            UserAccountDto(userAccount!!)
+        } catch (e: NoSuchElementException) {
+            null
+        } catch (e: NullPointerException) {
+            null
+        }
+    }
+
+    @Transactional
+    fun changeBaseUserDataById(id: Long, changes: ChangeUserDataDto): UserAccountDto? {
         return try {
             val changing = userAccountRepository.findById(id).get()
             // Change base values
@@ -73,13 +86,14 @@ class UserAccountService(
                 UserAccountModified(UserAccountDto(changed))
             )
             logger.info("Changed base account info for ${changing.email}")
-            changing.id
+            UserAccountDto(changed)
         } catch (e: NoSuchElementException) {
             null
         }
     }
 
-    fun changeSecureUserDataById(id: Long, changes: ChangeUserDataDto): Long? {
+    @Transactional
+    fun changeSecureUserDataById(id: Long, changes: ChangeUserDataDto): UserAccountDto? {
         return try {
             val changing = userAccountRepository.findById(id).get()
             // Change secure values
@@ -91,12 +105,13 @@ class UserAccountService(
                 UserRightsUpdated(changed.role)
             )
             logger.warn("Changed secure account info of ${changing.email} to ${changing.role}")
-            changing.id
+            UserAccountDto(changed)
         } catch (e: NoSuchElementException) {
             null
         }
     }
 
+    @Transactional
     fun deleteAccountById(id: Long): Long {
         userAccountRepository.deleteById(id)
         applicationEventPublisher.publishEvent(UserAccountDeleted(id))
