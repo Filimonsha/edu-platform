@@ -19,6 +19,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 //  Spring web
     implementation("org.springframework.boot:spring-boot-starter-web:3.0.6")
+    implementation("org.springframework.boot:spring-boot-starter-websocket:3.1.1")
 //  Spring security
     implementation("org.springframework.boot:spring-boot-starter-security:3.0.6")
 //  Spring data jpa
@@ -42,12 +43,25 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4")
 //  Tests
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+//  Static html, to remove under development
+    implementation("org.webjars:webjars-locator-core")
+    implementation("org.webjars:sockjs-client:1.0.2")
+    implementation("org.webjars:stomp-websocket:2.3.3")
+    implementation("org.webjars:bootstrap:3.4.0")
+    implementation("org.webjars:jquery:3.5.0")
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs = listOf("-Xjsr305=strict")
         jvmTarget = "17"
+    }
+}
+
+sourceSets {
+    named("main") {
+        java.srcDir("src/main/kotlin")
     }
 }
 

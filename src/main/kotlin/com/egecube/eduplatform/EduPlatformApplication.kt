@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.CrossOrigin
 @SpringBootApplication
 @EnableConfigurationProperties(JwtConfiguration::class)
 @EnableMethodSecurity(securedEnabled = true)
-@CrossOrigin("*")
+//@EnableMethodSecurity(securedEnabled = true)
 class EduPlatformApplication
 
 fun main(args: Array<String>) {
