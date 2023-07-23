@@ -1,8 +1,8 @@
-package com.egecube.eduplatform.quizGame.activeGames.utils
+package com.egecube.eduplatform.quizGame.activeGames.internal.utils
 
-import com.egecube.eduplatform.quizGame.activeGames.GameRepository
-import com.egecube.eduplatform.quizGame.activeGames.domain.Game
-import com.egecube.eduplatform.quizGame.activeGames.dto.GameAnswer
+import com.egecube.eduplatform.quizGame.activeGames.internal.GameRepository
+import com.egecube.eduplatform.quizGame.activeGames.internal.domain.Game
+import com.egecube.eduplatform.quizGame.activeGames.internal.dto.GameAnswer
 import com.egecube.eduplatform.quizGame.websockets.PlayerNotifications
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service

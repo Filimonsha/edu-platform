@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.quizGame.activeGames.dto
+package com.egecube.eduplatform.quizGame.activeGames.internal.dto
 
 data class GameAnswer(
     val userId: Long,

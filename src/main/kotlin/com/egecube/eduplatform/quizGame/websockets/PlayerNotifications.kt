@@ -1,8 +1,8 @@
 package com.egecube.eduplatform.quizGame.websockets
 
 import com.egecube.eduplatform.common.websocketConfig.routes.QuizGameWs
-import com.egecube.eduplatform.quizGame.activeGames.domain.Game
-import com.egecube.eduplatform.quizGame.activeGames.dto.GameDto
+import com.egecube.eduplatform.quizGame.activeGames.internal.domain.Game
+import com.egecube.eduplatform.quizGame.activeGames.internal.dto.GameDto
 import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.stereotype.Service
 

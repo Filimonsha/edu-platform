@@ -1,7 +1,8 @@
-package com.egecube.eduplatform.quizGame.activeGames
+package com.egecube.eduplatform.quizGame.activeGames.internal
 
-import com.egecube.eduplatform.quizGame.activeGames.dto.GameDto
-import com.egecube.eduplatform.quizGame.activeGames.dto.QuizActionsDto
+import com.egecube.eduplatform.quizGame.activeGames.GameService
+import com.egecube.eduplatform.quizGame.activeGames.internal.dto.GameDto
+import com.egecube.eduplatform.quizGame.activeGames.internal.dto.QuizActionsDto
 import com.egecube.eduplatform.quizGame.consts.GamesRoutes
 import org.bson.types.ObjectId
 import org.springframework.web.bind.annotation.GetMapping

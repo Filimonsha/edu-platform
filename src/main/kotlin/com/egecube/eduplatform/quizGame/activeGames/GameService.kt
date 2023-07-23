@@ -2,11 +2,12 @@ package com.egecube.eduplatform.quizGame.activeGames
 
 import com.egecube.eduplatform.chatsManagement.chats.ChatsService
 import com.egecube.eduplatform.chatsManagement.chats.internal.dto.NewChatDto
-import com.egecube.eduplatform.quizGame.activeGames.actions.QuizActions
-import com.egecube.eduplatform.quizGame.activeGames.domain.Game
-import com.egecube.eduplatform.quizGame.activeGames.dto.QuizActionsDto
-import com.egecube.eduplatform.quizGame.activeGames.utils.FieldUtils
-import com.egecube.eduplatform.quizGame.activeGames.utils.GameActionsService
+import com.egecube.eduplatform.quizGame.activeGames.internal.GameRepository
+import com.egecube.eduplatform.quizGame.activeGames.internal.actions.QuizActions
+import com.egecube.eduplatform.quizGame.activeGames.internal.domain.Game
+import com.egecube.eduplatform.quizGame.activeGames.internal.dto.QuizActionsDto
+import com.egecube.eduplatform.quizGame.activeGames.internal.utils.FieldUtils
+import com.egecube.eduplatform.quizGame.activeGames.internal.utils.GameActionsService
 import com.egecube.eduplatform.quizGame.consts.QuizGameData
 import com.egecube.eduplatform.quizGame.websockets.PlayerNotifications
 import com.egecube.eduplatform.tasksManagement.TaskService

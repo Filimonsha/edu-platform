@@ -1,7 +1,7 @@
-package com.egecube.eduplatform.quizGame.activeGames.domain
+package com.egecube.eduplatform.quizGame.activeGames.internal.domain
 
 import com.egecube.eduplatform.tasksManagement.domain.SimpleTask
-import com.egecube.eduplatform.quizGame.activeGames.dto.GameAnswer
+import com.egecube.eduplatform.quizGame.activeGames.internal.dto.GameAnswer
 import jakarta.persistence.Id
 import org.bson.types.ObjectId
 import org.springframework.data.mongodb.core.mapping.Document
