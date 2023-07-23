@@ -9,14 +9,14 @@ import com.egecube.eduplatform.quizGame.activeGames.utils.FieldUtils
 import com.egecube.eduplatform.quizGame.activeGames.utils.GameActionsService
 import com.egecube.eduplatform.quizGame.consts.QuizGameData
 import com.egecube.eduplatform.quizGame.websockets.PlayerNotifications
-import com.egecube.eduplatform.tasksManagement.tasks.TaskService
+import com.egecube.eduplatform.tasksManagement.tasks.SimpleTaskService
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
 
 @Service
 class GameService(
     private val chatsService: ChatsService,
-    private val taskService: TaskService,
+    private val taskService: SimpleTaskService,
     private val gameRepository: GameRepository,
     private val notifications: PlayerNotifications,
     private val actionsService: GameActionsService,

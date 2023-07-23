@@ -1,10 +1,16 @@
 package com.egecube.eduplatform.tasksManagement.tasks
 
+import com.egecube.eduplatform.tasksManagement.tasks.consts.Tables
+import jakarta.persistence.Id
 import org.bson.types.ObjectId
+import org.springframework.data.mongodb.core.mapping.Document
 
+@Document(Tables.TASK_TABLE)
 data class SimpleTask(
-    val id: ObjectId = ObjectId(),
-    val desc: String = "Simple question",
-    val answers: ArrayList<String> = arrayListOf("Right", "Wrong"),
-    val rightAnswer: String = "Right"
+    @Id
+    val _id: ObjectId = ObjectId(),
+    val subjectId: Int,
+    val desc: String,
+    val answers: List<String> = emptyList(),
+    val rightAnswer: String
 )
