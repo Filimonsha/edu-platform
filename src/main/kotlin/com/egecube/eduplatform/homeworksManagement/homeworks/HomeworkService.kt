@@ -59,6 +59,10 @@ class HomeworkService(
     fun addTasksToHomework(homeworkId: String, dtoTasks: List<TaskRequestDTO>): Homework {
         val foundHomework = homeworkRepository.findById(homeworkId).orElseThrow()
 //            TODO Как проверять уникальность приритета ?
+        //        val priorityRepeats = dtoTasks.associateBy{it.priority}
+//            priorityRepeats.
+//            .filter{it. .values.size > 1}
+
         val distinctTasks = dtoTasks.map {
             Task(
                 null,
@@ -70,8 +74,9 @@ class HomeworkService(
             )
         }.distinctBy { it.priority }
 
-        distinctTasks.map { task: Task -> taskRepository.save(task) }
-        foundHomework.tasks.plusAssign(distinctTasks.sortedBy { it.priority })
+
+        val savedTasks = distinctTasks.map { task: Task -> taskRepository.save(task) }
+        foundHomework.tasks.plusAssign(savedTasks.sortedBy { it.priority })
 
 
 //        return

@@ -8,7 +8,6 @@ import com.egecube.eduplatform.homeworksManagement.homeworks.internal.domain.Hom
 import com.egecube.eduplatform.homeworksManagement.solvers.dto.HomeworkAnswerPutRequestDTO
 import com.egecube.eduplatform.homeworksManagement.solvers.iternal.SolverRepository
 import com.egecube.eduplatform.homeworksManagement.solvers.iternal.domain.Solver
-import com.egecube.eduplatform.homeworksManagement.tasks.internal.domain.Task
 import com.egecube.eduplatform.homeworksManagement.tasks.internal.domain.TaskAnswer
 import com.egecube.eduplatform.subjectsManagement.events.ParticipantRegistered
 import com.egecube.eduplatform.subjectsManagement.subjects.SubjectService
@@ -43,7 +42,7 @@ class SolverService(
         val homeworkAnswer = HomeworkAnswer(
             null,
             homeworkId,
-            foundSolver._id?: throw Exception("Id yе определен"),
+            foundSolver._id ?: throw Exception("Id yе определен"),
             tasksAnswer
         )
         val homework = homeworkRepository.findById(homeworkAnswer.homeworkId).orElseThrow()
@@ -52,11 +51,10 @@ class SolverService(
         homework.tasks.size != homeworkAnswer.answers.size && throw Exception("Ne sovpadaet dlina )")
         homeworkAnswer.answers.forEach { taskAnswer: TaskAnswer ->
 //            TODO добавить кастомный эксепшен на не соотвествие инутых тасок к существующей домашки
-            homework.tasks.none { existingTasks: Task ->
-                println(existingTasks._id)
-                println(taskAnswer.taskId)
-                existingTasks._id == taskAnswer.taskId
-            } && throw Exception("Not found tasks with that id")
+            val notFoundIds = homework.tasks.map { it._id } - homeworkAnswer.answers.map { it.taskId }.distinct()
+            if (notFoundIds.isNotEmpty()) {
+                throw Exception("Not found task ids: ${notFoundIds.joinToString()}")
+            }
         }
         homework.answers.add(savedHomeworkAnswer._id!!)
         homeworkRepository.save(homework)
@@ -65,21 +63,15 @@ class SolverService(
 
     //    @Secured("TEACHER")
     fun addEvaluateOnHomeworkAnswer(
-//        solverId: Long,
-//        homeworkId: String,
         answerId: String,
         homeworkAnswerPutRequestDTO: HomeworkAnswerPutRequestDTO
     ) {
-//        val foundSolver = solverRepository.findBy_id(solverId.toString()).orElseThrow()
-//
-//        val foundHomework = homeworkRepository.getBy_id(homeworkId).orElseThrow()
         val foundHomeworkAnswer = homeworkAnswerRepository.findBy_id(answerId).orElseThrow()
 
 //        TODO сделать проверку на то , чтоб оценку можно было дать только расширенному заданию
         foundHomeworkAnswer.evaluate = homeworkAnswerPutRequestDTO.evaluate
         foundHomeworkAnswer.answers.forEach { taskAnswer -> println(taskAnswer.taskAnswer.answer::class.java) }
 
-//        foundHomeworkAnswer.answers =
         val answersMap = foundHomeworkAnswer.answers.associateBy { it.taskId }.toMutableMap()
         homeworkAnswerPutRequestDTO.tasksAnswer.forEach { taskAnswer ->
             val taskAnswer1 = answersMap[taskAnswer.taskId] ?: throw Exception("Такого задания нет")
@@ -91,9 +83,9 @@ class SolverService(
         homeworkAnswerRepository.save(foundHomeworkAnswer)
     }
 
-    fun getAllSolverHomeworksAnswers( solverId: Long): List<HomeworkAnswer> {
+    fun getAllSolverHomeworksAnswers(solverId: Long): List<HomeworkAnswer> {
         val foundSolver = solverRepository.findBy_id(solverId).orElseThrow()
-        return homeworkAnswerRepository.findAllBySolverId(foundSolver._id?: throw Exception("Id yе определен"))
+        return homeworkAnswerRepository.findAllBySolverId(foundSolver._id ?: throw Exception("Id yе определен"))
     }
 
 
