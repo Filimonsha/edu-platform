@@ -1,11 +1,7 @@
 package com.egecube.eduplatform.lecturesManagement.lectures.internal
 
 import com.egecube.eduplatform.lecturesManagement.listeners.internal.Listener
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import jakarta.persistence.ManyToMany
+import jakarta.persistence.*
 import java.time.ZonedDateTime
 
 @Entity
