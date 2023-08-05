@@ -1,6 +1,5 @@
 package com.egecube.eduplatform.tasksManagement
 
-import com.egecube.eduplatform.tasksManagement.internal.TaskRepository
 import org.springframework.stereotype.Service
 
 

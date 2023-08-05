@@ -1,5 +1,6 @@
 package com.egecube.eduplatform._security_.accounts.domain
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import jakarta.persistence.*
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -15,6 +16,7 @@ open class UserAccount(
     open var lastName: String,
     open var email: String,
     open var phone: String?,
+    @JsonIgnore
     open var passWord: String,
     open var accountSuspended: Boolean = false,
     @Enumerated(EnumType.STRING)
