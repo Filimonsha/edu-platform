@@ -53,8 +53,11 @@ jobs:
     - name: Release
       uses: softprops/action-gh-release@v1
       with:
+        name: Release ${{ needs.init.outputs.new_tag }}
         tag_name: ${{ needs.init.outputs.new_tag }}
+        body: ${{ needs.init.outputs.changelog }}
         files: ./build/libs/*.jar
+        generate_release_notes: true
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
@@ -76,18 +79,3 @@ jobs:
         docker tag ${IMAGE_NAME} ${IMAGE_ID}:${VERSION}
         docker tag ${IMAGE_NAME} ${IMAGE_ID}:latest
         docker push ${IMAGE_ID}:${VERSION}
-
-  release:
-    name: release
-    runs-on: ubuntu-latest
-    needs: [ init, build ]
-    steps:
-      - uses: actions/checkout@v3
-        name: Checkout
-      - name: Create a GitHub release
-        uses: ncipollo/release-action@v1
-        with:
-          tag: ${{ needs.init.outputs.new_tag }}
-          name: Release ${{ needs.init.outputs.new_tag }}
-          body: ${{ needs.init.outputs.changelog }}
-          generateReleaseNotes: true
