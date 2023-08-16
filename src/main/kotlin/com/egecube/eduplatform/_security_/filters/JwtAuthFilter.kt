@@ -33,6 +33,7 @@ class JwtAuthFilter(
             if (SecurityContextHolder.getContext().authentication == null) {
                 // Update auth context for filters
                 if (jwtService.isTokenValid(jwt, userMail!!)) {
+//                    val userId = jwtService.ex
                     val auth = UsernamePasswordAuthenticationToken(
                         userMail,
 //                        "def_user", // username

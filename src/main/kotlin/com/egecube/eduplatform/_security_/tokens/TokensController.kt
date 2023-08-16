@@ -1,5 +1,6 @@
 package com.egecube.eduplatform._security_.tokens
 
+import com.egecube.eduplatform._security_.accounts.domain.UserAccount
 import com.egecube.eduplatform._security_.jwt_utils.JwtService
 import com.egecube.eduplatform._security_.tokens.consts.TokensRoutes
 import com.egecube.eduplatform._security_.tokens.dto.AuthResponse
@@ -19,19 +20,23 @@ class TokensController(
 ) {
 
 
-    @PostMapping(TokensRoutes.TOKENS)
+    @PostMapping(TokensRoutes.REF_TOKENS)
     fun authenticateUser(
         @RequestBody request: LoginRequest
     ): ResponseEntity<AuthResponse> {
         return try {
-            authenticationManager.authenticate(
+            val authAction = authenticationManager.authenticate(
                 UsernamePasswordAuthenticationToken(
                     request.userMail,
                     request.password
                 )
             )
-            val jwtToken = jwtService.generateToken(request.userMail)
-            ResponseEntity.ok().body(AuthResponse(jwtToken))
+            val auth = authAction.principal as UserAccount
+            val accessToken = jwtService.generateAccessToken(auth.email, auth.id, auth.role)
+            val refreshToken = jwtService.generateRefreshToken(auth.email, auth.id, auth.role)
+            // clear refresh tokens for user and add one
+
+            ResponseEntity.ok().body(AuthResponse(accessToken, refreshToken))
         } catch (e: AuthenticationException) {
             ResponseEntity.badRequest().build()
         } catch (e: NoSuchElementException) {
