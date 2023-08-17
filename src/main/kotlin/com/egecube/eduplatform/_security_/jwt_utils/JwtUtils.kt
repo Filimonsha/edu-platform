@@ -45,7 +45,7 @@ class JwtUtils(
             .compact()
     }
 
-    private fun extractAllClaims(token: String): Claims =
+    fun extractAllClaims(token: String): Claims =
         Jwts.parserBuilder()
             .setSigningKey(signKey)
             .build()

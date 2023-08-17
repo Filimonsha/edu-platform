@@ -57,6 +57,7 @@ class JwtService(
         token, Claims::getSubject
     )
 
-
-//...
+    fun extractClaim(token: String, claim: String): String? = jwtUtils
+        .extractAllClaims(token)[claim]
+        .toString()
 }

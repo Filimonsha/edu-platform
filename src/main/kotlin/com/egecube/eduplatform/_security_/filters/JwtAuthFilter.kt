@@ -1,9 +1,7 @@
 package com.egecube.eduplatform._security_.filters
 
-//import com.egecube.eduplatform._security_.access_rights_utils.AccessRightsService
-//import com.egecube.eduplatform._security_.jwt_utils.JwtService
+
 import com.egecube.eduplatform._security_.access_rights_utils.AccessRightsService
-import com.egecube.eduplatform._security_.accounts.domain.UserRole
 import com.egecube.eduplatform._security_.jwt_utils.JwtService
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
@@ -26,19 +24,22 @@ class JwtAuthFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        // NO SECURITY FOR DEV MAIN BRANCH
+        println("filtering for access")
         try {
-            val jwt = accessRightsService.extractJwtIfPresentInRequest(request)
-            val userMail = jwtService.extractUserMail(jwt!!)
+            val jwt = accessRightsService.extractJwtIfPresentInRequest(request)!!
+            val userMail = jwtService.extractUserMail(jwt)
             if (SecurityContextHolder.getContext().authentication == null) {
                 // Update auth context for filters
-                if (jwtService.isTokenValid(jwt, userMail!!)) {
-//                    val userId = jwtService.ex
+                if (
+                    jwtService.isTokenValid(jwt, userMail!!) &&
+                    jwtService.extractClaim(jwt, "type") == "access"
+                    ) {
                     val auth = UsernamePasswordAuthenticationToken(
                         userMail,
-//                        "def_user", // username
-                        1, // get id from db if not authenticated
-                        arrayListOf(SimpleGrantedAuthority(UserRole.ADMIN.name))
+                        jwtService.extractClaim(jwt, "userId"), // get id from db if not authenticated
+                        arrayListOf(SimpleGrantedAuthority(
+                            jwtService.extractClaim(jwt, "userRights")
+                        ))
                     )
                     auth.details = WebAuthenticationDetailsSource().buildDetails(request)
                     SecurityContextHolder.getContext().authentication = auth
