@@ -11,12 +11,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.*
 
@@ -25,34 +23,6 @@ class UserAccountController(
     private val userService: UserAccountService,
     private val accessRightsService: AccessRightsService
 ) {
-    // Open endpoint
-    @Operation(summary = "Get account info, searching in the repo by unique name (mail)")
-    @GetMapping(UserAccountRoutes.ACCOUNTS)
-    fun getAccountInfoByName(
-        @RequestParam("name") name: String
-    ): ResponseEntity<UserAccountDto> {
-        val userInfo = userService.getUserByName(name)
-        return if (userInfo != null) {
-            ResponseEntity.ok().body(userInfo)
-        } else {
-            ResponseEntity.notFound().build()
-        }
-    }
-
-    // Open endpoint
-    @Operation(summary = "Get account info by id")
-    @GetMapping(UserAccountRoutes.ACCOUNT)
-    fun getAccountInfoById(
-        @PathVariable("id") userId: Long
-    ): ResponseEntity<UserAccountDto> {
-        val userInfo = userService.getUserById(userId)
-        return if (userInfo != null) {
-            ResponseEntity.ok().body(userInfo)
-        } else {
-            ResponseEntity.notFound().build()
-        }
-    }
-
     // Open endpoint
     @Operation(summary = "Request for creating new user account, back validation")
     @ApiResponses(value = [
