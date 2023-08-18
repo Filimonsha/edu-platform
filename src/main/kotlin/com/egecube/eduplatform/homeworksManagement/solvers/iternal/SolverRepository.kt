@@ -6,4 +6,5 @@ import java.util.*
 
 interface SolverRepository : MongoRepository<Solver, Long> {
     fun findBy_id(_id: Long): Optional<Solver>
+
 }

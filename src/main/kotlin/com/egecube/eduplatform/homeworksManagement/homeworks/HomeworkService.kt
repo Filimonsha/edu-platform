@@ -28,6 +28,11 @@ class HomeworkService(
         return homeworkRepository.findAllByCreatorId(creatorId)
     }
 
+    fun getAllHomeworksBySolverId(solverId: Long): List<Homework> {
+        val solver = solverRepository.findBy_id(solverId).orElseThrow()
+        return solver.homeworks.map { homeworkId -> homeworkRepository.findBy_id(homeworkId).orElseThrow() }
+    }
+
     fun createHomework(homeworkRequestDto: HomeworkRequestDto): Homework {
         val (title, subjectId, creatorId, description, deadline, solversIds) = homeworkRequestDto
         val foundSubject = subjectService.getById(subjectId)
@@ -70,6 +75,7 @@ class HomeworkService(
                 it.title,
                 it.description,
                 it.priority,
+                it.answerVariants,
                 it.correctAnswer,
             )
         }.distinctBy { it.priority }

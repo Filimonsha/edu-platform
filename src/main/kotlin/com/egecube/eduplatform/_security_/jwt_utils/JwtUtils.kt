@@ -17,7 +17,7 @@ class JwtUtils(
     private val jwtConfig: JwtConfiguration
 ) {
     private val logger = LoggerFactory.getLogger(this::class.java)
-    private val signAlgorithm = SignatureAlgorithm.HS256
+    private val signAlgorithm = SignatureAlgorithm.HS512
 
     private lateinit var secretKey: String
     private lateinit var signKey: SecretKey
