@@ -35,7 +35,7 @@ class FilterConfig(
             .csrf()
             .disable()
             .authorizeHttpRequests()
-            .requestMatchers("${BaseRoute.BASE_ROUTE}/**")
+            .requestMatchers("${BaseRoute.BASE_ROUTE}/**", "/swagger-ui/**")
             .permitAll()
             .anyRequest()
             .authenticated()

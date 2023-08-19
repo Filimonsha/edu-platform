@@ -3,6 +3,7 @@ package com.egecube.eduplatform._security_.tokens
 import com.egecube.eduplatform._security_.access_rights_utils.AccessRightsService
 import com.egecube.eduplatform._security_.accounts.domain.UserAccount
 import com.egecube.eduplatform._security_.accounts.domain.UserRole
+import com.egecube.eduplatform._security_.accounts.dto.UserAccountDto
 import com.egecube.eduplatform._security_.jwt_utils.JwtService
 import com.egecube.eduplatform._security_.tokens.consts.TokensRoutes
 import com.egecube.eduplatform._security_.tokens.dto.AuthResponse
@@ -41,7 +42,7 @@ class TokensController(
             val refreshToken = tokensService.giveOutNewRefreshForUser(auth)
             // clear refresh tokens for user and add one
 
-            ResponseEntity.ok().body(AuthResponse(accessToken, refreshToken))
+            ResponseEntity.ok().body(AuthResponse(accessToken, refreshToken, UserAccountDto(auth)))
         } catch (e: AuthenticationException) {
             ResponseEntity.badRequest().build()
         } catch (e: NoSuchElementException) {
