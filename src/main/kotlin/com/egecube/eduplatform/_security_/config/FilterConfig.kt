@@ -53,8 +53,10 @@ class FilterConfig(
         val config = CorsConfiguration()
         config.allowedOrigins = ImmutableList.of("http://localhost:3000")
         config.allowCredentials = true
-        config.allowedMethods = ImmutableList.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH")
-        config.allowedHeaders = ImmutableList.of("Authorization", "Cache-Control", "Content-Type")
+//        config.allowedMethods = ImmutableList.of("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH")
+        config.allowedMethods = ImmutableList.of("*")
+//        config.allowedHeaders = ImmutableList.of("Authorization", "Cache-Control", "Content-Type")
+        config.allowedHeaders = ImmutableList.of("*")
         val source = UrlBasedCorsConfigurationSource()
         source.registerCorsConfiguration("/**", config)
         return source
