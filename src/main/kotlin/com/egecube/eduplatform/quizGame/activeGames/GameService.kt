@@ -1,22 +1,23 @@
 package com.egecube.eduplatform.quizGame.activeGames
 
 import com.egecube.eduplatform.chatsManagement.chats.ChatsService
-import com.egecube.eduplatform.chatsManagement.chats.NewChatDto
-import com.egecube.eduplatform.quizGame.activeGames.actions.QuizActions
-import com.egecube.eduplatform.quizGame.activeGames.domain.Game
-import com.egecube.eduplatform.quizGame.activeGames.dto.QuizActionsDto
-import com.egecube.eduplatform.quizGame.activeGames.utils.FieldUtils
-import com.egecube.eduplatform.quizGame.activeGames.utils.GameActionsService
+import com.egecube.eduplatform.chatsManagement.chats.internal.dto.NewChatDto
+import com.egecube.eduplatform.quizGame.activeGames.internal.GameRepository
+import com.egecube.eduplatform.quizGame.activeGames.internal.actions.QuizActions
+import com.egecube.eduplatform.quizGame.activeGames.internal.domain.Game
+import com.egecube.eduplatform.quizGame.activeGames.internal.dto.QuizActionsDto
+import com.egecube.eduplatform.quizGame.activeGames.internal.utils.FieldUtils
+import com.egecube.eduplatform.quizGame.activeGames.internal.utils.GameActionsService
 import com.egecube.eduplatform.quizGame.consts.QuizGameData
 import com.egecube.eduplatform.quizGame.websockets.PlayerNotifications
-import com.egecube.eduplatform.tasksManagement.tasks.SimpleTaskService
+import com.egecube.eduplatform.tasksManagement.TaskService
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
 
 @Service
 class GameService(
     private val chatsService: ChatsService,
-    private val taskService: SimpleTaskService,
+    private val taskService: TaskService,
     private val gameRepository: GameRepository,
     private val notifications: PlayerNotifications,
     private val actionsService: GameActionsService,
@@ -28,7 +29,7 @@ class GameService(
             NewChatDto("Chat for game $roomId")
         )
         val tasksSet = taskService.getNumberOfSimpleTasks(QuizGameData.Q_ELEMENTS)
-        val taskFields = fieldUtils.makeEmptyFieldWithElements(QuizGameData.Q_ELEMENTS, tasksSet.map { it._id.toHexString() })
+        val taskFields = fieldUtils.makeEmptyFieldWithElements(QuizGameData.Q_ELEMENTS, tasksSet.map { it.id.toHexString() })
 
         val newGame = Game(
             appendedChatId = newChat!!,

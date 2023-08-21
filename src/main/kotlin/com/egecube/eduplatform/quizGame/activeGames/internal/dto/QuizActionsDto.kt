@@ -1,6 +1,6 @@
-package com.egecube.eduplatform.quizGame.activeGames.dto
+package com.egecube.eduplatform.quizGame.activeGames.internal.dto
 
-import com.egecube.eduplatform.quizGame.activeGames.actions.QuizActions
+import com.egecube.eduplatform.quizGame.activeGames.internal.actions.QuizActions
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
 

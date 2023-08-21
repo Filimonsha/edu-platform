@@ -1,6 +1,6 @@
-package com.egecube.eduplatform.quizGame.activeGames.utils
+package com.egecube.eduplatform.quizGame.activeGames.internal.utils
 
-import com.egecube.eduplatform.quizGame.activeGames.domain.Game
+import com.egecube.eduplatform.quizGame.activeGames.internal.domain.Game
 import org.springframework.stereotype.Service
 import kotlin.math.floor
 import kotlin.math.sqrt

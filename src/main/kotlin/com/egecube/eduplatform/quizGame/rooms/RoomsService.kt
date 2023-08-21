@@ -1,9 +1,9 @@
 package com.egecube.eduplatform.quizGame.rooms
 
 import com.egecube.eduplatform.quizGame.activeGames.GameService
-import com.egecube.eduplatform.quizGame.activeGames.domain.Game
+import com.egecube.eduplatform.quizGame.activeGames.internal.domain.Game
 import com.egecube.eduplatform.quizGame.consts.QuizGameData
-import com.egecube.eduplatform.quizGame.rooms.domain.PlayerInRoom
+import com.egecube.eduplatform.quizGame.rooms.internal.domain.PlayerInRoom
 import com.egecube.eduplatform.quizGame.websockets.PlayerNotifications
 import org.springframework.stereotype.Service
 
