@@ -1,7 +1,7 @@
 package com.egecube.eduplatform.homeworksManagement.tasks.dto
 
-import com.egecube.eduplatform.homeworksManagement.tasks.internal.domain.Task
-import com.egecube.eduplatform.homeworksManagement.tasks.internal.domain.TaskAnswerType
+import com.egecube.eduplatform.homeworksManagement.tasks.domain.Task
+import com.egecube.eduplatform.homeworksManagement.tasks.domain.TaskAnswerType
 import io.swagger.v3.oas.annotations.media.Schema
 import java.io.Serializable
 
@@ -19,6 +19,7 @@ data class TaskRequestDTO(
     )
     val priority: Long,
 
+    val answerVariants: List<TaskAnswerType.TaskVariant>,
     @Schema(
         name = "Правильный овет на задание",
         description = "Тип задания указывается одной из следующих констант:TEXT_INPUT,SINGLE_CHOICE,MULTIPLE_ANSWER, ANSWER_WITH_ATTACHMENT"

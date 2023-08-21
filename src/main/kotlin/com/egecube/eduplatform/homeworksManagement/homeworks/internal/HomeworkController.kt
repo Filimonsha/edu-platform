@@ -29,9 +29,16 @@ class HomeworkController(
 
     @GetMapping(HomeworksRoute.HOMEWORKS)
     @Operation(summary = "Получение всех ДЗ по создателю")
-    fun getAllHomeworks(@RequestParam creatorId: String): List<Homework> {
+    fun getAllHomeworksByCreator(@RequestParam creatorId: String): List<Homework> {
         return homeworkService.getAllHomeworksByCreatorId(creatorId)
     }
+
+//    TODO
+//    @GetMapping(HomeworksRoute.HOMEWORKS)
+//    @Operation(summary = "Получение всех ДЗ по решателю")
+//    fun getAllHomeworksBySolver(@RequestParam solverId: Long): List<Homework> {
+//        return homeworkService.getAllHomeworksBySolverId(solverId)
+//    }
 
     @PostMapping(HomeworksRoute.HOMEWORKS)
     @Operation(summary = "Создание ДЗ для групп")

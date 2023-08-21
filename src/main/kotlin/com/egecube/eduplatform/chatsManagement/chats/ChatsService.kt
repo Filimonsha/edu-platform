@@ -1,7 +1,6 @@
 package com.egecube.eduplatform.chatsManagement.chats
 
 import com.egecube.eduplatform.chatsManagement.chats.internal.domain.Chat
-import com.egecube.eduplatform.chatsManagement.chats.internal.dto.NewChatDto
 import com.egecube.eduplatform.chatsManagement.chats.internal.ChatsRepository
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
