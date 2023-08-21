@@ -20,7 +20,7 @@ class SubjectController(
 
     @GetMapping(SubjectsRoutes.SUBJECT)
     fun getSubjectById(@PathVariable(value = "subjectId") subjectId: Long): SubjectResponseDto {
-        return mapSubjectToResponse(subjectService.getById(subjectId).orElseThrow())
+        return mapSubjectToResponse(subjectService.getById(subjectId))
     }
 
 

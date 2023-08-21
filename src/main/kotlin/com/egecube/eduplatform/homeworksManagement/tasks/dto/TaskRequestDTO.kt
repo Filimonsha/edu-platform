@@ -8,7 +8,6 @@ import java.io.Serializable
 /**
  * A DTO for the [Task] entity
  */
-
 @Schema(name = "Прикрепление задачи к ДЗ")
 data class TaskRequestDTO(
     @Schema(description = "По умолчанию необходимо брать из индекса задания")
@@ -20,6 +19,7 @@ data class TaskRequestDTO(
     )
     val priority: Long,
 
+    val answerVariants: List<TaskAnswerType.TaskVariant>,
     @Schema(
         name = "Правильный овет на задание",
         description = "Тип задания указывается одной из следующих констант:TEXT_INPUT,SINGLE_CHOICE,MULTIPLE_ANSWER, ANSWER_WITH_ATTACHMENT"

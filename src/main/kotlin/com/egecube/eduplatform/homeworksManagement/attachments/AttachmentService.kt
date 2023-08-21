@@ -12,8 +12,7 @@ import org.springframework.web.multipart.MultipartFile
 class AttachmentService(
     private val attachmentRepository: AttachmentRepository
 ) {
-    fun loadAttachment(title: String, file: MultipartFile): Attachment {
-        print(file.bytes.toString())
+    fun saveAttachment(title: String, file: MultipartFile): Attachment {
         val attachment = Attachment(
             title,
             Binary(

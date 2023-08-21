@@ -1,7 +1,7 @@
 package com.egecube.eduplatform.homeworksManagement.homeworks.internal.routes
 
 object HomeworksRoute {
-    private const val BASE_ROUTE = "/api/homewroks-management"
+    private const val BASE_ROUTE = "/api/homeworks-management"
     const val HOMEWORKS = "$BASE_ROUTE/homeworks"
     const val HOMEWORK = "$BASE_ROUTE/homeworks/{homeworkId}"
 

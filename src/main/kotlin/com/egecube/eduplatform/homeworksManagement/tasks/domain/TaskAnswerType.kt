@@ -5,10 +5,17 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo
 
 
 sealed class TaskAnswerType {
+
     class TaskUserAnswer(
         val answerIsCorrect: Boolean,
         val answer: TaskRightAnswer
     ) : TaskAnswerType()
+
+    class TaskVariant(
+        val order: Number,
+        //    TODO сделать разные типы
+        val answer: String
+    )
 
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
     @JsonSubTypes(

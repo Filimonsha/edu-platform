@@ -10,6 +10,9 @@ import java.time.ZonedDateTime
 
 data class HomeworkRequestDto(
     val title: String,
+    val subjectId:Long,
+    val creatorId: String,
     val description: String,
     val deadline: ZonedDateTime,
+    val solversIds: List<Long>
 ) : Serializable

@@ -16,16 +16,9 @@ class AttachmentFileService(
     private val gridFsTemplate: GridFsTemplate,
     private val gridFsOperations: GridFsOperations
 ) {
-    fun loadFile(multipartFile: MultipartFile): ObjectId {
-//        val basicDBObject = BasicDBObject()
-//        basicDBObject.put("fileSize")
-//        metadata.put("fileSize", upload.getSize());
+    fun saveFile(multipartFile: MultipartFile): ObjectId {
 
-        //store in database which returns the objectID
-
-        val objectId = gridFsTemplate.store(multipartFile.inputStream, multipartFile.name, multipartFile.contentType)
-        //return as a string
-        return objectId
+        return gridFsTemplate.store(multipartFile.inputStream, multipartFile.name, multipartFile.contentType)
     }
 
     fun getFile(fileId:String):AttachmentFile{

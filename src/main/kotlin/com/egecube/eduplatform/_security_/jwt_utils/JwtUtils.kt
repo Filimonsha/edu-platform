@@ -17,7 +17,7 @@ class JwtUtils(
     private val jwtConfig: JwtConfiguration
 ) {
     private val logger = LoggerFactory.getLogger(this::class.java)
-    private val signAlgorithm = SignatureAlgorithm.HS256
+    private val signAlgorithm = SignatureAlgorithm.HS512
 
     private lateinit var secretKey: String
     private lateinit var signKey: SecretKey
@@ -31,10 +31,10 @@ class JwtUtils(
     fun buildToken(
         claims: Map<String, Any>,
         userMail: String,
-        expiredHours: Int
+        expiredMinutes: Int
     ): String {
         val issuedAt: Long = System.currentTimeMillis()
-        val expiredAt = issuedAt + expiredHours * 60 * 60 * 1000
+        val expiredAt = issuedAt + expiredMinutes * 60 * 1000
         logger.trace("Building token for user $userMail")
         return Jwts.builder()
             .setClaims(claims)
@@ -45,7 +45,7 @@ class JwtUtils(
             .compact()
     }
 
-    private fun extractAllClaims(token: String): Claims =
+    fun extractAllClaims(token: String): Claims =
         Jwts.parserBuilder()
             .setSigningKey(signKey)
             .build()

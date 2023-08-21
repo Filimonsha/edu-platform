@@ -15,6 +15,7 @@ open class Task(
     val title: String,
     val description: String,
     val priority: Long,
+    val answerVariants: List<TaskAnswerType.TaskVariant>,
     val correctAnswer: TaskAnswerType.TaskRightAnswer,
 //    val attachments: List<Attachment>,
 )
