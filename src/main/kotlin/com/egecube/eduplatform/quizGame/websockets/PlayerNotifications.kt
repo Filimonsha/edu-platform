@@ -1,10 +1,8 @@
 package com.egecube.eduplatform.quizGame.websockets
 
 import com.egecube.eduplatform.common.websocketConfig.routes.QuizGameWs
-import com.egecube.eduplatform.quizGame.active_games.domain.Game
-import com.egecube.eduplatform.quizGame.active_games.dto.GameDto
-import com.egecube.eduplatform.quizGame.websockets.dto.RoomPlayers
-import org.bson.types.ObjectId
+import com.egecube.eduplatform.quizGame.activeGames.domain.Game
+import com.egecube.eduplatform.quizGame.activeGames.dto.GameDto
 import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.stereotype.Service
 
@@ -17,8 +15,6 @@ class PlayerNotifications(
             "${QuizGameWs.GAME_ENDPOINT}/rooms/${game.roomId}",
             game
         )
-        println("notifying of users")
-
     }
 
     fun notifyOfGameState(game: Game) {
@@ -26,7 +22,6 @@ class PlayerNotifications(
             "${QuizGameWs.GAME_ENDPOINT}/${game._id.toHexString()}",
             GameDto(game)
         )
-        println("notifying of game")
     }
 
 }

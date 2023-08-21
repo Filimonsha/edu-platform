@@ -1,6 +1,6 @@
 package com.egecube.eduplatform.homeworksManagement.internal.domain
 
-import com.egecube.eduplatform.homeworksManagement.tasks.internal.domain.TaskAnswerType
+import com.egecube.eduplatform.homeworksManagement.tasks.domain.TaskAnswerType
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
