@@ -41,7 +41,7 @@ class GameActionsService(
         val gameStat = gameRepository.findById(gameId).orElseThrow()
         var answerIsCorrect = false
 
-        val taskInfo = gameStat.tasksSet.find { it.id.toHexString() == answer.simpleTaskId }
+        val taskInfo = gameStat.tasksSet.find { it._id.toHexString() == answer.simpleTaskId }
         val neededField = Pair(answer.simpleTaskId, false)
 
         val row = gameStat.gameField.indexOfFirst { it.contains(neededField) }
