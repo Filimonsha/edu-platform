@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.homeworksManagement.tasks.domain
+package com.egecube.eduplatform.homeworksManagement.tasks.internal.domain
 
 import com.egecube.eduplatform.homeworksManagement.homeworks.internal.domain.Evaluate
 

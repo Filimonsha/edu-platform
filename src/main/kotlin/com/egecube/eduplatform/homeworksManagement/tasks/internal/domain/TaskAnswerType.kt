@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.homeworksManagement.tasks.domain
+package com.egecube.eduplatform.homeworksManagement.tasks.internal.domain
 
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo

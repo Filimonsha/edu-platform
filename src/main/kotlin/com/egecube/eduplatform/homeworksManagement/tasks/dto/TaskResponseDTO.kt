@@ -1,7 +1,7 @@
 package com.egecube.eduplatform.homeworksManagement.tasks.dto
 
-import com.egecube.eduplatform.homeworksManagement.tasks.domain.Task
-import com.egecube.eduplatform.homeworksManagement.tasks.domain.TaskAnswerType
+import com.egecube.eduplatform.homeworksManagement.tasks.internal.domain.Task
+import com.egecube.eduplatform.homeworksManagement.tasks.internal.domain.TaskAnswerType
 import java.io.Serializable
 
 /**

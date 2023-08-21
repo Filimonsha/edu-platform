@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.homeworksManagement.tasks.domain
+package com.egecube.eduplatform.homeworksManagement.tasks.internal.domain
 
 import jakarta.persistence.Id
 import net.minidev.json.annotate.JsonIgnore

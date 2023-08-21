@@ -1,8 +1,7 @@
 package com.egecube.eduplatform.homeworksManagement.internal.domain
 
-import com.egecube.eduplatform.homeworksManagement.tasks.domain.TaskAnswerType
+import com.egecube.eduplatform.homeworksManagement.tasks.internal.domain.TaskAnswerType
 import com.fasterxml.jackson.databind.ObjectMapper
-import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 internal class TaskAnswerTypeTest {
@@ -19,7 +18,7 @@ internal class TaskAnswerTypeTest {
     fun a () {
         val objectMapper = ObjectMapper()
 
-        val jsonString =  """{"type":"text","answer":"dsda"}""";
+        val jsonString =  """{"type":"text","answer":"dsda"}"""
 
 val res =         objectMapper.readValue(jsonString.toByteArray(), TaskAnswerType.TaskRightAnswer::class.java)
         println(res)

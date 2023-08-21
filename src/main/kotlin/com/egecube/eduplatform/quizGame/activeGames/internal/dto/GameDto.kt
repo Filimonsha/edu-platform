@@ -1,7 +1,7 @@
 package com.egecube.eduplatform.quizGame.activeGames.internal.dto
 
 import com.egecube.eduplatform.quizGame.activeGames.internal.domain.Game
-import com.egecube.eduplatform.tasksManagement.dto.SimpleTaskDto
+import com.egecube.eduplatform.tasksManagement.tasks.SimpleTaskDto
 
 data class GameDto(
     val id: String,

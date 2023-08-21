@@ -1,6 +1,6 @@
 package com.egecube.eduplatform.homeworksManagement.homeworks.internal.domain
 
-import com.egecube.eduplatform.homeworksManagement.tasks.domain.Task
+import com.egecube.eduplatform.homeworksManagement.tasks.internal.domain.Task
 import jakarta.persistence.Id
 import net.minidev.json.annotate.JsonIgnore
 import org.bson.types.ObjectId
