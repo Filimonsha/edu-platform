@@ -1,4 +1,4 @@
-package com.egecube.eduplatform.homeworksManagement.tasks.domain
+package com.egecube.eduplatform.homeworksManagement.tasks.internal.domain
 
 //enum class TaskType(
 //    //private val str: String
