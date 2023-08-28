@@ -11,6 +11,7 @@ class LectureController(
 ) {
     @GetMapping(LecturesRoutes.LECTURES)
     fun getLectures() {
+        println("giving lectures")
 //        TODO
     }
 

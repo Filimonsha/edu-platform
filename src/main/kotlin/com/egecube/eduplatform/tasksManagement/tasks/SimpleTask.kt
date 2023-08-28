@@ -10,6 +10,7 @@ data class SimpleTask(
     @Id
     val _id: ObjectId = ObjectId(),
     val subjectId: Int,
+    val taskNum: Int,
     val desc: String,
     val answers: List<String> = emptyList(),
     val rightAnswer: String

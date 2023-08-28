@@ -24,16 +24,17 @@ class JwtAuthFilter(
         response: HttpServletResponse,
         filterChain: FilterChain
     ) {
-        println("filtering for access")
         try {
             val jwt = accessRightsService.extractJwtIfPresentInRequest(request)!!
             val userMail = jwtService.extractUserMail(jwt)
+            println("filtering req from $userMail")
             if (SecurityContextHolder.getContext().authentication == null) {
                 // Update auth context for filters
                 if (
                     jwtService.isTokenValid(jwt, userMail!!) &&
                     jwtService.extractClaim(jwt, "type") == "access"
                     ) {
+                    println("passed")
                     val auth = UsernamePasswordAuthenticationToken(
                         userMail,
                         jwtService.extractClaim(jwt, "userId"), // get id from db if not authenticated

@@ -41,7 +41,8 @@ class SimpleTaskService(
             subjectId = task.subjectId,
             desc = task.desc,
             answers = task.answers,
-            rightAnswer = task.rightAnswer
+            rightAnswer = task.rightAnswer,
+            taskNum = task.taskNum
         )
         return SimpleTaskDto(taskRepository.save(newTask))
     }
