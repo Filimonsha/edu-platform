@@ -4,3 +4,5 @@
 3. build docker image - `gradle bootBuildImage`
 4. run spring and postgres containers - `docker-compose up -d`
 
+
+-
